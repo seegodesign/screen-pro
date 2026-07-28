@@ -1,88 +1,113 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import {
-  Blinds,
-  DoorOpen,
-  PanelsTopLeft,
-  PanelTop,
+  BadgeCheck,
+  Factory,
+  Handshake,
+  HeartHandshake,
+  Phone,
+  Ruler,
   ShieldCheck,
-  Wrench,
 } from "@lucide/astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import ValueCard from "../components/ValueCard.astro";
 import { serviceAreas } from "../data/service-areas";
+import { services } from "../data/services";
+import "../styles/variables.css";
 
-const services = [
+const brands = [
+  [
+    "ClearView",
+    "Premium retractable door systems with an exceptionally clean profile.",
+    "/images/brand-logos/clearview.png",
+    true,
+  ],
+  [
+    "Rainier Shading",
+    "Our preferred motorized screens for refined outdoor living spaces.",
+    "/images/brand-logos/rainier.avif",
+    true,
+  ],
+  [
+    "Wizard Screens & Shades",
+    "Versatile retractable and motorized options for custom openings.",
+    "/images/brand-logos/wizard.svg",
+    true,
+  ],
+  [
+    "Centor",
+    "High-end systems engineered for expansive, large-format openings.",
+    "/images/brand-logos/centor.svg",
+    true,
+  ],
+  [
+    "Hurricane Fabric",
+    "Tested fabric protection that deploys quickly and stores compactly.",
+    "/images/brand-logos/hurricane-fabric.webp",
+    false,
+  ],
+];
+
+const reasons = [
   {
-    num: "01",
-    slug: "screen-doors",
-    title: "Retractable Screen Doors",
-    copy: "Low-profile screens for single, double, French, and patio doors—custom fit so the view stays open when the screen is away.",
-    tags: ["Single & double doors", "French doors"],
-    icon: DoorOpen,
+    title: "Quality products",
+    copy: "We select proven retractable screen and shade systems that meet our standards for durability, clean design, and dependable everyday performance.",
+    image: "/images/screen-installation-1.avif",
+    icon: BadgeCheck,
   },
   {
-    num: "02",
-    slug: "motorized-screens",
-    title: "Motorized Screens",
-    copy: "Remote-controlled shade and bug protection for wide lanais, decks, outdoor kitchens, and other large-format openings.",
-    tags: ["Large openings", "Sun + insect control"],
-    icon: Blinds,
+    title: "Personal service",
+    copy: "From the first site visit through long-term support, you work with a local team that listens carefully, communicates clearly, and stands behind the work.",
+    image: "/images/screen-installation-2.avif",
+    icon: Handshake,
   },
   {
-    num: "03",
-    slug: "window-screens",
-    title: "Window Screens",
-    copy: "New aluminum frames and precise re-screening in white or bronze, with charcoal and light-gray mesh options.",
-    tags: ["New frames", "Re-screening"],
-    icon: PanelsTopLeft,
-  },
-  {
-    num: "04",
-    slug: "sliding-screen-doors",
-    title: "Sliding Screen Doors",
-    copy: "Durable aluminum doors with nylon wheels, adjusted on site for a smooth glide and a clean, dependable close.",
-    tags: ["Aluminum frames", "Smooth operation"],
-    icon: PanelTop,
-  },
-  {
-    num: "05",
-    slug: "hurricane-screens",
-    title: "Hurricane Screens",
-    copy: "Hurricane-rated fabric protection that is easy to deploy, compact to store, and fitted for inside or outside access.",
-    tags: ["Compact storage", "Custom installation"],
-    icon: ShieldCheck,
-  },
-  {
-    num: "06",
-    slug: "screen-repair",
-    title: "Screen Repair",
-    copy: "Re-screening, wheel and hydraulic tube replacement, clips, springs, and an honest assessment of tired frames.",
-    tags: ["Serviceable repairs", "All screen types"],
-    icon: Wrench,
+    title: "Professional installation",
+    copy: "Every opening is measured precisely and installed with close attention to fit, finish, smooth operation, and respect for your home or business.",
+    image: "/images/screen-installation-3.avif",
+    icon: Ruler,
   },
 ];
 
-const brands = [
-  ["CLEARVIEW", "Premium retractable door systems with an exceptionally clean profile."],
-  ["RAINIER", "Our preferred motorized screens for refined outdoor living spaces."],
-  ["WIZARD", "Versatile retractable and motorized options for custom openings."],
-  ["CENTAUR", "High-end systems engineered for expansive, large-format openings."],
-  ["HURRICANE FABRIC", "Tested fabric protection that deploys quickly and stores compactly."],
+const values = [
+  {
+    title: "Reliable",
+    copy: "Reliability is ingrained in our company culture. Count on consistent performance, timely projects, and a steadfast commitment to your needs—giving you confidence in every door and window solution.",
+    icon: ShieldCheck,
+    image: "/images/custom-screen-installation-kauai-v2.jpg",
+  },
+  {
+    title: "Family owned",
+    copy: "We are more than a business—we are family. Integrity, personal care, and community shape every interaction. When you choose Screen Pro, you become a valued member of our ʻohana.",
+    icon: HeartHandshake,
+    image: "/images/Screen-Pro-Retractable-Doors-Kauai43.jpg",
+  },
+  {
+    title: "OEM dealer",
+    copy: "As an authorized OEM dealer, we provide genuine products from leading manufacturers, pairing the latest innovations and highest-quality options with knowledgeable local craftsmanship.",
+    icon: Factory,
+    image: "/images/custom-screen-installation-kauai.jpg",
+  },
 ];
 
 const reviews = [
   {
-    quote: "Screen Pro made the entire process easy. The communication was excellent, the installation was clean, and the retractable screens feel like they were always part of the house.",
+    quote:
+      "Screen Pro made the entire process easy. The communication was excellent, the installation was clean, and the retractable screens feel like they were always part of the house.",
     name: "Malia R.",
     place: "Princeville",
   },
   {
-    quote: "We had a very wide lanai opening and wanted something that would disappear when not in use. The finished motorized screen is beautiful and works flawlessly.",
+    quote:
+      "We had a very wide lanai opening and wanted something that would disappear when not in use. The finished motorized screen is beautiful and works flawlessly.",
     name: "David K.",
     place: "Poʻipū",
   },
   {
-    quote: "They repaired two old sliders other companies wanted to replace. Honest advice, quality parts, and both doors glide better than they have in years.",
+    quote:
+      "They repaired two old sliders other companies wanted to replace. Honest advice, quality parts, and both doors glide better than they have in years.",
     name: "Anne P.",
     place: "Kapaʻa",
   },
@@ -118,7 +143,10 @@ const jsonLd = {
       foundingDate: "1998",
       areaServed: [
         { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
-        ...serviceAreas.map((town) => ({ "@type": "City", name: `${town}, Hawaii` })),
+        ...serviceAreas.map((town) => ({
+          "@type": "City",
+          name: `${town}, Hawaii`,
+        })),
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -132,7 +160,10 @@ const jsonLd = {
             provider: { "@id": businessId },
             areaServed: [
               { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
-              ...serviceAreas.map((town) => ({ "@type": "City", name: `${town}, Hawaii` })),
+              ...serviceAreas.map((town) => ({
+                "@type": "City",
+                name: `${town}, Hawaii`,
+              })),
             ],
           },
         })),
@@ -147,14 +178,20 @@ const jsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Premium custom screen doors, window screens, motorized screens, hurricane screens, and screen repair for Kauai homes. Island-wide service and expert installation." />
+    <meta
+      name="description"
+      content="Premium custom screen doors, window screens, motorized screens, hurricane screens, and screen repair for Kauai homes. Island-wide service and expert installation."
+    />
     <meta name="theme-color" content="#12324a" />
     <link rel="icon" href="/favicon.svg" />
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <title>Screen Doors Kauai | Retractable, Motorized & Screen Repair</title>
     <ClientRouter />
   </head>
@@ -164,19 +201,40 @@ const jsonLd = {
     <main>
       <section class="hero">
         <div class="hero__media">
-          <video autoplay muted playsinline preload="metadata" poster="/images/hero-video-poster.webp" aria-hidden="true" tabindex="-1">
+          <video
+            autoplay
+            muted
+            playsinline
+            preload="metadata"
+            poster="/images/hero-video-poster.webp"
+            aria-hidden="true"
+            tabindex="-1"
+          >
             <source src="/motorized-screen.webm" type="video/webm" />
           </video>
         </div>
         <div class="hero__shade"></div>
         <div class="container hero__content">
-          <div class="eyebrow eyebrow--light"><span></span> Kauaʻi’s custom screen specialists</div>
+          <div class="eyebrow eyebrow--light">
+            <span></span> Kauaʻi’s custom screen specialists
+          </div>
           <h1>Premium screen solutions<br /><em>for Kauaʻi homes.</em></h1>
-          <p class="hero__lede">Premium screen solutions designed for Kauaʻi homes—from discreet retractable doors to wide-format motorized screens, built and installed to last.</p>
+          <p class="hero__lede">
+            Designed for Hawaii homes—from retractable doors to wide motorized
+            screens, built and installed to last.
+          </p>
           <div class="hero__actions">
-            <a class="button button--bronze" href="#contact">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+            <a class="button button--bronze" href="#contact"
+              >Get a free quote <span class="button__arrow" aria-hidden="true"
+                ><svg viewBox="0 0 16 16"
+                  ><path d="M4 12 12 4M6 4h6v6"></path></svg
+                ></span
+              ></a
+            >
             <a class="button button--glass" href={`tel:${tel}`}>
-              <span class="button__icon">⌕</span><span><small>Call us today</small>{phone}</span>
+              <Phone class="button__icon" aria-hidden="true" /><span
+                ><small>Call us today</small>{phone}</span
+              >
             </a>
           </div>
         </div>
@@ -190,7 +248,9 @@ const jsonLd = {
             <span><b>★★★★★</b><br />Local customer rating</span>
           </div>
           <div class="hero__location">
-            <span>North Shore</span><i></i><span>East Side</span><i></i><span>South Side</span>
+            <span>North Shore</span><i></i><span>East Side</span><i></i><span
+              >South Side</span
+            >
           </div>
         </div>
       </section>
@@ -202,14 +262,24 @@ const jsonLd = {
             <h2>Kauaʻi’s complete<br /><em>screen service company.</em></h2>
           </div>
           <div class="intro__copy">
-            <p class="lead">The right screen should feel like it was designed with your home—not added after the fact.</p>
-            <p>We help Kauaʻi homeowners choose, install, and maintain the right screen system—from a single window repair to a fully motorized lanai. We specify quality aluminum, proven hardware, and systems we can service down the road.</p>
+            <p class="lead">
+              The right screen should feel like it was designed with your
+              home—not added after the fact.
+            </p>
+            <p>
+              We help Kauaʻi homeowners choose, install, and maintain the right
+              screen system—from a single window repair to a fully motorized
+              lanai. We specify quality aluminum, proven hardware, and systems
+              we can service down the road.
+            </p>
             <div class="intro__details">
               <span><b>Custom fit</b>Measured on site</span>
               <span><b>Island-wide</b>We come to you</span>
               <span><b>Built to last</b>Serviceable systems</span>
             </div>
-            <a class="text-link" href="#about">Why homeowners choose us <span>→</span></a>
+            <a class="text-link" href="#about"
+              >Why homeowners choose us <span>→</span></a
+            >
           </div>
         </div>
       </section>
@@ -221,21 +291,40 @@ const jsonLd = {
               <div class="eyebrow"><span></span> What we do</div>
               <h2>Custom screens for doors,<br /><em>windows & lanais.</em></h2>
             </div>
-            <p>Custom work for doors, windows, decks, lanais, and large architectural openings across Kauaʻi.</p>
+            <p>
+              Custom work for doors, windows, decks, lanais, and large
+              architectural openings across Kauaʻi.
+            </p>
           </div>
           <div class="service-grid">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <article class="service-card">
-                  <div class="service-card__top"><span>{service.num}</span><i><Icon size={20} strokeWidth={1.6} /></i></div>
-                  <h3>{service.title}</h3>
-                  <p>{service.copy}</p>
-                  <ul>{service.tags.map((tag) => <li>{tag}</li>)}</ul>
-                <a href={`/services/${service.slug}/`} aria-label={`Learn more about ${service.title}`}>Learn more <span>↗</span></a>
-                </article>
-              );
-            })}
+            {
+              services.map((service) => <ServiceCard {...service} />)
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="why section">
+        <div class="container">
+          <div class="why__head">
+            <div class="eyebrow"><span></span> Why Screen Pro</div>
+            <h2>Why choose <em>us?</em></h2>
+            <p>
+              We are Kauaʻi’s exclusive dealer for leading retractable screen
+              and power-shade systems. For more than 25 years, we have gone the
+              extra mile to deliver thoughtful recommendations, careful
+              installation, and lasting local support.
+            </p>
+          </div>
+          <div class="why__grid">
+            {
+              reasons.map((reason) => (
+                <ValueCard {...reason} variant="feature" />
+              ))
+            }
+          </div>
+          <div class="values-grid">
+            {values.map((value) => <ValueCard {...value} />)}
           </div>
         </div>
       </section>
@@ -244,19 +333,54 @@ const jsonLd = {
         <div class="container feature__grid">
           <div class="feature__image-wrap">
             <div class="feature__image"></div>
-            <div class="feature__badge"><strong>Custom fit</strong><span>Measured & installed on site</span></div>
+            <div class="feature__badge">
+              <strong>Custom fit</strong><span
+                >Measured & installed on site</span>
+            </div>
           </div>
           <div class="feature__content">
-            <div class="eyebrow eyebrow--light"><span></span> Built around your home</div>
-            <h2>Custom-fit screen installation<br /><em>built for Kauaʻi homes.</em></h2>
-            <p class="lead">They should work smoothly, look intentional, and let the breeze in without competing with your view.</p>
-            <p>That is why we begin with an on-site consultation. We look at the opening, traffic flow, exposure, and how you use the space—then recommend the system that makes sense. No hard sell. No one-size-fits-all shortcut.</p>
-            <div class="feature__points">
-              <div><strong>01</strong><span><b>Measured precisely</b>Custom fabricated for a clean fit.</span></div>
-              <div><strong>02</strong><span><b>Installed professionally</b>Detailed work, respectful job sites.</span></div>
-              <div><strong>03</strong><span><b>Serviceable for years</b>Quality parts we can maintain later.</span></div>
+            <div class="eyebrow eyebrow--light">
+              <span></span> Built around your home
             </div>
-            <a class="button button--bronze" href="#contact">Schedule a consultation <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+            <h2>
+              Custom-fit screen installation<br /><em
+                >built for Kauaʻi homes.</em>
+            </h2>
+            <p class="lead">
+              They should work smoothly, look intentional, and let the breeze in
+              without competing with your view.
+            </p>
+            <p>
+              That is why we begin with an on-site consultation. We look at the
+              opening, traffic flow, exposure, and how you use the space—then
+              recommend the system that makes sense. No hard sell. No
+              one-size-fits-all shortcut.
+            </p>
+            <div class="feature__points">
+              <div>
+                <strong>01</strong><span
+                  ><b>Measured precisely</b>Custom fabricated for a clean fit.</span>
+              </div>
+              <div>
+                <strong>02</strong><span
+                  ><b>Installed professionally</b>Detailed work, respectful job
+                  sites.</span>
+              </div>
+              <div>
+                <strong>03</strong><span
+                  ><b>Serviceable for years</b>Quality parts we can maintain
+                  later.</span>
+              </div>
+            </div>
+            <a class="button button--bronze" href="#contact"
+              >Schedule a consultation <span
+                class="button__arrow"
+                aria-hidden="true"
+                ><svg viewBox="0 0 16 16"
+                  ><path d="M4 12 12 4M6 4h6v6"></path></svg
+                ></span
+              ></a
+            >
           </div>
         </div>
       </section>
@@ -266,19 +390,36 @@ const jsonLd = {
           <div class="brands__head">
             <div>
               <div class="eyebrow"><span></span> Trusted systems</div>
-              <h2>Trusted retractable & motorized<br /><em>screen brands.</em></h2>
+              <h2>
+                Trusted retractable & motorized<br /><em>screen brands.</em>
+              </h2>
             </div>
-            <p>We partner with manufacturers whose products meet our standards for performance, finish, and long-term serviceability.</p>
+            <p>
+              We partner with manufacturers whose products meet our standards
+              for performance, finish, and long-term serviceability.
+            </p>
           </div>
           <div class="brand-list">
-            {brands.map(([name, copy], index) => (
-              <article class="brand-row">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{name}</h3>
-                <p>{copy}</p>
-                <i>↗</i>
-              </article>
-            ))}
+            {
+              brands.map(([name, copy, logo, monochrome], index) => (
+                <article class="brand-row">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div class="brand-row__identity">
+                    <img
+                      class:list={[
+                        "brand-row__logo",
+                        { "brand-row__logo--monochrome": monochrome },
+                      ]}
+                      src={logo}
+                      alt={`${name} logo`}
+                      loading="lazy"
+                    />
+                    <h3 class="sr-only">{name}</h3>
+                  </div>
+                  <p>{copy}</p>
+                </article>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -286,21 +427,44 @@ const jsonLd = {
       <section class="gallery section" id="gallery">
         <div class="container">
           <div class="section-head section-head--gallery">
-            <div><div class="eyebrow"><span></span> Recent work</div><h2>Screen installations<br /><em>across Kauaʻi.</em></h2></div>
-            <a class="text-link" href="#contact">Plan your project <span>→</span></a>
+            <div>
+              <div class="eyebrow"><span></span> Recent work</div><h2>
+                Screen installations<br /><em>across Kauaʻi.</em>
+              </h2>
+            </div>
+            <a class="text-link" href="#contact"
+              >Plan your project <span>→</span></a
+            >
           </div>
           <div class="gallery__grid">
             <figure class="gallery__item gallery__item--wide">
               <div class="gallery__photo gallery__photo--one"></div>
-              <figcaption><div><span>Motorized lanai screen</span><small>North Shore</small></div><a class="gallery__cta gallery__cta--motorized" href="#contact">Plan yours <b>→</b></a></figcaption>
+              <figcaption>
+                <div>
+                  <span>Motorized lanai screen</span><small>North Shore</small>
+                </div><a
+                  class="gallery__cta gallery__cta--motorized"
+                  href="#contact">Plan yours <b>→</b></a>
+              </figcaption>
             </figure>
             <figure class="gallery__item">
               <div class="gallery__photo gallery__photo--two"></div>
-              <figcaption><div><span>Retractable French door</span><small>East Side</small></div><a class="gallery__cta gallery__cta--door" href="#contact">Plan yours <b>→</b></a></figcaption>
+              <figcaption>
+                <div>
+                  <span>Retractable French door</span><small>East Side</small>
+                </div><a class="gallery__cta gallery__cta--door" href="#contact"
+                  >Plan yours <b>→</b></a>
+              </figcaption>
             </figure>
             <figure class="gallery__item">
               <div class="gallery__photo gallery__photo--three"></div>
-              <figcaption><div><span>Custom window screens</span><small>South Side</small></div><a class="gallery__cta gallery__cta--windows" href="#contact">Plan yours <b>→</b></a></figcaption>
+              <figcaption>
+                <div>
+                  <span>Custom window screens</span><small>South Side</small>
+                </div><a
+                  class="gallery__cta gallery__cta--windows"
+                  href="#contact">Plan yours <b>→</b></a>
+              </figcaption>
             </figure>
           </div>
         </div>
@@ -309,17 +473,39 @@ const jsonLd = {
       <section class="reviews section" id="reviews">
         <div class="container">
           <div class="reviews__top">
-            <div><div class="eyebrow eyebrow--light"><span></span> Homeowner reviews</div><h2>Kauaʻi screen installation<br /><em>& repair reviews.</em></h2></div>
-            <div class="rating"><strong>5.0</strong><span><b>★★★★★</b><small>Based on local customer reviews</small></span></div>
+            <div>
+              <div class="eyebrow eyebrow--light">
+                <span></span> Homeowner reviews
+              </div><h2>
+                Kauaʻi screen installation<br /><em>& repair reviews.</em>
+              </h2>
+            </div>
+            <div class="rating">
+              <strong>5.0</strong><span
+                ><b>★★★★★</b><small>Based on local customer reviews</small
+                ></span>
+            </div>
           </div>
           <div class="review-grid">
-            {reviews.map((review) => (
-              <blockquote class="review-card">
-                <div class="review-card__stars">★★★★★</div>
-                <p>“{review.quote}”</p>
-                <footer><span>{review.name.slice(0,1)}</span><div><strong>{review.name}</strong><small>{review.place}, Kauaʻi</small></div></footer>
-              </blockquote>
-            ))}
+            {
+              reviews.map((review) => (
+                <blockquote class="review-card">
+                  <div class="review-card__stars">★★★★★</div>
+                  <p>“{review.quote}”</p>
+                  <footer>
+                    <>
+                      <span>{review.name.slice(0, 1)}</span>
+                      <div>
+                        <>
+                          <strong>{review.name}</strong>
+                          <small>{review.place}, Kauaʻi</small>
+                        </>
+                      </div>
+                    </>
+                  </footer>
+                </blockquote>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -335,11 +521,30 @@ const jsonLd = {
           <div class="area__content">
             <div class="eyebrow"><span></span> Island-wide service</div>
             <h2>Island-wide screen service<br /><em>across Kauaʻi.</em></h2>
-            <p>From Hanalei and Princeville to Anahola, Kapaʻa, Līhuʻe, Kōloa, and Poʻipū, we bring experienced screen installation and repair directly to your home.</p>
+            <p>
+              From Hanalei and Princeville to Anahola, Kapaʻa, Līhuʻe, Kōloa,
+              and Poʻipū, we bring experienced screen installation and repair
+              directly to your home.
+            </p>
             <ul>
-              <li><a href="/service-areas/north-shore-kauai/"><span>North Shore</span><small>Hanalei · Princeville · Kīlauea</small><b>→</b></a></li>
-              <li><a href="/service-areas/east-side-kauai/"><span>East Side</span><small>Anahola · Kapaʻa · Wailua · Līhuʻe</small><b>→</b></a></li>
-              <li><a href="/service-areas/south-shore-kauai/"><span>South Shore</span><small>Kōloa · Poʻipū · Kalāheo</small><b>→</b></a></li>
+              <li>
+                <a href="/service-areas/north-shore-kauai/"
+                  ><span>North Shore</span><small
+                    >Hanalei · Princeville · Kīlauea</small
+                  ><b>→</b></a>
+              </li>
+              <li>
+                <a href="/service-areas/east-side-kauai/"
+                  ><span>East Side</span><small
+                    >Anahola · Kapaʻa · Wailua · Līhuʻe</small
+                  ><b>→</b></a>
+              </li>
+              <li>
+                <a href="/service-areas/south-shore-kauai/"
+                  ><span>South Shore</span><small
+                    >Kōloa · Poʻipū · Kalāheo</small
+                  ><b>→</b></a>
+              </li>
             </ul>
           </div>
         </div>
@@ -348,357 +553,1477 @@ const jsonLd = {
       <section class="contact section" id="contact">
         <div class="container contact__grid">
           <div class="contact__content">
-            <div class="eyebrow eyebrow--light"><span></span> Start your project</div>
-            <h2>Request a quote for<br /><em>your Kauaʻi screen project.</em></h2>
-            <p>Tell us what you are working on. We will follow up to learn about the opening, answer your questions, and arrange a complimentary on-site consultation.</p>
-            <a class="contact__phone" href={`tel:${tel}`}><span>Call us directly</span><strong>{phone}</strong></a>
-            <a class="contact__email" href="mailto:info@kauairetractablescreens.com">info@kauairetractablescreens.com</a>
-            <div class="contact__promise"><span>✓</span><p><b>Fast, helpful communication</b>We typically respond within one business day.</p></div>
-          </div>
-          <form class="quote-form" action="mailto:info@kauairetractablescreens.com" method="post" enctype="text/plain">
-            <div class="quote-form__heading"><strong>Request a free quote</strong><span>No pressure. Just helpful advice.</span></div>
-            <div class="quote-form__grid">
-              <label><span>Full name *</span><input type="text" name="name" placeholder="Your name" required /></label>
-              <label><span>Phone number *</span><input type="tel" name="phone" placeholder="(808) 000-0000" required /></label>
-              <label><span>Email address *</span><input type="email" name="email" placeholder="you@email.com" required /></label>
-              <label><span>Project address</span><input type="text" name="address" placeholder="Town or address" /></label>
-              <label class="quote-form__full"><span>What can we help with? *</span><select name="service" required><option value="">Select a service</option><option>Retractable screen doors</option><option>Motorized screens</option><option>Window screens</option><option>Sliding screen doors</option><option>Hurricane screens</option><option>Screen repair</option><option>Not sure yet</option></select></label>
-              <label class="quote-form__full"><span>Tell us about your project *</span><textarea name="description" placeholder="What opening or screen needs attention?" required></textarea></label>
-              <label><span>Opening size (optional)</span><input type="text" name="measurements" placeholder="Approx. width × height" /></label>
-              <label class="upload"><span>Project photos (optional)</span><input type="file" name="photos" accept="image/*" multiple /><i>＋ Add photos</i></label>
+            <div class="eyebrow eyebrow--light">
+              <span></span> Start your project
             </div>
-            <button class="button button--bronze quote-form__submit" type="submit">Send quote request <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
-            <small class="quote-form__note">By submitting, you agree that we may contact you about your project.</small>
+            <h2>Request a quote for <em>your screen project.</em></h2>
+            <p>
+              Tell us what you are working on. Together, we will explore design
+              options, discuss product features, and create a detailed quote.
+              It’s the first step towards transforming your space with
+              confidence and precision. Reach out today and let us bring your
+              vision to life.
+            </p>
+            <a class="contact__phone" href={`tel:${tel}`}
+              ><span>Call us directly</span><strong>{phone}</strong></a
+            >
+            <a
+              class="contact__email"
+              href="mailto:info@kauairetractablescreens.com"
+              >info@kauairetractablescreens.com</a
+            >
+            <div class="contact__promise">
+              <span>✓</span><p>
+                <b>Fast, helpful communication</b>We typically respond within
+                one business day.
+              </p>
+            </div>
+          </div>
+          <form
+            class="quote-form"
+            action="mailto:info@kauairetractablescreens.com"
+            method="post"
+            enctype="text/plain"
+          >
+            <div class="quote-form__heading">
+              <strong>Request a free quote</strong><span
+                >No pressure. Just helpful advice.</span>
+            </div>
+            <div class="quote-form__grid">
+              <label
+                ><span>Full name *</span><input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                /></label
+              >
+              <label
+                ><span>Phone number *</span><input
+                  type="tel"
+                  name="phone"
+                  placeholder="(808) 000-0000"
+                  required
+                /></label
+              >
+              <label
+                ><span>Email address *</span><input
+                  type="email"
+                  name="email"
+                  placeholder="you@email.com"
+                  required
+                /></label
+              >
+              <label
+                ><span>Project address</span><input
+                  type="text"
+                  name="address"
+                  placeholder="Town or address"
+                /></label
+              >
+              <label class="quote-form__full"
+                ><span>What can we help with? *</span><select
+                  name="service"
+                  required
+                  ><option value="">Select a service</option><option
+                    >Retractable screen doors</option
+                  ><option>Motorized screens</option><option
+                    >Window screens</option
+                  ><option>Sliding screen doors</option><option
+                    >Hurricane screens</option
+                  ><option>Screen repair</option><option>Not sure yet</option
+                  ></select
+                ></label
+              >
+              <label class="quote-form__full"
+                ><span>Tell us about your project *</span><textarea
+                  name="description"
+                  placeholder="What opening or screen needs attention?"
+                  required></textarea></label
+              >
+              <label
+                ><span>Opening size (optional)</span><input
+                  type="text"
+                  name="measurements"
+                  placeholder="Approx. width × height"
+                /></label
+              >
+              <label class="upload"
+                ><span>Project photos (optional)</span><input
+                  type="file"
+                  name="photos"
+                  accept="image/*"
+                  multiple
+                /><i>＋ Add photos</i></label
+              >
+            </div>
+            <button
+              class="button button--bronze quote-form__submit"
+              type="submit"
+              >Send quote request <span class="button__arrow" aria-hidden="true"
+                ><svg viewBox="0 0 16 16"
+                  ><path d="M4 12 12 4M6 4h6v6"></path></svg
+                ></span
+              ></button
+            >
+            <small class="quote-form__note"
+              >By submitting, you agree that we may contact you about your
+              project.</small
+            >
           </form>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__top">
-          <a class="logo logo--light" href="#">
-            <img src="/images/logo-light.webp" width="1723" height="522" alt="Screen Pro Retractable Doors" />
-          </a>
-          <p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p>
-          <a class="button button--outline" href="#contact">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-        </div>
-        <div class="footer__middle">
-          <div><span>Explore</span><a href="#services">Services</a><a href="#brands">Brands</a><a href="#about">About</a><a href="#gallery">Gallery</a></div>
-          <div><span>Services</span><a href="/services/screen-doors/">Retractable screens</a><a href="/services/motorized-screens/">Motorized screens</a><a href="/services/screen-repair/">Screen repair</a><a href="/services/hurricane-screens/">Hurricane screens</a></div>
-          <div><span>Service areas</span><a href="/service-areas/north-shore-kauai/">North Shore Kauaʻi</a><a href="/service-areas/east-side-kauai/">East Side Kauaʻi</a><a href="/service-areas/south-shore-kauai/">South Shore Kauaʻi</a></div>
-          <div><span>Contact</span><a href={`tel:${tel}`}>{phone}</a><a href="mailto:info@kauairetractablescreens.com">info@kauairetractablescreens.com</a></div>
-        </div>
-        <div class="footer__bottom"><span>© {new Date().getFullYear()} Screen Pro Retractable Doors</span><span>Family owned · Serving Kauaʻi since 1998</span><a href="https://seegodesign.com" target="_blank" rel="noopener noreferrer">Site by Seego Design</a></div>
-      </div>
-    </footer>
-    <a class="mobile-call" href={`tel:${tel}`}>Call now <span>{phone}</span></a>
-
+    <SiteFooter />
   </body>
 </html>
 
 <style is:global>
-  :root {
-    --color-ink: #132a37;
-    --color-navy: #102f43;
-    --color-navy-deep: #0a2332;
-    --color-ocean: #567786;
-    --color-bronze: #b98552;
-    --color-bronze-light: #d7aa76;
-    --color-sand: #eee7dc;
-    --color-cream: #f8f6f1;
-    --color-white: #fff;
-    --color-line: rgba(19, 42, 55, .15);
-    --font-display: "Manrope", sans-serif;
-    --font-headline: Georgia, serif;
-    --font-body: "DM Sans", sans-serif;
-    --size-xs: .75rem;
-    --size-sm: .875rem;
-    --size-base: 1rem;
-    --size-lg: 1.125rem;
-    --space-1: .5rem;
-    --space-2: .75rem;
-    --space-3: 1rem;
-    --space-4: 1.5rem;
-    --space-5: 2rem;
-    --space-6: 3rem;
-    --space-7: 4.5rem;
-    --space-8: 7rem;
-    --radius-sm: 2px;
-    --radius-md: 6px;
-    --container: 1240px;
-    --shadow: 0 24px 70px rgba(10, 35, 50, .13);
+  * {
+    box-sizing: border-box;
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; color: var(--color-ink); background: var(--color-cream); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; text-decoration: none; }
-  p, h1, h2, h3 { margin-top: 0; }
-  button, input, textarea, select { font: inherit; }
-  .container { width: min(calc(100% - 48px), var(--container)); margin-inline: auto; }
-  .section { padding: var(--space-8) 0; }
-  h1, h2, h3 { font-family: var(--font-headline); }
-  h1 { margin-bottom: 1.5rem; font-size: clamp(2.8rem, 5vw, 5.2rem); line-height: .94; letter-spacing: -.045em; font-weight: 400; }
-  h2 { margin-bottom: 0; font-size: clamp(2.2rem, 3.7vw, 3.8rem); line-height: 1; letter-spacing: -.04em; font-weight: 400; }
-  h1 em, h2 em { font-weight: 400; color: var(--color-bronze-light); font-style: italic; }
-  .eyebrow { display: flex; align-items: center; margin-bottom: 1.5rem; color: var(--color-ocean); font-size: .7rem; letter-spacing: .19em; text-transform: uppercase; font-weight: 700; }
-  .eyebrow > span { display: none; }
-  .eyebrow--light { color: rgba(255,255,255,.7); }
-  .button { min-height: 54px; padding: 0 1.5rem; display: inline-flex; align-items: center; justify-content: center; gap: 1.5rem; border: 1px solid transparent; cursor: pointer; font-size: .76rem; letter-spacing: .09em; text-transform: uppercase; font-weight: 700; transition: .25s ease; }
-  .button:hover { transform: translateY(-2px); }
-  .button__arrow { width: 1.8rem; height: 1.8rem; display: grid; flex: 0 0 auto; place-items: center; border: 1px solid currentColor; border-radius: 50%; transition: transform .25s ease, background-color .25s ease; }
-  .button__arrow svg { width: .85rem; height: .85rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .button:hover .button__arrow { background: rgba(255,255,255,.12); transform: translate(2px,-2px); }
-  .button--dark { color: white; background: var(--color-navy); }
-  .button--bronze { color: white; background: var(--color-bronze); }
-  .button--bronze:hover { background: #a97543; }
-  .button--glass, .button--outline { color: white; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.08); }
-  .button--glass { min-width: 215px; justify-content: flex-start; text-transform: none; letter-spacing: 0; }
-  .button--glass small { display: block; opacity: .7; font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; }
-  .button__icon { font-size: 1.4rem; }
-  .text-link { display: inline-flex; align-items: center; gap: 2rem; padding-bottom: .35rem; border-bottom: 1px solid var(--color-ink); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
-  .topbar { color: rgba(255,255,255,.84); background: var(--color-navy-deep); font-size: .7rem; letter-spacing: .05em; }
-  .topbar__inner { height: 36px; display: flex; align-items: center; justify-content: space-between; }
-  .topbar p { margin: 0; }
-  .topbar__meta { display: flex; gap: 2rem; }
-  .topbar__meta a { color: white; font-weight: 600; }
-  .header { position: sticky; z-index: 20; top: 0; background: #F9F5EF; }
-  .header__inner { height: 96px; display: flex; align-items: center; justify-content: space-between; }
-  .logo { display: flex; align-items: center; gap: .75rem; color: var(--color-navy); }
-  .logo--nav img { width: 220px; height: auto; display: block; }
-  .logo__mark { width: 40px; height: 40px; fill: none; stroke: currentColor; stroke-width: 1.5; }
-  .logo__type { display: grid; line-height: 1; }
-  .logo__type strong { font-family: var(--font-display); font-size: .96rem; letter-spacing: .12em; }
-  .logo__type small { margin-top: .35rem; color: var(--color-bronze); font-size: .48rem; letter-spacing: .21em; font-weight: 700; }
-  .nav { display: flex; align-items: center; gap: 2.1rem; font-size: .82rem; letter-spacing: .04em; font-weight: 600; }
-  .nav a:hover, .nav-services button:hover, .nav-areas button:hover { color: var(--color-bronze); }
-  .nav-services, .nav-areas { position: relative; }
-  .nav-services button, .nav-areas button { padding: 1.25rem 0; border: 0; color: inherit; background: transparent; cursor: default; font: inherit; letter-spacing: inherit; }
-  .nav-services button span { margin-left: .3rem; }
-  .services-dropdown, .areas-dropdown { position: absolute; top: 100%; left: -1.25rem; width: 245px; display: grid; visibility: hidden; opacity: 0; background: white; border: 1px solid var(--color-line); box-shadow: var(--shadow); transform: translateY(-5px); transition: .2s ease; }
-  .nav-services:hover .services-dropdown, .nav-services:focus-within .services-dropdown, .nav-areas:hover .areas-dropdown, .nav-areas:focus-within .areas-dropdown { visibility: visible; opacity: 1; transform: none; }
-  .services-dropdown a, .areas-dropdown a { padding: .7rem .8rem; }
-  .services-dropdown a:hover, .areas-dropdown a:hover { color: var(--color-bronze); background: var(--color-cream); }
-  .header__cta { min-height: 44px; padding-inline: 1.2rem; }
-  .menu-button, .mobile-nav { display: none; }
-  .hero { min-height: 740px; position: relative; display: flex; align-items: center; overflow: hidden; color: white; background: var(--color-navy); }
-  .hero__media { position: absolute; inset: 0; background: url("/images/Screen-Pro-Retractable-Doors-Kauai43.jpg") center 52%/cover no-repeat; transform: scale(1.01); }
-  .hero__media video { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 52%; }
-  .hero__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,31,43,.72) 0%, rgba(8,34,48,.43) 47%, rgba(8,34,48,.08) 78%), linear-gradient(0deg, rgba(8,29,41,.36), transparent 45%); }
-  .hero__content { position: relative; z-index: 1; padding-bottom: 6rem; }
-  .hero__lede { max-width: 600px; margin-bottom: 2rem; color: rgba(255,255,255,.82); font-size: 1.08rem; line-height: 1.75; }
-  .hero__actions { display: flex; gap: .8rem; }
-  .hero__foot { position: absolute; z-index: 2; bottom: 0; left: 50%; transform: translateX(-50%); min-height: 108px; display: flex; align-items: center; border-top: 1px solid rgba(255,255,255,.24); }
-  .hero__trust { min-width: 225px; display: flex; align-items: center; gap: 1rem; padding-right: 2rem; margin-right: 2rem; border-right: 1px solid rgba(255,255,255,.22); }
-  .hero__trust strong { font-family: var(--font-display); font-size: 2rem; font-weight: 500; }
-  .hero__trust span { color: rgba(255,255,255,.65); font-size: .7rem; line-height: 1.5; }
-  .hero__trust b { color: var(--color-bronze-light); letter-spacing: .08em; }
-  .hero__location { margin-left: auto; display: flex; align-items: center; gap: .8rem; color: rgba(255,255,255,.7); font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; }
-  .hero__location i { width: 4px; height: 4px; background: var(--color-bronze-light); border-radius: 50%; }
-  .intro { position: relative; overflow: hidden; background: var(--color-sand); }
-  .intro__grid { position: relative; z-index: 1; display: grid; grid-template-columns: .9fr 1.1fr; gap: 8rem; align-items: center; }
-  .intro__grid > div:first-child { padding-left: 1.5rem; border-left: 3px solid var(--color-bronze); }
-  .intro__copy { padding: 3rem; background: rgba(255,255,255,.82); box-shadow: 0 18px 55px rgba(19,42,55,.08); }
-  .intro__copy p { color: #61727a; }
-  .intro__copy .lead { color: var(--color-ink); font-family: var(--font-display); font-size: 1.4rem; line-height: 1.5; }
-  .intro__details { margin: 2rem 0; padding: 1.3rem 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
-  .intro__details span { display: grid; color: #718087; font-size: .67rem; line-height: 1.5; }
-  .intro__details b { color: var(--color-ink); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; }
-  .intro__copy .text-link { margin-top: .25rem; }
-  .services { padding-top: var(--space-8); }
-  .section-head, .brands__head, .reviews__top { display: flex; align-items: end; justify-content: space-between; margin-bottom: 3rem; }
-  .section-head > p, .brands__head > p { max-width: 420px; margin-bottom: .6rem; color: #66777e; }
-  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--color-line); border-left: 1px solid var(--color-line); }
-  .service-card { min-height: 410px; padding: 2.1rem; display: flex; flex-direction: column; background: white; border-right: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); transition: .3s ease; }
-  .service-card:hover { position: relative; z-index: 2; transform: translateY(-6px); box-shadow: var(--shadow); }
-  .service-card__top { display: flex; justify-content: space-between; color: var(--color-ocean); font-size: .68rem; }
-  .service-card__top i { width: 43px; height: 43px; display: grid; place-items: center; color: var(--color-bronze); border: 1px solid rgba(185,133,82,.35); border-radius: 50%; font-style: normal; font-size: 1.25rem; }
-  .service-card__top i svg { display: block; }
-  .service-card h3 { margin: 2.2rem 0 1rem; font-size: 1.55rem; letter-spacing: -.03em; font-weight: 600; }
-  .service-card p { color: #65757c; font-size: .9rem; }
-  .service-card ul { margin: .2rem 0 1.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; }
-  .service-card li { padding: .25rem .55rem; color: #607079; background: var(--color-cream); font-size: .66rem; }
-  .service-card > a { margin-top: auto; padding-top: 1rem; display: flex; justify-content: space-between; border-top: 1px solid var(--color-line); font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
-  .feature { color: white; background: var(--color-navy); }
-  .feature__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: center; }
-  .feature__image-wrap { position: relative; }
-  .feature__image { aspect-ratio: .83; background: url("/images/custom-screen-installation-kauai-v3.jpg") center/cover; }
-  .feature__badge { position: absolute; right: -2rem; bottom: 2.5rem; width: 200px; padding: 1.2rem; display: grid; color: var(--color-ink); background: var(--color-sand); box-shadow: var(--shadow); }
-  .feature__badge strong { font-family: var(--font-display); font-size: 1.1rem; }
-  .feature__badge span { color: #66777e; font-size: .67rem; }
-  .feature__content p { color: rgba(255,255,255,.65); }
-  .feature__content .lead { margin-top: 2rem; color: white; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.55; }
-  .feature__points { margin: 2rem 0; border-top: 1px solid rgba(255,255,255,.15); }
-  .feature__points > div { padding: 1rem 0; display: flex; gap: 1.2rem; border-bottom: 1px solid rgba(255,255,255,.15); }
-  .feature__points strong { color: var(--color-bronze-light); font-size: .66rem; }
-  .feature__points span { display: grid; color: rgba(255,255,255,.57); font-size: .75rem; }
-  .feature__points b { color: white; font-family: var(--font-display); font-size: .92rem; }
-  .brands { background: var(--color-sand); }
-  .brand-list { border-top: 1px solid rgba(19,42,55,.2); }
-  .brand-row { min-height: 112px; display: grid; grid-template-columns: 60px 1fr 1.2fr 40px; align-items: center; gap: 1.5rem; border-bottom: 1px solid rgba(19,42,55,.2); }
-  .brand-row > span { color: var(--color-ocean); font-size: .65rem; }
-  .brand-row h3 { margin: 0; font-size: 1.2rem; letter-spacing: .08em; }
-  .brand-row p { margin: 0; color: #64747b; font-size: .85rem; }
-  .brand-row i { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(19,42,55,.25); border-radius: 50%; font-style: normal; }
-  .section-head--gallery { align-items: end; }
-  .gallery__grid { display: grid; grid-template-columns: 1.15fr .85fr; grid-template-rows: repeat(2, 340px); gap: 1rem; }
-  .gallery__item { position: relative; margin: 0; overflow: hidden; }
-  .gallery__item--wide { grid-row: 1 / 3; }
-  .gallery__photo { width: 100%; height: 100%; background-position: center; background-size: cover; transition: transform .6s ease; }
-  .gallery__item:hover .gallery__photo { transform: scale(1.035); }
-  .gallery__photo--one { background-image: url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85"); }
-  .gallery__photo--two { background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=85"); }
-  .gallery__photo--three { background-image: url("https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1100&q=85"); }
-  .gallery__item figcaption { position: absolute; inset: auto 0 0; padding: 3rem 1.4rem 1.2rem; display: flex; justify-content: space-between; color: white; background: linear-gradient(transparent, rgba(9,30,42,.78)); }
-  .gallery__item figcaption > div { display: grid; gap: .25rem; }
-  .gallery__item figcaption span { font-family: var(--font-display); font-size: 1rem; }
-  .gallery__item figcaption small { opacity: .7; text-transform: uppercase; letter-spacing: .1em; }
-  .gallery__cta { min-height: 42px; padding: 0 1rem; display: inline-flex; align-items: center; align-self: end; gap: .75rem; color: white; font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: transform .25s ease, filter .25s ease; }
-  .gallery__cta:hover { color: white; filter: brightness(1.1); transform: translateY(-2px); }
-  .gallery__cta b { font-size: .9rem; }
-  .gallery__cta--motorized { background: var(--color-bronze); }
-  .gallery__cta--door { background: var(--color-navy); }
-  .gallery__cta--windows { background: var(--color-ocean); }
-  .reviews { color: white; background: var(--color-navy); }
-  .rating { display: flex; align-items: center; gap: 1rem; }
-  .rating > strong { font-family: var(--font-display); font-size: 2.7rem; font-weight: 400; }
-  .rating span { display: grid; }
-  .rating b, .review-card__stars { color: var(--color-bronze-light); letter-spacing: .08em; }
-  .rating small { color: rgba(255,255,255,.55); font-size: .65rem; }
-  .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.15); }
-  .review-card { min-height: 310px; margin: 0; padding: 2rem; display: flex; flex-direction: column; background: var(--color-navy); }
-  .review-card__stars { font-size: .72rem; }
-  .review-card > p { margin: 1.5rem 0; color: rgba(255,255,255,.78); font-family: var(--font-display); font-size: 1.02rem; line-height: 1.7; }
-  .review-card footer { margin-top: auto; display: flex; align-items: center; gap: .8rem; }
-  .review-card footer > span { width: 38px; height: 38px; display: grid; place-items: center; color: var(--color-navy); background: var(--color-sand); border-radius: 50%; font-weight: 700; }
-  .review-card footer div { display: grid; }
-  .review-card footer strong { font-size: .8rem; }
-  .review-card footer small { color: rgba(255,255,255,.5); font-size: .67rem; }
-  .area { background: var(--color-cream); }
-  .area__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
-  .area__map { position: relative; background: #e8e2d7; }
-  .area__map img { display: block; width: 100%; height: auto; }
-  .area__label { position: absolute; color: var(--color-ink); font-family: var(--font-body); font-size: .75rem; letter-spacing: .125rem; text-transform: uppercase; }
-  .area__label::before { width: .875rem; height: .875rem; position: absolute; top: 50%; border-radius: 50%; background: var(--color-bronze); content: ""; transform: translateY(-50%); }
-  .area__label--north { top: 23%; left: 34%; }
-  .area__label--north::before { right: calc(100% + .5rem); }
-  .area__label--east { top: 46%; right: 8%; }
-  .area__label--east::before { left: calc(100% + .5rem); }
-  .area__label--south { bottom: 9%; left: 45%; }
-  .area__label--south::before { right: calc(100% + .5rem); }
-  .area__content > p { margin: 2rem 0; color: #63737a; }
-  .area__content ul { padding: 0; border-top: 1px solid var(--color-line); list-style: none; }
-  .area__content li { border-bottom: 1px solid var(--color-line); }
-  .area__content li a { padding: 1rem 0; display: grid; grid-template-columns: 8rem 1fr auto; align-items: center; gap: 1rem; }
-  .area__content li a:hover { color: var(--color-bronze); }
-  .area__content li span { font-family: var(--font-display); font-weight: 600; }
-  .area__content li small { color: #6d7c82; }
-  .area__content li b { color: var(--color-bronze); }
-  .contact { color: white; background: var(--color-navy-deep); }
-  .contact__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8%; align-items: start; }
-  .contact__content > p { max-width: 470px; margin: 2rem 0; color: rgba(255,255,255,.62); }
-  .contact__phone { margin-top: 2.5rem; display: grid; }
-  .contact__phone span { color: rgba(255,255,255,.5); font-size: .65rem; text-transform: uppercase; letter-spacing: .15em; }
-  .contact__phone strong { color: var(--color-bronze-light); font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; }
-  .contact__email { display: block; margin-top: .35rem; color: rgba(255,255,255,.74); font-size: .8rem; }
-  .contact__promise { margin-top: 3rem; display: flex; align-items: center; gap: 1rem; }
-  .contact__promise > span { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; color: var(--color-bronze-light); }
-  .contact__promise p { margin: 0; display: grid; color: rgba(255,255,255,.5); font-size: .7rem; }
-  .contact__promise b { color: white; font-size: .8rem; }
-  .quote-form { padding: 2.5rem; color: var(--color-ink); background: var(--color-cream); }
-  .quote-form__heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 2rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--color-line); }
-  .quote-form__heading strong { font-family: var(--font-display); font-size: 1.5rem; }
-  .quote-form__heading span { color: #6b7a81; font-size: .73rem; }
-  .quote-form__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
-  .quote-form label { display: grid; gap: .4rem; }
-  .quote-form label > span { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
-  .quote-form input, .quote-form select, .quote-form textarea { width: 100%; padding: .82rem 0; color: var(--color-ink); background: transparent; border: 0; border-bottom: 1px solid rgba(19,42,55,.25); outline: 0; border-radius: 0; }
-  .quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus { border-color: var(--color-bronze); }
-  .quote-form textarea { min-height: 90px; resize: vertical; }
-  .quote-form__full { grid-column: 1 / -1; }
-  .upload { position: relative; }
-  .upload input { position: absolute; opacity: 0; pointer-events: none; }
-  .upload i { padding: .84rem 0; border-bottom: 1px solid rgba(19,42,55,.25); color: #6b7a81; font-style: normal; }
-  .quote-form__submit { width: 100%; margin-top: 1.8rem; border: 0; }
-  .quote-form__note { display: block; margin-top: .8rem; color: #7a878d; text-align: center; font-size: .62rem; }
-  .footer { padding: 4rem 0 1.5rem; color: rgba(255,255,255,.75); background: #061b27; }
-  .logo--light img { width: 220px; height: auto; display: block; }
-  .footer__top { padding-bottom: 3rem; display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; gap: 4rem; border-bottom: 1px solid rgba(255,255,255,.13); }
-  .footer__top p { margin: 0; max-width: 370px; font-family: var(--font-display); font-size: 1.1rem; }
-  .footer__middle { padding: 3rem 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; border-bottom: 1px solid rgba(255,255,255,.13); }
-  .footer__middle > div { display: flex; flex-direction: column; gap: .5rem; font-size: .75rem; }
-  .footer__middle div > span { margin-bottom: .5rem; color: var(--color-bronze-light); font-size: .62rem; text-transform: uppercase; letter-spacing: .14em; }
-  .footer__middle p { margin: 0; }
-  .footer__middle a:hover { color: white; }
-  .footer__bottom { padding-top: 1.5rem; display: flex; justify-content: space-between; color: rgba(255,255,255,.35); font-size: .65rem; }
-  .footer__bottom a:hover { color: white; }
-  .mobile-call { display: none; }
-
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    color: var(--color-ink);
+    background: var(--color-cream);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  p,
+  h1,
+  h2,
+  h3 {
+    margin-top: 0;
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+  .container {
+    width: min(calc(100% - 48px), var(--container));
+    margin-inline: auto;
+  }
+  .section {
+    padding: var(--space-8) 0;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-headline);
+  }
+  h1 {
+    margin-bottom: 1.5rem;
+    font-size: clamp(2.8rem, 5vw, 5.2rem);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    font-weight: 400;
+  }
+  h2 {
+    margin-bottom: 0;
+    font-size: clamp(2.2rem, 3.7vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+  }
+  h1 em,
+  h2 em {
+    font-weight: 400;
+    color: var(--color-bronze-light);
+    font-style: italic;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: var(--color-ocean);
+    font-size: 0.7rem;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .eyebrow > span {
+    display: none;
+  }
+  .eyebrow--light {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .button {
+    min-height: 54px;
+    padding: 0 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: 0.76rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: 0.25s ease;
+  }
+  .button:hover {
+    transform: translateY(-2px);
+  }
+  .button__arrow {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease;
+  }
+  .button__arrow svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .button:hover .button__arrow {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translate(2px, -2px);
+  }
+  .button--dark {
+    color: white;
+    background: var(--color-navy);
+  }
+  .button--bronze {
+    color: white;
+    background: var(--color-bronze);
+  }
+  .button--bronze:hover {
+    background: #a97543;
+  }
+  .button--glass,
+  .button--outline {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .button--glass {
+    min-width: 215px;
+    justify-content: flex-start;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .button--glass small {
+    display: block;
+    opacity: 0.7;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .button__icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    flex: 0 0 auto;
+  }
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--color-ink);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .topbar {
+    color: rgba(255, 255, 255, 0.84);
+    background: var(--color-navy-deep);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+  .topbar__inner {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topbar p {
+    margin: 0;
+  }
+  .topbar__meta {
+    display: flex;
+    gap: 2rem;
+  }
+  .topbar__meta a {
+    color: white;
+    font-weight: 600;
+  }
+  .header {
+    position: sticky;
+    z-index: 20;
+    top: 0;
+    background: #f9f5ef;
+  }
+  .header__inner {
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-navy);
+  }
+  .logo--nav img {
+    width: 220px;
+    height: auto;
+    display: block;
+  }
+  .logo__mark {
+    width: 40px;
+    height: 40px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+  .logo__type {
+    display: grid;
+    line-height: 1;
+  }
+  .logo__type strong {
+    font-family: var(--font-display);
+    font-size: 0.96rem;
+    letter-spacing: 0.12em;
+  }
+  .logo__type small {
+    margin-top: 0.35rem;
+    color: var(--color-bronze);
+    font-size: 0.48rem;
+    letter-spacing: 0.21em;
+    font-weight: 700;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2.1rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .nav a:hover,
+  .nav-services button:hover,
+  .nav-areas button:hover {
+    color: var(--color-bronze);
+  }
+  .nav-services,
+  .nav-areas {
+    position: relative;
+  }
+  .nav-services button,
+  .nav-areas button {
+    padding: 1.25rem 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    cursor: default;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  .nav-services button span {
+    margin-left: 0.3rem;
+  }
+  .services-dropdown,
+  .areas-dropdown {
+    position: absolute;
+    top: 100%;
+    left: -1.25rem;
+    width: 245px;
+    display: grid;
+    visibility: hidden;
+    opacity: 0;
+    background: white;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow);
+    transform: translateY(-5px);
+    transition: 0.2s ease;
+  }
+  .nav-services:hover .services-dropdown,
+  .nav-services:focus-within .services-dropdown,
+  .nav-areas:hover .areas-dropdown,
+  .nav-areas:focus-within .areas-dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+  .services-dropdown a,
+  .areas-dropdown a {
+    padding: 0.7rem 0.8rem;
+  }
+  .services-dropdown a:hover,
+  .areas-dropdown a:hover {
+    color: var(--color-bronze);
+    background: var(--color-cream);
+  }
+  .header__cta {
+    min-height: 44px;
+    padding-inline: 1.2rem;
+  }
+  .menu-button,
+  .mobile-nav {
+    display: none;
+  }
+  .hero {
+    min-height: 740px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    background: var(--color-navy);
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    background: url("/images/Screen-Pro-Retractable-Doors-Kauai43.jpg") center
+      52% / cover no-repeat;
+    transform: scale(1.01);
+  }
+  .hero__media video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 52%;
+  }
+  .hero__shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(7, 31, 43, 0.72) 0%,
+        rgba(8, 34, 48, 0.43) 47%,
+        rgba(8, 34, 48, 0.08) 78%
+      ),
+      linear-gradient(0deg, rgba(8, 29, 41, 0.36), transparent 45%);
+  }
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 6rem;
+  }
+  .hero__lede {
+    max-width: 600px;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+  .hero__actions {
+    display: flex;
+    gap: 0.8rem;
+  }
+  .hero__foot {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 108px;
+    display: flex;
+    align-items: center;
+  }
+  .hero__trust {
+    min-width: 225px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 2rem;
+    margin-right: 2rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  .hero__trust strong {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .hero__trust span {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+  .hero__trust b {
+    color: var(--color-rating-star);
+    letter-spacing: 0.08em;
+  }
+  .hero__location {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .hero__location i {
+    width: 4px;
+    height: 4px;
+    background: var(--color-bronze-light);
+    border-radius: 50%;
+  }
+  .intro {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-sand);
+  }
+  .intro__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 8rem;
+    align-items: center;
+  }
+  .intro__grid > div:first-child {
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--color-bronze);
+  }
+  .intro__copy {
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 18px 55px rgba(19, 42, 55, 0.08);
+  }
+  .intro__copy p {
+    color: #61727a;
+  }
+  .intro__copy .lead {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+  .intro__details {
+    margin: 2rem 0;
+    padding: 1.3rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .intro__details span {
+    display: grid;
+    color: #718087;
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+  .intro__details b {
+    color: var(--color-ink);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .intro__copy .text-link {
+    margin-top: 0.25rem;
+  }
+  .services {
+    padding-top: var(--space-8);
+  }
+  .section-head,
+  .brands__head,
+  .reviews__top {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+  .section-head > p,
+  .brands__head > p {
+    max-width: 420px;
+    margin-bottom: 0.6rem;
+    color: #66777e;
+  }
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .why {
+    background: var(--color-sand);
+  }
+  .why__head {
+    max-width: 760px;
+    margin: 0 auto 3.25rem;
+    text-align: center;
+  }
+  .why__head .eyebrow {
+    justify-content: center;
+  }
+  .why__head p {
+    max-width: 700px;
+    margin: 1.5rem auto 0;
+    color: #65757c;
+  }
+  .why__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .values-grid {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .feature {
+    color: white;
+    background: var(--color-navy);
+  }
+  .feature__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8%;
+    align-items: center;
+  }
+  .feature__image-wrap {
+    position: relative;
+  }
+  .feature__image {
+    aspect-ratio: 0.83;
+    background: url("/images/custom-screen-installation-kauai-v3.jpg")
+      center/cover;
+  }
+  .feature__badge {
+    position: absolute;
+    right: -2rem;
+    bottom: 2.5rem;
+    width: 200px;
+    padding: 1.2rem;
+    display: grid;
+    color: var(--color-ink);
+    background: var(--color-sand);
+    box-shadow: var(--shadow);
+  }
+  .feature__badge strong {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+  .feature__badge span {
+    color: #66777e;
+    font-size: 0.67rem;
+  }
+  .feature__content p {
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .feature__content .lead {
+    margin-top: 2rem;
+    color: white;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.55;
+  }
+  .feature__points {
+    margin: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .feature__points > div {
+    padding: 1rem 0;
+    display: flex;
+    gap: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .feature__points strong {
+    color: var(--color-bronze-light);
+    font-size: 0.66rem;
+  }
+  .feature__points span {
+    display: grid;
+    color: rgba(255, 255, 255, 0.57);
+    font-size: 0.75rem;
+  }
+  .feature__points b {
+    color: white;
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+  }
+  .brands {
+    background: var(--color-sand);
+  }
+  .brand-list {
+    border-top: 1px solid rgba(19, 42, 55, 0.2);
+  }
+  .brand-row {
+    min-height: 112px;
+    display: grid;
+    grid-template-columns: 60px 0.5fr 1.2fr;
+    align-items: center;
+    gap: 1.5rem;
+    border-bottom: 1px solid rgba(19, 42, 55, 0.2);
+  }
+  .brand-row > span {
+    color: var(--color-ocean);
+    font-size: 0.65rem;
+  }
+  .brand-row__identity {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+  .brand-row__logo {
+    width: auto;
+    max-width: 180px;
+    height: auto;
+    max-height: 58px;
+    object-fit: contain;
+    object-position: left center;
+  }
+  .brand-row__logo--monochrome {
+    filter: brightness(0) saturate(100%);
+    opacity: 0.82;
+  }
+  .brand-row p {
+    margin: 0;
+    color: #64747b;
+    font-size: 1rem;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .section-head--gallery {
+    align-items: end;
+  }
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-rows: repeat(2, 340px);
+    gap: 1rem;
+  }
+  .gallery__item {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+  }
+  .gallery__item--wide {
+    grid-row: 1 / 3;
+  }
+  .gallery__photo {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.6s ease;
+  }
+  .gallery__item:hover .gallery__photo {
+    transform: scale(1.035);
+  }
+  .gallery__photo--one {
+    background-image: url("/images/screen-installation-3.avif");
+  }
+  .gallery__photo--two {
+    background-image: url("/images/screen-installation-2.avif");
+  }
+  .gallery__photo--three {
+    background-image: url("/images/screen-installation-1.avif");
+  }
+  .gallery__item figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 3rem 1.4rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    background: linear-gradient(transparent, rgba(9, 30, 42, 0.78));
+  }
+  .gallery__item figcaption > div {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .gallery__item figcaption span {
+    font-family: var(--font-display);
+    font-size: 1rem;
+  }
+  .gallery__item figcaption small {
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .gallery__cta {
+    min-height: 42px;
+    padding: 0 1rem;
+    display: inline-flex;
+    align-items: center;
+    align-self: end;
+    gap: 0.75rem;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+      transform 0.25s ease,
+      filter 0.25s ease;
+  }
+  .gallery__cta:hover {
+    color: white;
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+  .gallery__cta b {
+    font-size: 0.9rem;
+  }
+  .gallery__cta--motorized {
+    background: var(--color-bronze);
+  }
+  .gallery__cta--door {
+    background: var(--color-navy);
+  }
+  .gallery__cta--windows {
+    background: var(--color-ocean);
+  }
+  .reviews {
+    color: white;
+    background: var(--color-navy);
+  }
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .rating > strong {
+    font-family: var(--font-display);
+    font-size: 2.7rem;
+    font-weight: 400;
+  }
+  .rating span {
+    display: grid;
+  }
+  .rating b,
+  .review-card__stars {
+    color: var(--color-rating-star);
+    letter-spacing: 0.08em;
+  }
+  .rating small {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.65rem;
+  }
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .review-card {
+    min-height: 310px;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-navy);
+  }
+  .review-card__stars {
+    font-size: 0.72rem;
+  }
+  .review-card > p {
+    margin: 1.5rem 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+  .review-card footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .review-card footer > span {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    color: var(--color-navy);
+    background: var(--color-sand);
+    border-radius: 50%;
+    font-weight: 700;
+  }
+  .review-card footer div {
+    display: grid;
+  }
+  .review-card footer strong {
+    font-size: 0.8rem;
+  }
+  .review-card footer small {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.67rem;
+  }
+  .area {
+    background: var(--color-cream);
+  }
+  .area__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: center;
+  }
+  .area__map {
+    position: relative;
+    background: #e8e2d7;
+  }
+  .area__map img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .area__label {
+    position: absolute;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.125rem;
+    text-transform: uppercase;
+  }
+  .area__label::before {
+    width: 0.875rem;
+    height: 0.875rem;
+    position: absolute;
+    top: 50%;
+    border-radius: 50%;
+    background: var(--color-bronze);
+    content: "";
+    transform: translateY(-50%);
+  }
+  .area__label--north {
+    top: 23%;
+    left: 34%;
+  }
+  .area__label--north::before {
+    right: calc(100% + 0.5rem);
+  }
+  .area__label--east {
+    top: 46%;
+    right: 8%;
+  }
+  .area__label--east::before {
+    left: calc(100% + 0.5rem);
+  }
+  .area__label--south {
+    bottom: 9%;
+    left: 45%;
+  }
+  .area__label--south::before {
+    right: calc(100% + 0.5rem);
+  }
+  .area__content > p {
+    margin: 2rem 0;
+    color: #63737a;
+  }
+  .area__content ul {
+    padding: 0;
+    border-top: 1px solid var(--color-line);
+    list-style: none;
+  }
+  .area__content li {
+    border-bottom: 1px solid var(--color-line);
+  }
+  .area__content li a {
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: 8rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+  }
+  .area__content li a:hover {
+    color: var(--color-bronze);
+  }
+  .area__content li span {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .area__content li small {
+    color: #6d7c82;
+  }
+  .area__content li b {
+    color: var(--color-bronze);
+  }
+  .contact {
+    color: white;
+    background: var(--color-navy-deep);
+  }
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 8%;
+    align-items: start;
+  }
+  .contact__content > p {
+    max-width: 470px;
+    margin: 2rem 0;
+    color: rgba(255, 255, 255, 0.62);
+  }
+  .contact__phone {
+    margin-top: 2.5rem;
+    display: grid;
+  }
+  .contact__phone span {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .contact__phone strong {
+    color: var(--color-bronze-light);
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+  .contact__email {
+    display: block;
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 0.8rem;
+  }
+  .contact__promise {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .contact__promise > span {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: var(--color-bronze-light);
+  }
+  .contact__promise p {
+    margin: 0;
+    display: grid;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+  }
+  .contact__promise b {
+    color: white;
+    font-size: 0.8rem;
+  }
+  .quote-form {
+    padding: 2.5rem;
+    color: var(--color-ink);
+    background: var(--color-cream);
+  }
+  .quote-form__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 2rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .quote-form__heading strong {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+  }
+  .quote-form__heading span {
+    color: #6b7a81;
+    font-size: 0.73rem;
+  }
+  .quote-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  .quote-form label {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .quote-form label > span {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  .quote-form input,
+  .quote-form select,
+  .quote-form textarea {
+    width: 100%;
+    padding: 0.82rem 0;
+    color: var(--color-ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(19, 42, 55, 0.25);
+    outline: 0;
+    border-radius: 0;
+  }
+  .quote-form input:focus,
+  .quote-form select:focus,
+  .quote-form textarea:focus {
+    border-color: var(--color-bronze);
+  }
+  .quote-form textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+  .quote-form__full {
+    grid-column: 1 / -1;
+  }
+  .upload {
+    position: relative;
+  }
+  .upload input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .upload i {
+    padding: 0.84rem 0;
+    border-bottom: 1px solid rgba(19, 42, 55, 0.25);
+    color: #6b7a81;
+    font-style: normal;
+  }
+  .quote-form__submit {
+    width: 100%;
+    margin-top: 1.8rem;
+    border: 0;
+  }
+  .quote-form__note {
+    display: block;
+    margin-top: 0.8rem;
+    color: #7a878d;
+    text-align: center;
+    font-size: 0.62rem;
+  }
+  .footer {
+    padding: 4rem 0 1.5rem;
+    color: rgba(255, 255, 255, 0.75);
+    background: #061b27;
+  }
+  .logo--light img {
+    width: 220px;
+    height: auto;
+    display: block;
+  }
+  .footer__top {
+    padding-bottom: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: center;
+    gap: 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+  }
+  .footer__top p {
+    margin: 0;
+    max-width: 370px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+  .footer__middle {
+    padding: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+  }
+  .footer__middle > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+  }
+  .footer__middle div > span {
+    margin-bottom: 0.5rem;
+    color: var(--color-bronze-light);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .footer__middle p {
+    margin: 0;
+  }
+  .footer__middle a:hover {
+    color: white;
+  }
+  .footer__bottom {
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.65rem;
+  }
+  .footer__bottom a:hover {
+    color: white;
+  }
   @media (max-width: 980px) {
-    .section { padding: 5.5rem 0; }
-    .nav { gap: 1rem; }
-    .intro__grid, .feature__grid, .area__grid, .contact__grid { gap: 4rem; }
-    .service-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero__location { display: none; }
-    .brand-row { grid-template-columns: 40px 1fr 1.2fr 30px; }
+    .section {
+      padding: 5.5rem 0;
+    }
+    .nav {
+      gap: 1rem;
+    }
+    .intro__grid,
+    .feature__grid,
+    .area__grid,
+    .contact__grid {
+      gap: 4rem;
+    }
+    .service-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .hero__location {
+      display: none;
+    }
+    .brand-row {
+      grid-template-columns: 40px 1fr 1.2fr;
+    }
   }
   @media (max-width: 760px) {
-    body { padding-bottom: 52px; }
-    .container { width: min(calc(100% - 32px), var(--container)); }
-    .section { padding: 4.5rem 0; }
-    .topbar { display: none; }
-    .header__inner { height: 76px; }
-    .logo--nav img { width: 180px; }
-    .nav, .header__cta { display: none; }
-    .menu-button { width: 42px; height: 42px; padding: 0 10px; display: grid; align-content: center; gap: 6px; background: transparent; border: 1px solid var(--color-line); }
-    .menu-button span { height: 1px; background: var(--color-ink); }
-    .mobile-nav { position: absolute; inset: 76px 0 auto; padding: 1rem 16px 1.5rem; display: none; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #F9F5EF; border-top: 1px solid var(--color-line); box-shadow: var(--shadow); }
-    .mobile-nav--open { display: grid; }
-    .mobile-nav a, .mobile-nav strong { padding: .8rem; background: var(--color-cream); font-size: .8rem; }
-    .mobile-nav strong { grid-column: 1 / -1; color: var(--color-bronze); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
-    .hero { min-height: 690px; align-items: start; }
-    .hero__media { background-position: 62% center; }
-    .hero__media video { object-position: 62% center; }
-    .hero__shade { background: linear-gradient(90deg, rgba(7,31,43,.76), rgba(8,34,48,.25)), linear-gradient(0deg, rgba(8,29,41,.45), transparent 50%); }
-    .hero__content { padding-top: 5rem; padding-bottom: 9rem; }
-    h1 { font-size: clamp(2.6rem, 10.8vw, 3.7rem); }
-    h2 { font-size: clamp(2.05rem, 9vw, 3rem); }
-    .hero__lede { font-size: .95rem; }
-    .hero__actions { align-items: stretch; flex-direction: column; }
-    .hero__actions .button { width: 100%; }
-    .hero__foot { min-height: 84px; }
-    .hero__trust { min-width: 0; flex: 1; margin-right: 1rem; padding-right: 1rem; gap: .6rem; }
-    .hero__trust strong { font-size: 1.4rem; }
-    .hero__trust span { font-size: .57rem; }
-    .intro__grid, .feature__grid, .area__grid, .contact__grid { grid-template-columns: 1fr; gap: 3rem; }
-    .intro__grid > div:first-child { padding-left: 1rem; }
-    .intro__copy { padding: 1.6rem; }
-    .intro__details { grid-template-columns: 1fr; gap: .8rem; }
-    .section-head, .brands__head, .reviews__top { align-items: start; flex-direction: column; gap: 1.5rem; }
-    .service-grid { grid-template-columns: 1fr; }
-    .service-card { min-height: 350px; padding: 1.5rem; }
-    .feature__image-wrap { margin-right: 1.5rem; }
-    .feature__badge { right: -1.5rem; }
-    .brand-row { min-height: 130px; padding: 1rem 0; grid-template-columns: 32px 1fr 30px; gap: .7rem; }
-    .brand-row p { grid-column: 2 / 3; }
-    .brand-row i { grid-column: 3; grid-row: 1 / 3; }
-    .gallery__grid { grid-template-columns: 1fr; grid-template-rows: 440px 280px 280px; }
-    .gallery__item--wide { grid-row: auto; }
-    .review-grid { grid-template-columns: 1fr; }
-    .area__grid { display: flex; flex-direction: column-reverse; }
-    .area__content li { align-items: start; flex-direction: column; gap: .2rem; }
-    .quote-form { padding: 1.5rem; margin-inline: -8px; }
-    .quote-form__heading { align-items: start; flex-direction: column; }
-    .quote-form__grid { grid-template-columns: 1fr; }
-    .quote-form__full { grid-column: auto; }
-    .footer__top { grid-template-columns: 1fr; gap: 2rem; }
-    .footer__middle { grid-template-columns: repeat(2, 1fr); }
-    .footer__bottom { flex-direction: column; gap: .4rem; }
-    .mobile-call { position: fixed; z-index: 50; inset: auto 0 0; height: 52px; padding: 0 1.2rem; display: flex; align-items: center; justify-content: space-between; color: white; background: var(--color-bronze); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
-    .mobile-call span { font-size: .7rem; }
+    .container {
+      width: min(calc(100% - 32px), var(--container));
+    }
+    .section {
+      padding: 4.5rem 0;
+    }
+    .topbar {
+      display: none;
+    }
+    .header__inner {
+      height: 76px;
+    }
+    .logo--nav img {
+      width: 180px;
+    }
+    .nav,
+    .header__cta {
+      display: none;
+    }
+    .menu-button {
+      width: 42px;
+      height: 42px;
+      padding: 0 10px;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid var(--color-line);
+    }
+    .menu-button span {
+      height: 1px;
+      background: var(--color-ink);
+    }
+    .mobile-nav {
+      position: absolute;
+      inset: 76px 0 auto;
+      padding: 1rem 16px 1.5rem;
+      display: none;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: #f9f5ef;
+      border-top: 1px solid var(--color-line);
+      box-shadow: var(--shadow);
+    }
+    .mobile-nav--open {
+      display: grid;
+    }
+    .mobile-nav a,
+    .mobile-nav strong {
+      padding: 0.8rem;
+      background: var(--color-cream);
+      font-size: 0.8rem;
+    }
+    .mobile-nav strong {
+      grid-column: 1 / -1;
+      color: var(--color-bronze);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero {
+      min-height: 690px;
+      align-items: start;
+    }
+    .hero__media {
+      background-position: 62% center;
+    }
+    .hero__media video {
+      object-position: 62% center;
+    }
+    .hero__shade {
+      background:
+        linear-gradient(90deg, rgba(7, 31, 43, 0.76), rgba(8, 34, 48, 0.25)),
+        linear-gradient(0deg, rgba(8, 29, 41, 0.45), transparent 50%);
+    }
+    .hero__content {
+      padding-top: 3rem;
+      padding-bottom: 9rem;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 10.8vw, 3.7rem);
+    }
+    h2 {
+      font-size: clamp(2.05rem, 9vw, 3rem);
+    }
+    .hero__lede {
+      font-size: 0.95rem;
+    }
+    .hero__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .hero__actions .button {
+      width: 100%;
+    }
+    .hero__foot {
+      min-height: 84px;
+    }
+    .hero__trust {
+      min-width: 0;
+      flex: 1;
+      margin-right: 1rem;
+      padding-right: 1rem;
+      gap: 0.6rem;
+    }
+    .hero__trust strong {
+      font-size: 1.4rem;
+    }
+    .hero__trust span {
+      font-size: 0.57rem;
+    }
+    .intro__grid,
+    .feature__grid,
+    .area__grid,
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .intro__grid > div:first-child {
+      padding-left: 1rem;
+    }
+    .intro__copy {
+      padding: 1.6rem;
+    }
+    .intro__details {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+    .section-head,
+    .brands__head,
+    .reviews__top {
+      align-items: start;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+    .why__head {
+      margin-bottom: 2.25rem;
+      text-align: left;
+    }
+    .why__head .eyebrow {
+      justify-content: flex-start;
+    }
+    .why__grid {
+      grid-template-columns: 1fr;
+    }
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+    .feature__image-wrap {
+      margin-right: 1.5rem;
+    }
+    .feature__badge {
+      right: -1.5rem;
+    }
+    .brand-row {
+      min-height: 130px;
+      padding: 1rem 0;
+      grid-template-columns: 32px 1fr;
+      gap: 0.7rem;
+    }
+    .brand-row p {
+      grid-column: 2 / 3;
+    }
+    .brand-row__logo {
+      max-width: 150px;
+      max-height: 48px;
+    }
+    .gallery__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: 440px 280px 280px;
+    }
+    .gallery__item--wide {
+      grid-row: auto;
+    }
+    .review-grid {
+      grid-template-columns: 1fr;
+    }
+    .area__grid {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .area__content li {
+      align-items: start;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .quote-form {
+      padding: 1.5rem;
+      margin-inline: -8px;
+    }
+    .quote-form__heading {
+      align-items: start;
+      flex-direction: column;
+    }
+    .quote-form__grid {
+      grid-template-columns: 1fr;
+    }
+    .quote-form__full {
+      grid-column: auto;
+    }
+    .footer__top {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .footer__middle {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .footer__bottom {
+      flex-direction: column;
+      gap: 0.4rem;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { transition-duration: .01ms !important; }
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>

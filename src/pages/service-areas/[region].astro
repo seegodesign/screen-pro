@@ -1,6 +1,8 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import "../../styles/variables.css";
 import { serviceAreaRegions, type ServiceAreaSlug } from "../../data/service-areas";
 import { serviceMeta } from "../../data/service-meta";
 
@@ -138,7 +140,7 @@ const jsonLd = {
       </section>
     </main>
 
-    <footer><div class="container footer__inner"><img src="/images/logo-light.webp" width="1723" height="522" alt="Screen Pro Retractable Doors" /><p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p><a href={`tel:${tel}`}>{phone}</a><a class="credit" href="https://seegodesign.com" target="_blank" rel="noopener noreferrer">Site by Seego Design</a></div></footer>
+    <SiteFooter />
   </body>
 </html>
 

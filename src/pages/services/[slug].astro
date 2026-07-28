@@ -1,8 +1,11 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
+import SiteFooter from "../../components/SiteFooter.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
+import serviceContent from "../../data/service-content.json";
 import { serviceAreas } from "../../data/service-areas";
+import "../../styles/variables.css";
 
 type Benefit = { title: string; body: string };
 type ProcessStep = Benefit & { step: string };
@@ -16,36 +19,13 @@ const slug = Astro.params.slug as ServiceSlug;
 const meta = serviceMeta[slug];
 if (!meta) return Astro.redirect("/#services");
 
-const sources = import.meta.glob("../../figma-services/*.tsx", {
-  query: "?raw",
-  import: "default",
-  eager: true,
-}) as Record<string, string>;
-const source = sources[`../../figma-services/${meta.source}`];
-
-const decode = (value: string) => JSON.parse(`"${value}"`) as string;
-const prop = (name: string) => {
-  const match = source.match(new RegExp(`${name}="((?:\\\\.|[^"])*)"`));
-  if (!match) throw new Error(`Missing ${name} in ${meta.source}`);
-  return decode(match[1]);
-};
-const block = (name: string, nextName: string) => {
-  const match = source.match(new RegExp(`${name}=\\{\\[([\\s\\S]*?)\\]\\}\\s+${nextName}=`));
-  if (!match) throw new Error(`Missing ${name} in ${meta.source}`);
-  return match[1];
-};
-const pairs = (value: string, first: string, second: string) =>
-  [...value.matchAll(new RegExp(`${first}:\\s*"((?:\\\\.|[^"])*)"[\\s\\S]*?${second}:\\s*"((?:\\\\.|[^"])*)"`, "g"))]
-    .map((match) => ({ [first]: decode(match[1]), [second]: decode(match[2]) }));
-
-const heroImage = prop("heroImage");
-const intro = prop("intro");
-const benefits = pairs(block("benefits", "process"), "title", "body") as Benefit[];
-const process = [...block("process", "faqs").matchAll(/step:\s*"((?:\\.|[^"])*)",\s*title:\s*"((?:\\.|[^"])*)",\s*body:\s*"((?:\\.|[^"])*)"/g)]
-  .map((match) => ({ step: decode(match[1]), title: decode(match[2]), body: decode(match[3]) })) as ProcessStep[];
-const faqs = pairs(block("faqs", "relatedSlugs"), "q", "a") as Faq[];
-const relatedMatch = source.match(/relatedSlugs=\{\[([\s\S]*?)\]\}/);
-const relatedSlugs = [...(relatedMatch?.[1] ?? "").matchAll(/"([^"]+)"/g)].map((match) => match[1] as ServiceSlug);
+const content = serviceContent[slug];
+const heroImage = content.heroImage;
+const intro = content.intro;
+const benefits = content.benefits as Benefit[];
+const process = content.process as ProcessStep[];
+const faqs = content.faqs as Faq[];
+const relatedSlugs = content.relatedSlugs as ServiceSlug[];
 const related = relatedSlugs.map((relatedSlug) => ({ slug: relatedSlug, ...serviceMeta[relatedSlug] }));
 
 const phone = "(808) 651-8664";
@@ -181,14 +161,13 @@ const jsonLd = {
         <div class="container">
           <div class="section-head"><p class="eyebrow eyebrow--dark">More services</p><h2>Explore other<br /><em>screen solutions.</em></h2></div>
           <div class="related__grid">
-            {related.map((item) => <a href={`/services/${item.slug}/`}><span>Learn more ↗</span><h3>{item.title}</h3><p>{item.description}</p></a>)}
+            {related.map((item) => <a href={`/services/${item.slug}/`}><h3>{item.title}</h3><p>{item.description}</p><span>Learn more ↗</span></a>)}
           </div>
         </div>
       </section>
     </main>
 
-    <footer><div class="container"><img src="/images/logo-light.webp" width="1723" height="522" alt="Screen Pro Retractable Doors" /><p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p><a href={`tel:${tel}`}>{phone}</a><a class="site-credit" href="https://seegodesign.com" target="_blank" rel="noopener noreferrer">Site by Seego Design</a></div></footer>
-    <a class="mobile-call" href={`tel:${tel}`}>Call now <span>{phone}</span></a>
+    <SiteFooter />
   </body>
 </html>
 
@@ -273,7 +252,7 @@ const jsonLd = {
   .form-grid .full { grid-column:1/-1; }
   input,textarea { width:100%; padding:.8rem 0; border:0; border-bottom:1px solid rgba(19,42,55,.25); border-radius:0; outline:0; background:transparent; font:inherit; }
   input:focus,textarea:focus { border-color:var(--bronze); }
-  .faq { background:var(--sand); }
+  .faq { background:var(--cream); }
   .faq__grid { display:grid; grid-template-columns:.65fr 1.35fr; gap:8rem; }
   .faq details { border-top:1px solid rgba(19,42,55,.2); }
   .faq details:last-child { border-bottom:1px solid rgba(19,42,55,.2); }
@@ -283,11 +262,11 @@ const jsonLd = {
   .faq details[open] summary span { transform:rotate(45deg); }
   .faq details p { padding-right:2rem; color:var(--muted); font-size:.9rem; }
   .related__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
-  .related__grid a { min-height:240px; padding:2rem; display:flex; flex-direction:column; border:1px solid var(--line); transition:.25s; }
+  .related__grid a { min-height:240px; padding:1.75rem; display:flex; flex-direction:column; border:1px solid var(--line); transition:.25s; }
   .related__grid a:hover { transform:translateY(-4px); box-shadow:0 15px 45px rgba(7,31,43,.1); }
-  .related__grid span { color:var(--bronze); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
-  .related__grid h3 { margin-top:auto; margin-bottom:.5rem; font-size:1.25rem; }
-  .related__grid p { margin:0; color:var(--muted); font-size:.82rem; }
+  .related__grid span { margin-top:auto; padding-top:1rem; border-top:1px solid var(--line); color:var(--bronze); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .related__grid h3 { margin:0 0 .75rem; font-size:1.25rem; }
+  .related__grid p { margin:0 0 1.5rem; color:var(--muted); font-size:.82rem; }
   footer { padding:3rem 0; color:rgba(255,255,255,.65); background:var(--navy-deep); }
   footer .container { display:flex; align-items:center; gap:3rem; }
   footer img { width:200px; height:auto; }
@@ -295,13 +274,11 @@ const jsonLd = {
   footer a { margin-left:auto; color:#fff; }
   footer .site-credit { margin-left:0; color:rgba(255,255,255,.5); font-size:.7rem; }
   footer .site-credit:hover { color:#fff; }
-  .mobile-call { display:none; }
   @media (max-width:900px) {
     .overview__grid,.quote__grid,.faq__grid { gap:4rem; }
     .process__grid { grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width:760px) {
-    body { padding-bottom:52px; }
     .container { width:min(calc(100% - 32px),1180px); }
     .section { padding:4.5rem 0; }
     .topbar,.nav,.header__cta { display:none; }
@@ -326,7 +303,6 @@ const jsonLd = {
     .related__grid { grid-template-columns:1fr; }
     footer .container { align-items:flex-start; flex-direction:column; gap:1.25rem; }
     footer a { margin-left:0; }
-    .mobile-call { position:fixed; z-index:50; inset:auto 0 0; height:52px; padding:0 1.2rem; display:flex; align-items:center; justify-content:space-between; color:#fff; background:var(--bronze); font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
   }
   @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*::before,*::after{transition-duration:.01ms!important} }
 </style>

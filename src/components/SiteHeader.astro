@@ -1,4 +1,5 @@
 ---
+import { MessageSquareText } from "@lucide/astro";
 import { serviceMeta } from "../data/service-meta";
 import { serviceAreaRegions } from "../data/service-areas";
 
@@ -28,10 +29,11 @@ const phone = "(808) 651-8664";
       <div class="site-header__menu">
         <button type="button" aria-haspopup="true">Services</button>
         <div class="site-header__dropdown">
+          <a href="/services/">All services</a>
           {Object.entries(serviceMeta).map(([slug, service]) => <a href={`/services/${slug}/`} aria-current={slug === currentService ? "page" : undefined}>{service.title}</a>)}
         </div>
       </div>
-      <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
+      <a href="/#about">About</a><a href="/partners/">Partners</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
       <div class="site-header__menu">
         <button type="button" aria-haspopup="true">Service areas</button>
         <div class="site-header__dropdown">
@@ -39,15 +41,16 @@ const phone = "(808) 651-8664";
         </div>
       </div>
     </nav>
-    <a class="site-header__cta" href={quoteHref}>Get a quote <span aria-hidden="true">↗</span></a>
+    <a class="site-header__cta" href={quoteHref}>Get a quote <MessageSquareText aria-hidden="true" /></a>
     <button class="site-header__menu-button" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </div>
   <nav class="site-header__mobile-nav" aria-label="Mobile navigation">
     <strong>Services</strong>
+    <a href="/services/">All services</a>
     {Object.entries(serviceMeta).map(([slug, service]) => <a href={`/services/${slug}/`} aria-current={slug === currentService ? "page" : undefined}>{service.title}</a>)}
     <strong>Service areas</strong>
     {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`} aria-current={slug === currentArea ? "page" : undefined}>{area.name}</a>)}
-    <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a><a href={quoteHref}>Get a quote</a>
+    <a href="/#about">About</a><a href="/partners/">Partners</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a><a href={quoteHref}>Get a quote</a>
   </nav>
 </header>
 
@@ -72,7 +75,7 @@ const phone = "(808) 651-8664";
   .site-header { position:sticky; z-index:20; top:0; background:#f9f5ef; font-family:"DM Sans",sans-serif; }
   .site-header__inner { height:96px; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
   .site-header__logo img { width:220px; height:auto; display:block; }
-  .site-header__nav { display:flex; align-items:center; gap:2rem; color:#132a37; font-size:.8rem; font-weight:600; }
+  .site-header__nav { display:flex; align-items:center; gap:2rem; color:#132a37; font-size:1rem; font-weight:600; }
   .site-header a { color:inherit; text-decoration:none; }
   .site-header__nav > a:hover,.site-header__menu button:hover { color:#b98552; }
   .site-header__menu { position:relative; }
@@ -82,10 +85,9 @@ const phone = "(808) 651-8664";
   .site-header__dropdown a { padding:.7rem .8rem; }
   .site-header__dropdown a:hover,.site-header__dropdown a[aria-current="page"] { color:#b98552; background:#f7f3ec; }
   .site-header__cta { min-height:44px; padding:0 1.2rem; display:inline-flex; align-items:center; justify-content:center; gap:1.2rem; color:#fff !important; background:#12324a; font-size:.72rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
-  .site-header__cta span { font-size:1rem; }
+  .site-header__cta svg { width:1rem; height:1rem; flex:0 0 auto; stroke-width:1.8; }
   .site-header__menu-button,.site-header__mobile-nav { display:none; }
   @media (max-width:760px) {
-    :global(body) { padding-bottom:52px; }
     .site-header__container { width:min(calc(100% - 32px),1180px); }
     .site-topbar,.site-header__nav,.site-header__cta { display:none; }
     .site-header__inner { height:76px; }

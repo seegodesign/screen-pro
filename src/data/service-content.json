@@ -1,0 +1,432 @@
+{
+  "screen-doors": {
+    "heroImage": "/images/kauai-retractable-screen-door.webp",
+    "intro": "Custom-measured screen doors for Kauai homes — swing doors, French doors, patio sliders, and security screens. Every door is built to fit your exact opening.",
+    "benefits": [
+      {
+        "title": "Let the Breeze In, Keep the Bugs Out",
+        "body": "Kauai's trade winds are one of the best things about living here. A well-fitted screen door lets you enjoy the airflow without inviting in mosquitoes, gnats, or the occasional gecko."
+      },
+      {
+        "title": "Custom-Fit Means No Gaps",
+        "body": "Off-the-shelf screen doors almost never fit perfectly — leaving gaps at the top, sides, or bottom that defeat the purpose. We measure every opening and build to spec."
+      },
+      {
+        "title": "Aluminum Frames That Last",
+        "body": "Unlike plastic or hollow steel frames, our extruded aluminum frames resist corrosion, hold their shape, and can be repaired when hardware eventually wears out."
+      },
+      {
+        "title": "Security Options Available",
+        "body": "For homeowners who want more than bug protection, we offer security screen doors with reinforced mesh and frames that provide a meaningful deterrent without sacrificing ventilation."
+      }
+    ],
+    "process": [
+      {
+        "step": "1",
+        "title": "Call or Request a Quote",
+        "body": "Tell us what you need. We'll ask about your door type, opening size, and any special requirements."
+      },
+      {
+        "step": "2",
+        "title": "On-Site Measurement",
+        "body": "We come to your home and measure the actual opening — not from a photo or your best guess. Exact measurements matter."
+      },
+      {
+        "step": "3",
+        "title": "Build & Source",
+        "body": "Your screen door is built or sourced to match your opening, frame color preference, and mesh choice."
+      },
+      {
+        "step": "4",
+        "title": "Professional Installation",
+        "body": "We install the door, adjust the hardware, test the operation, and clean up. You're left with a door that works from day one."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What types of screen doors do you install on Kauai?",
+        "a": "We install single swing screen doors, double or French screen doors, patio sliding screen doors, security screen doors, and retractable screen doors. If you have an unusual opening, let us know — we've handled them all."
+      },
+      {
+        "q": "What frame colors are available?",
+        "a": "We offer white and bronze aluminum frames. Bronze tends to blend better with darker door frames and is popular on higher-end homes. White works well with white or light-colored trim."
+      },
+      {
+        "q": "Can you screen a French door opening?",
+        "a": "Yes. Double French door openings get a paired screen door system that swings out (or in, depending on your preference) and latches in the center. We custom-measure and fit each panel."
+      },
+      {
+        "q": "How long does installation take?",
+        "a": "Most single screen door installations are completed in under two hours. Double doors or more complex hardware setups may take a half day. We'll give you a time estimate before we start."
+      },
+      {
+        "q": "Do you service screen doors you didn't install?",
+        "a": "Yes. If your existing screen door needs new wheels, a new latch, a patched or replaced screen, or frame repair — we can help regardless of who installed it originally."
+      }
+    ],
+    "relatedSlugs": [
+      "sliding-screen-doors",
+      "screen-repair",
+      "motorized-screens"
+    ]
+  },
+  "motorized-screens": {
+    "heroImage": "/images/kauai-luxury-motorized-screen.avif",
+    "intro": "Premium motorized screens for Kauai lanais, decks, and large openings. Remote-controlled, custom-fit, and built for the kinds of spaces that manual screens can't handle.",
+    "benefits": [
+      {
+        "title": "Designed for Large Openings",
+        "body": "Motorized screens shine on wide lanai openings, large deck spans, and open-concept indoor-outdoor spaces where manual screens would be impractical or ugly. We size systems for openings up to 30+ feet wide."
+      },
+      {
+        "title": "Sun Shade and Bug Protection in One",
+        "body": "Select from solar shade fabrics that cut UV and glare while maintaining outward visibility, insect screening for bug control, or combination systems. The right fabric depends on your orientation and priorities."
+      },
+      {
+        "title": "Disappears When Not Needed",
+        "body": "When retracted, motorized screens tuck into a compact housing at the top of the opening — leaving the view and the architecture completely unobstructed."
+      },
+      {
+        "title": "Premium Brands, Professional Installation",
+        "body": "We install Rainier, Wizard, and Centaur motorized screen systems. These aren't the Amazon-budget variety — they're built for longevity, quiet operation, and serviceability."
+      }
+    ],
+    "process": [
+      {
+        "step": "1",
+        "title": "Site Consultation",
+        "body": "We assess the opening, discuss fabric options, housing placement, and control preferences. Large-format installs need a proper plan."
+      },
+      {
+        "step": "2",
+        "title": "System Specification",
+        "body": "We specify the right motor, housing size, and fabric for your opening and goals. You'll know exactly what you're getting before any work begins."
+      },
+      {
+        "step": "3",
+        "title": "Professional Installation",
+        "body": "Housing is mounted, motor is wired, fabric is hung and tensioned. This is not a DIY project — precision matters for proper operation and longevity."
+      },
+      {
+        "step": "4",
+        "title": "Programming & Walkthrough",
+        "body": "We program your remote, test full travel in both directions, and walk you through operation and basic maintenance."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What motorized screen brands do you install on Kauai?",
+        "a": "We install Rainier, Wizard, and Centaur motorized screen systems. Rainier is our preferred system for most residential applications. Centaur is our recommendation for very large openings. We'll match you with the right brand for your project."
+      },
+      {
+        "q": "How wide of an opening can a motorized screen cover?",
+        "a": "Depending on the system, motorized screens can cover single openings up to 20 feet wide without a center post, and much wider with coupled or paired systems. We'll tell you exactly what's achievable for your opening."
+      },
+      {
+        "q": "What fabric options are available for motorized screens?",
+        "a": "We offer insect screening for bug protection, solar shade fabrics in various openness factors for UV/glare control, and blackout fabrics for privacy or media rooms. Fabric choice depends on your orientation, goals, and aesthetic preference."
+      },
+      {
+        "q": "Can motorized screens be operated without a remote?",
+        "a": "Yes. Most systems can be wired to a wall switch in addition to or instead of a remote. Some systems are also compatible with smart home integration. We discuss your preferred control setup during the consultation."
+      },
+      {
+        "q": "What happens if my motorized screen stops working?",
+        "a": "Most motor and fabric issues are serviceable. We support the systems we install and can diagnose and repair motor, track, or fabric problems. This is one of the reasons we only install brands with real service support."
+      },
+      {
+        "q": "How much do motorized screens cost on Kauai?",
+        "a": "Pricing depends on opening size, fabric, brand, and installation complexity. Motorized screens are a premium product — they're not cheap — but they're built to last and add real value to a home. Contact us for a no-obligation quote."
+      }
+    ],
+    "relatedSlugs": [
+      "screen-doors",
+      "hurricane-screens",
+      "screen-repair"
+    ]
+  },
+  "window-screens": {
+    "heroImage": "/images/kauai-window-screens.webp",
+    "intro": "New window screens, re-screening, and aluminum frame replacement for Kauai homes. Available in white or bronze frames with charcoal or light gray mesh.",
+    "benefits": [
+      {
+        "title": "Ventilation Without Compromise",
+        "body": "Good window screens let you keep windows open year-round without bug intrusion. In Kauai's climate, that's not a luxury — it's a quality-of-life essential."
+      },
+      {
+        "title": "Re-Screening Costs Far Less Than Replacement",
+        "body": "If your frames are still solid, there's no reason to replace the whole window screen. We re-screen existing frames with fresh mesh for a fraction of the cost of new units."
+      },
+      {
+        "title": "Mesh Color Makes a Difference",
+        "body": "Charcoal mesh offers better outward visibility and a sharper look. Light gray is more traditional and works well with older homes. We carry both and can help you choose."
+      },
+      {
+        "title": "Aluminum Frames, Not Fiberglass",
+        "body": "Fiberglass frames warp, crack, and oxidize in Hawaii's UV and humidity. Our aluminum frames are built to last — and when hardware eventually fails, they can be repaired."
+      }
+    ],
+    "process": [
+      {
+        "step": "1",
+        "title": "Assessment",
+        "body": "We evaluate your existing window screens — what's reusable, what needs replacement, and what mesh and frame options fit your home."
+      },
+      {
+        "step": "2",
+        "title": "Measure Every Opening",
+        "body": "Each window gets individually measured. Even windows from the same manufacturer can vary by fractions of an inch."
+      },
+      {
+        "step": "3",
+        "title": "Build or Re-Screen",
+        "body": "New screens are built to spec. Existing frames in good shape are re-screened with fresh mesh using a new spline."
+      },
+      {
+        "step": "4",
+        "title": "Install & Inspect",
+        "body": "Every screen is installed, checked for fit, and tested for proper retention before we leave."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What's the difference between re-screening and screen replacement?",
+        "a": "Re-screening means removing the old mesh from your existing frame and installing new mesh. Screen replacement means building a new frame with new mesh from scratch. If your frames are still in good condition, re-screening saves money. If they're bent, broken, or corroded, replacement is the right call."
+      },
+      {
+        "q": "What mesh colors do you offer?",
+        "a": "We carry charcoal and light gray mesh as our standard options. Charcoal is the most popular because it improves outward visibility and gives a cleaner look. Both are fiberglass mesh — durable, flexible, and resistant to corrosion."
+      },
+      {
+        "q": "What frame colors are available for new window screens?",
+        "a": "We offer white and bronze aluminum frames. White is standard and matches most window frames. Bronze blends well with darker trim and is popular on higher-end properties."
+      },
+      {
+        "q": "Can you make screens for custom or non-standard window sizes?",
+        "a": "Yes. We custom-build screens for any size opening, including skylights, transom windows, casement windows, and unusual architectural openings. We measure on-site and build to fit."
+      },
+      {
+        "q": "How long do window screens last on Kauai?",
+        "a": "With quality mesh and aluminum frames, window screens can last 10-15 years or more. Mesh in high-UV areas may need replacing sooner. If you see sagging, holes, or rusting, it's time to call us."
+      }
+    ],
+    "relatedSlugs": [
+      "screen-doors",
+      "screen-repair",
+      "hurricane-screens"
+    ]
+  },
+  "sliding-screen-doors": {
+    "heroImage": "/images/kauai-sliding-screen-door.webp",
+    "intro": "Heavy-duty aluminum sliding screen doors for Kauai homes — smooth, quiet, and built to handle Hawaii's humidity, salt air, and daily use.",
+    "benefits": [
+      {
+        "title": "Built for Island Conditions",
+        "body": "Standard sliding screen doors from big-box stores are built for mild climates. Our aluminum track systems resist corrosion from Kauai's salt air and hold up to year-round use."
+      },
+      {
+        "title": "Nylon Wheels for Smooth Operation",
+        "body": "Cheap steel wheels corrode and seize. Our screens run on quality nylon rollers that stay smooth and quiet for years — and can be replaced when they eventually wear out."
+      },
+      {
+        "title": "Custom-Cut to Your Opening",
+        "body": "We measure and cut tracks on-site. No adapters, no shimming, no gaps at the edges. Your sliding screen door will fit flush from day one."
+      },
+      {
+        "title": "Serviceable by Design",
+        "body": "When a wheel wears out or a latch breaks, we can fix it without replacing the whole door. We install systems that can be maintained — not just replaced."
+      }
+    ],
+    "process": [
+      {
+        "step": "1",
+        "title": "Quote & Consult",
+        "body": "We discuss your opening size, track configuration, and frame color preference. We'll let you know what to expect before any work begins."
+      },
+      {
+        "step": "2",
+        "title": "On-Site Measurement",
+        "body": "We measure the exact opening and existing track space. Sliding doors require precise track dimensions for smooth operation."
+      },
+      {
+        "step": "3",
+        "title": "Cut & Build",
+        "body": "Frames and tracks are cut to your exact dimensions. No standard sizes — every door is made for your specific opening."
+      },
+      {
+        "step": "4",
+        "title": "Install & Adjust",
+        "body": "We install the door, set the wheel height, adjust the latch, and test the slide before we leave."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "My sliding screen door is hard to slide — can you fix it without replacing it?",
+        "a": "Often yes. Stiff or sticky sliding doors are usually caused by worn nylon wheels, dirty or bent tracks, or a warped frame. We assess first and repair what we can. Replacement is only recommended when the frame itself is too damaged to salvage."
+      },
+      {
+        "q": "What frame colors do sliding screen doors come in?",
+        "a": "We offer white and bronze aluminum frames. Both are extruded aluminum, not rolled or hollow profiles, so they hold their shape and resist warping."
+      },
+      {
+        "q": "Can you replace just the wheels on my sliding screen door?",
+        "a": "Yes. Wheel replacement is one of our most common repairs. It's fast, affordable, and restores smooth operation without replacing the whole door."
+      },
+      {
+        "q": "How wide can a sliding screen door be?",
+        "a": "We build sliding screen doors for openings from standard 36\" widths up to large 8-10 foot spans for wide pocket-door openings. For very large openings, we may recommend a different system — we'll advise you honestly."
+      },
+      {
+        "q": "Do you service sliding screen doors you didn't install?",
+        "a": "Yes. We repair and re-screen existing sliding doors regardless of brand or who installed them. Bring us the problem and we'll tell you what's fixable."
+      }
+    ],
+    "relatedSlugs": [
+      "screen-doors",
+      "screen-repair",
+      "motorized-screens"
+    ]
+  },
+  "hurricane-screens": {
+    "heroImage": "/images/kauai-hurricane-weather.avif",
+    "intro": "Hurricane-rated screen protection for Kauai homes. Easy to deploy before a storm, compact to store after, and installable from inside or outside depending on your opening.",
+    "benefits": [
+      {
+        "title": "Real Hurricane-Rated Protection",
+        "body": "Not all hurricane screens are equal. We work with fabrics rated for sustained high winds, protecting your windows and doors from flying debris — one of the leading causes of storm damage."
+      },
+      {
+        "title": "Deploy in Minutes, Not Hours",
+        "body": "Unlike plywood boarding or metal shutters, hurricane screens can be attached and secured quickly. Less time scrambling when a storm watch becomes a warning."
+      },
+      {
+        "title": "Compact Storage Between Seasons",
+        "body": "Screens roll or fold into a fraction of the space that plywood or metal panels require. Store them in a closet, garage, or under a bed — ready to go when you need them."
+      },
+      {
+        "title": "Inside or Outside Installation",
+        "body": "Depending on your opening configuration, screens can be installed from inside or outside. We assess your home and recommend the setup that makes the most sense for your situation."
+      }
+    ],
+    "process": [
+      {
+        "step": "1",
+        "title": "Home Assessment",
+        "body": "We evaluate your openings, note any unique configurations, and recommend the right hurricane screen system for your home."
+      },
+      {
+        "step": "2",
+        "title": "Custom Measurement",
+        "body": "Every opening is measured. Hurricane screens need to overlap the frame and anchor securely — precision matters more here than anywhere."
+      },
+      {
+        "step": "3",
+        "title": "Anchoring System Install",
+        "body": "We install the attachment hardware — tracks, clips, or bolt anchors — so the screens go up and come down easily when needed."
+      },
+      {
+        "step": "4",
+        "title": "Walkthrough & Training",
+        "body": "We walk you through how to deploy and store each screen so you're confident before storm season hits."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Do hurricane screens actually work?",
+        "a": "Yes, when properly specified and installed. Hurricane-rated fabrics are tested to withstand high-velocity wind-borne debris impact. They're an approved protection method under Hawaii's building code for properties that use them correctly."
+      },
+      {
+        "q": "Can I install hurricane screens myself?",
+        "a": "The hardware installation requires professional placement to ensure the anchors are properly set and load-rated. Once the hardware is in, homeowners can typically attach and remove the screens themselves — we walk you through it."
+      },
+      {
+        "q": "How do I store hurricane screens when I'm not using them?",
+        "a": "Screens roll or fold compactly. We provide storage recommendations based on your screen size and configuration. Most homeowners store them in a closet, garage shelf, or storage cabinet."
+      },
+      {
+        "q": "Do hurricane screens work on doors as well as windows?",
+        "a": "Yes. We install hurricane screens for windows, sliding glass doors, French doors, and lanai openings. Each installation is custom-measured and anchored appropriately for the opening size and type."
+      },
+      {
+        "q": "How early before a storm should I put hurricane screens up?",
+        "a": "Ideally as soon as a hurricane watch is issued for your area. Most installations take less than an hour once the hardware is in place. We recommend a practice run before storm season so you're confident when it matters."
+      }
+    ],
+    "relatedSlugs": [
+      "window-screens",
+      "screen-doors",
+      "motorized-screens"
+    ]
+  },
+  "screen-repair": {
+    "heroImage": "/images/kauai-broken-screen-repair.webp",
+    "intro": "Screen repair on Kauai — re-screening, wheel replacement, hydraulic tube repair, clip fixes, and frame assessment. We fix screens others won't touch.",
+    "benefits": [
+      {
+        "title": "Repair First, Replace Only When Necessary",
+        "body": "Most damaged screens don't need to be replaced — they need to be repaired. We assess honestly and recommend the most cost-effective path forward."
+      },
+      {
+        "title": "We Fix What Others Won't",
+        "body": "Many contractors won't bother with repairs — it's easier to sell a new product. We take repair work seriously because it's often the right answer for the homeowner."
+      },
+      {
+        "title": "Any Brand, Any Type",
+        "body": "We work on sliding screen doors, retractable screens, motorized systems, window screens, and patio doors — regardless of brand or who installed them."
+      },
+      {
+        "title": "Parts Stocked On-Site",
+        "body": "We carry common replacement parts — nylon wheels, spline, clips, springs, and hydraulic components — so most repairs can be completed in a single visit."
+      }
+    ],
+    "process": [
+      {
+        "step": "1",
+        "title": "Diagnose the Problem",
+        "body": "We inspect the screen, identify what's actually wrong, and explain the options — repair vs. partial replacement vs. full replacement."
+      },
+      {
+        "step": "2",
+        "title": "Quote the Work",
+        "body": "No surprises. We quote the repair before starting so you know what to expect."
+      },
+      {
+        "step": "3",
+        "title": "Complete the Repair",
+        "body": "Most repairs are done on-site in a single visit. Complex jobs may require parts to be ordered."
+      },
+      {
+        "step": "4",
+        "title": "Test & Confirm",
+        "body": "We test the repaired screen before we leave — operation, fit, hardware — to make sure everything works as it should."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What types of screen repairs do you do on Kauai?",
+        "a": "We repair torn or sagging mesh (re-screening), worn nylon wheels on sliding doors, hydraulic tube closers, door clips, springs, latches, hinges, and frame damage. We also assess frames and recommend repair vs. replacement when damage is significant."
+      },
+      {
+        "q": "Is it worth repairing an old screen door?",
+        "a": "Often yes, especially if the frame is still solid. A re-screening job or new set of wheels costs a fraction of a new door. We'll tell you honestly whether repair makes sense or whether you're better off replacing."
+      },
+      {
+        "q": "My retractable screen is stuck — can you fix it?",
+        "a": "Yes. Stuck retractable screens are usually caused by a tension issue, a dirty track, a broken spring cartridge, or a damaged housing. Most are repairable. We work on Clearview, Wizard, and other retractable brands."
+      },
+      {
+        "q": "Can you replace the wheels on my sliding screen door?",
+        "a": "Yes. Wheel replacement is one of our most common repair jobs. We carry standard nylon wheels that fit most sliding screen door profiles. Most wheel replacements are done in under an hour."
+      },
+      {
+        "q": "Do I need to bring the screen to you or do you come to me?",
+        "a": "We come to you. On-site repair is standard — we bring the tools and common parts to your home and complete the work where the screen lives."
+      }
+    ],
+    "relatedSlugs": [
+      "screen-doors",
+      "window-screens",
+      "sliding-screen-doors"
+    ]
+  }
+}
