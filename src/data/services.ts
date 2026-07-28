@@ -37,7 +37,7 @@ export const services = [
     title: "Hurricane Screens",
     copy: "Hurricane-rated fabric protection that is easy to deploy, compact to store, and fitted for inside or outside access.",
     tags: ["Compact storage", "Custom installation"],
-    image: "/images/kauai-hurricane-weather.avif",
+    image: "/images/hurricane-screens-kauai.avif",
   },
   {
     num: "06",

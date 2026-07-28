@@ -9,14 +9,14 @@ interface Props {
   quoteHref?: string;
 }
 
-const { currentService, currentArea, quoteHref = "/#contact" } = Astro.props;
+const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
 const phone = "(808) 651-8664";
 ---
 
 <div class="site-topbar">
   <div class="site-header__container site-topbar__inner">
     <p>Custom-fit screen solutions, built for island living.</p>
-    <div><span>Serving all of Kauaʻi</span><a href="tel:+18086518664">{phone}</a></div>
+    <div><span>Serving North, East & South Kauaʻi</span><a href="tel:+18086518664">{phone}</a></div>
   </div>
 </div>
 
@@ -33,7 +33,7 @@ const phone = "(808) 651-8664";
           {Object.entries(serviceMeta).map(([slug, service]) => <a href={`/services/${slug}/`} aria-current={slug === currentService ? "page" : undefined}>{service.title}</a>)}
         </div>
       </div>
-      <a href="/#about">About</a><a href="/partners/">Partners</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
+      <a href="/about/">About</a><a href="/partners/">Partners</a><a href="/#reviews">Reviews</a>
       <div class="site-header__menu">
         <button type="button" aria-haspopup="true">Service areas</button>
         <div class="site-header__dropdown">
@@ -50,7 +50,7 @@ const phone = "(808) 651-8664";
     {Object.entries(serviceMeta).map(([slug, service]) => <a href={`/services/${slug}/`} aria-current={slug === currentService ? "page" : undefined}>{service.title}</a>)}
     <strong>Service areas</strong>
     {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`} aria-current={slug === currentArea ? "page" : undefined}>{area.name}</a>)}
-    <a href="/#about">About</a><a href="/partners/">Partners</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a><a href={quoteHref}>Get a quote</a>
+    <a href="/about/">About</a><a href="/partners/">Partners</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a><a href={quoteHref}>Get a quote</a>
   </nav>
 </header>
 

@@ -80,22 +80,22 @@ const jsonLd = {
     <ClientRouter />
   </head>
   <body>
-    <SiteHeader currentArea={region} quoteHref="#quote" />
+    <SiteHeader currentArea={region} quoteHref="/free-quote/" />
 
     <main>
-      <section class="hero">
+      <section class="hero" style={`--hero-image: url("${area.heroImage}")`}>
         <div class="container hero__content">
           <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#service-area">Service areas</a><span>/</span><span>{area.name}</span></nav>
-          <p class="eyebrow">Island-wide service</p>
+          <p class="eyebrow">Local Kauaʻi service</p>
           <h1>{area.title}</h1>
           <p>{area.description}</p>
-          <a class="button button--bronze" href="#quote">Schedule a free consultation <span aria-hidden="true">↗</span></a>
+          <a class="button button--bronze" href="/free-quote/">Schedule a free consultation <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
       <section class="section intro">
         <div class="container split">
-          <div><p class="eyebrow eyebrow--dark">Local screen expertise</p><h2>Built for open-air living<br /><em>in {area.name}.</em></h2></div>
+          <div><p class="eyebrow eyebrow--dark">Local screen expertise</p><h2>{area.expertiseHeading}<br /><em>{area.expertiseAccent}</em></h2></div>
           <div class="prose"><p>{area.intro}</p><p>{area.conditions}</p></div>
         </div>
       </section>
@@ -104,7 +104,7 @@ const jsonLd = {
         <div class="container">
           <div class="section-head"><div><p class="eyebrow eyebrow--dark">Communities we serve</p><h2>Screen service throughout<br /><em>{area.shortName}.</em></h2></div><p>We provide on-site consultations, custom measurement, installation, and repair throughout these communities.</p></div>
           <div class="town-grid">
-            {area.towns.map((town, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{town}</h3><p>{area.townCopy[town]}</p><a href="#quote">Request service in {town} <b>→</b></a></article>)}
+            {area.towns.map((town, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{town}</h3><p>{area.townCopy[town]}</p><a href="/free-quote/">Request service in {town} <b>→</b></a></article>)}
           </div>
         </div>
       </section>
@@ -120,24 +120,11 @@ const jsonLd = {
 
       <section class="section regions">
         <div class="container split">
-          <div><p class="eyebrow">Also serving</p><h2>Screen Pro serves<br /><em>all of Kauaʻi.</em></h2></div>
+          <div><p class="eyebrow">Also serving</p><h2>Our other Kauaʻi<br /><em>service areas.</em></h2></div>
           <div class="region-links">{otherRegions.map(([slug, item]) => <a href={`/service-areas/${slug}/`}><span>{item.name}</span><b>→</b></a>)}</div>
         </div>
       </section>
 
-      <section class="section quote" id="quote">
-        <div class="container quote__grid">
-          <div><p class="eyebrow">Start your project</p><h2>Request screen service<br /><em>in {area.name}.</em></h2><p>Tell us about your opening or repair. We’ll follow up to answer questions and arrange a complimentary on-site consultation.</p><a class="phone" href={`tel:${tel}`}>{phone}</a></div>
-          <form class="form" name={`service-area-${region}`} method="POST" action="/?submitted=true#contact">
-            <label>Name<input name="name" autocomplete="name" required /></label>
-            <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
-            <label>Email<input name="email" type="email" autocomplete="email" /></label>
-            <label>Town<select name="town" required><option value="">Select your town</option>{area.towns.map((town) => <option value={town}>{town}</option>)}</select></label>
-            <label class="full">How can we help?<textarea name="message" rows="3"></textarea></label>
-            <button class="button button--bronze full" type="submit">Request a free quote <span aria-hidden="true">↗</span></button>
-          </form>
-        </div>
-      </section>
     </main>
 
     <SiteFooter />
@@ -178,7 +165,7 @@ const jsonLd = {
   .button { min-height:52px; padding:0 1.4rem; display:inline-flex; align-items:center; justify-content:center; gap:1.2rem; color:#fff; border:1px solid transparent; cursor:pointer; font:700 .72rem var(--body); letter-spacing:.09em; text-transform:uppercase; }
   .button--dark { background:var(--navy); }
   .button--bronze { background:var(--bronze); }
-  .hero { min-height:610px; display:flex; align-items:center; color:#fff; background:linear-gradient(100deg,rgba(7,31,43,.96),rgba(8,34,48,.76) 58%,rgba(8,34,48,.42)),url("/images/Screen-Pro-Retractable-Doors-Kauai43.jpg") center/cover; }
+  .hero { min-height:610px; display:flex; align-items:center; color:#fff; background-image:linear-gradient(100deg,rgba(7,31,43,.96),rgba(8,34,48,.76) 58%,rgba(8,34,48,.42)),var(--hero-image); background-position:center; background-size:cover; }
   .hero__content { padding-block:5rem; }
   .hero__content > p:not(.eyebrow) { max-width:680px; margin-bottom:2rem; color:rgba(255,255,255,.78); font-size:1.05rem; }
   .breadcrumbs { margin-bottom:4rem; display:flex; gap:.7rem; color:rgba(255,255,255,.48); font-size:.7rem; }
@@ -207,13 +194,7 @@ const jsonLd = {
   .region-links { border-top:1px solid rgba(255,255,255,.18); }
   .region-links a { padding:1.2rem 0; display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,.18); }
   .region-links b { color:#d4aa7d; }
-  .quote { color:#fff; background:var(--deep); }
-  .quote__grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:8%; }
-  .quote__grid > div > p:not(.eyebrow) { color:rgba(255,255,255,.62); }
   .phone { color:#d4aa7d; font-family:var(--display); font-size:1.7rem; }
-  .form { padding:2.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem 1.5rem; color:var(--ink); background:var(--cream); }
-  .form label { display:grid; gap:.35rem; color:var(--muted); font-size:.67rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
-  .form input,.form select,.form textarea { width:100%; padding:.75rem 0; color:var(--ink); background:transparent; border:0; border-bottom:1px solid rgba(19,42,55,.25); border-radius:0; outline:0; font:inherit; }
   .full { grid-column:1/-1; }
   footer { padding:3rem 0; color:rgba(255,255,255,.65); background:#061b27; }
   .footer__inner { display:flex; align-items:center; gap:2.5rem; }
@@ -225,7 +206,7 @@ const jsonLd = {
     .nav { display:none; }
     .header__inner { height:76px; }
     .logo img { width:180px; }
-    .split,.quote__grid,.section-head { grid-template-columns:1fr; gap:2.5rem; }
+    .split,.section-head { grid-template-columns:1fr; gap:2.5rem; }
     .service-grid { grid-template-columns:repeat(2,1fr); }
     .footer__inner { align-items:flex-start; flex-direction:column; gap:1rem; }
     footer .footer__inner > a:first-of-type { margin-left:0; }
@@ -235,9 +216,8 @@ const jsonLd = {
     .header .button { min-height:42px; padding:0 .8rem; font-size:.6rem; }
     .hero { min-height:570px; }
     .breadcrumbs { margin-bottom:2.5rem; }
-    .town-grid,.service-grid,.form { grid-template-columns:1fr; }
+    .town-grid,.service-grid { grid-template-columns:1fr; }
     .town-grid article { border-right:0; }
     .full { grid-column:auto; }
-    .form { padding:1.5rem; }
   }
 </style>

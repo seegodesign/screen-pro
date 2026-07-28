@@ -17,8 +17,11 @@ export const serviceAreaRegions = {
     shortName: "North Shore",
     towns: ["Hanalei", "Princeville", "Kīlauea"],
     title: "Screen Doors & Screen Repair on North Shore Kauaʻi",
+    heroImage: "/images/Screen-Pro-Retractable-Doors-Kauai-2.avif",
     description:
       "Custom screen doors, window screens, motorized screens, and screen repair for homes in Hanalei, Princeville, and Kīlauea.",
+    expertiseHeading: "Designed around the view",
+    expertiseAccent: "on the North Shore.",
     intro:
       "North Shore homes are designed around open air, garden views, and covered outdoor living. Screen Pro measures, installs, and repairs screen systems that protect that connection without making the opening feel closed in.",
     conditions:
@@ -37,8 +40,11 @@ export const serviceAreaRegions = {
     shortName: "East Side",
     towns: ["Anahola", "Kapaʻa", "Wailua", "Līhuʻe"],
     title: "Screen Doors & Screen Repair on East Side Kauaʻi",
+    heroImage: "/images/Screen-Pro-Retractable-Doors-Kauai.jpg",
     description:
       "Professional screen installation and repair in Anahola, Kapaʻa, Wailua, and Līhuʻe, including custom doors, windows, and motorized screens.",
+    expertiseHeading: "Fresh air, fewer tradeoffs",
+    expertiseAccent: "on the East Side.",
     intro:
       "East Side homes rely on natural airflow throughout the year. We build and service screen systems that make it easier to keep doors and windows open while helping keep insects and debris outside.",
     conditions:
@@ -59,8 +65,11 @@ export const serviceAreaRegions = {
     shortName: "South Shore",
     towns: ["Kōloa", "Poʻipū", "Kalāheo"],
     title: "Screen Doors & Screen Repair on South Shore Kauaʻi",
+    heroImage: "/images/screen-installation-3.avif",
     description:
       "Custom screen doors, motorized screens, window screens, and repairs for homes in Kōloa, Poʻipū, and Kalāheo.",
+    expertiseHeading: "A seamless indoor-outdoor flow",
+    expertiseAccent: "on the South Shore.",
     intro:
       "South Shore living often moves between indoor rooms, lanais, pools, and gardens. We install refined screen systems that support that flow while fitting the architecture and finish of the home.",
     conditions:

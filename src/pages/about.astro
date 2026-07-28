@@ -1,0 +1,148 @@
+---
+import { BadgeCheck, HeartHandshake, MapPin, ShieldCheck } from "@lucide/astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/variables.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Family-owned since 1998, Screen Pro provides custom retractable and motorized screen solutions backed by more than 25 years of experience on Kauaʻi." />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>About Screen Pro | Family-Owned on Kauaʻi Since 1998</title>
+  </head>
+  <body>
+    <SiteHeader quoteHref="/free-quote/" />
+
+    <main>
+      <section class="hero">
+        <div class="container hero__content">
+          <p class="eyebrow">Our story</p>
+          <h1>A legacy of quality<br /><em>on the Garden Isle.</em></h1>
+          <p>Family-owned, locally experienced, and committed to helping Kauaʻi homes welcome the breeze without compromising comfort.</p>
+        </div>
+      </section>
+
+      <section class="legacy section">
+        <div class="container legacy__grid">
+          <div class="legacy__image">
+            <img src="/images/screen-installation-1.avif" alt="Custom screen installation at a Kauaʻi home" />
+            <span><strong>25+</strong> years serving Kauaʻi</span>
+          </div>
+          <div class="legacy__content">
+            <p class="eyebrow eyebrow--dark">Family owned since 1998</p>
+            <h2>More than a business.<br /><em>We’re family.</em></h2>
+            <p class="lead">For more than 25 years, Screen Pro has helped our neighbors experience the beauty of island living more comfortably.</p>
+            <p>Living and working on Kauaʻi gives us a practical understanding of how salt air, humidity, tropical sun, trade winds, and everyday use affect a home. That experience shapes every recommendation we make.</p>
+            <p>We aren’t simply selling screens. We create custom solutions that invite in fresh air, preserve the view, and protect the spaces where island life happens.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="principles section">
+        <div class="container">
+          <div class="principles__head">
+            <div><p class="eyebrow eyebrow--dark">What guides us</p><h2>Local knowledge.<br /><em>Lasting standards.</em></h2></div>
+            <p>Our reputation has been built one home, one opening, and one relationship at a time.</p>
+          </div>
+          <div class="principles__grid">
+            <article><MapPin aria-hidden="true" /><h3>Island experience</h3><p>Solutions selected for Kauaʻi’s coastal climate, architecture, and indoor-outdoor way of life.</p></article>
+            <article><ShieldCheck aria-hidden="true" /><h3>Dependable quality</h3><p>Careful specifications, precise measurements, professional installation, and products designed to be serviced.</p></article>
+            <article><HeartHandshake aria-hidden="true" /><h3>Personal care</h3><p>Clear communication, honest guidance, and the same attention we would want for our own home.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="expertise section">
+        <div class="container expertise__grid">
+          <div>
+            <p class="eyebrow">The exclusive local experts</p>
+            <h2>Industry-leading systems,<br /><em>supported here at home.</em></h2>
+            <p>Our commitment to integrity and customer care is reflected in the partners we choose. As Kauaʻi’s exclusive OEM dealer for ClearView, Rainier, and Wizard, we bring proven retractable doors, motorized shades, and large-format screen systems directly to the island.</p>
+            <p>We only recommend products that meet our standards for durability, appearance, smooth operation, and long-term serviceability.</p>
+            <a href="/partners/">Meet our partners <span>↗</span></a>
+          </div>
+          <div class="expertise__points">
+            <div><BadgeCheck aria-hidden="true" /><span><strong>Authorized products</strong>Genuine systems backed by established manufacturers.</span></div>
+            <div><BadgeCheck aria-hidden="true" /><span><strong>Current technology</strong>Modern manual, motorized, and smart-control options.</span></div>
+            <div><BadgeCheck aria-hidden="true" /><span><strong>Local support</strong>Professional installation, service, and warranty guidance on Kauaʻi.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ohana section">
+        <div class="container ohana__grid">
+          <div class="ohana__image"><img src="/images/custom-screen-installation-kauai.jpg" alt="Custom screen installation at a Kauaʻi home" loading="lazy" /></div>
+          <div>
+            <p class="eyebrow eyebrow--dark">Part of our ʻohana</p>
+            <h2>Your home deserves<br /><em>personal attention.</em></h2>
+            <p>When you choose Screen Pro, you’re not just another customer—you become a valued member of our ʻohana. From the complimentary site visit through the final walkthrough, we treat every project as if it were for our own home.</p>
+            <p>We stand behind our word, our workmanship, and our warranties. Our goal is a warm, straightforward experience and a finished space where you can enjoy the best of Kauaʻi living.</p>
+            <a class="button" href="/contact/">Start a conversation <span>↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>
+
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; color:var(--color-ink); background:var(--color-cream); font-family:var(--font-body); line-height:1.65; }
+  a { color:inherit; text-decoration:none; }
+  h1,h2,h3,p { margin-top:0; }
+  h1,h2 { font-weight:400; letter-spacing:-.045em; }
+  h1 { margin:0; font-size:clamp(3.2rem,6vw,5.8rem); line-height:.96; }
+  h2 { margin-bottom:1.5rem; font-size:clamp(2.2rem,4vw,3.8rem); line-height:1; }
+  em { color:var(--color-bronze-light); font-weight:400; }
+  .container { width:min(calc(100% - 48px),1180px); margin-inline:auto; }
+  .section { padding:var(--space-8) 0; }
+  .eyebrow { margin-bottom:1.25rem; color:var(--color-bronze-light); font-size:.68rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+  .eyebrow--dark { color:var(--color-ocean); }
+  .hero { padding:8rem 0; color:white; background:linear-gradient(90deg,rgba(7,31,43,.92),rgba(18,50,74,.48)),url("/images/screen-installation-3.avif") center/cover; }
+  .hero__content > p:last-child { max-width:620px; margin:1.75rem 0 0; color:rgba(255,255,255,.72); font-size:1.05rem; }
+  .legacy__grid,.expertise__grid,.ohana__grid { display:grid; grid-template-columns:1fr 1fr; gap:8%; align-items:center; }
+  .legacy__image { position:relative; }
+  .legacy__image img { width:100%; aspect-ratio:.9; display:block; object-fit:cover; object-position:center top; }
+  .legacy__image > span { min-width:190px; padding:1rem 1.25rem; position:absolute; right:-1.5rem; bottom:2rem; display:grid; color:var(--color-ink); background:var(--color-cream); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; }
+  .legacy__image strong { color:var(--color-bronze-light); font-size:1.8rem; line-height:1.1; }
+  .legacy__content p { color:var(--color-muted); }
+  .legacy__content .lead { color:var(--color-ink); font-family:var(--font-headline); font-size:1.3rem; line-height:1.5; }
+  .principles { background:var(--color-sand); }
+  .principles__head { margin-bottom:3rem; display:grid; grid-template-columns:1fr 1fr; gap:8%; align-items:end; }
+  .principles__head h2 { margin:0; }
+  .principles__head > p { max-width:430px; margin-bottom:.5rem; color:var(--color-muted); }
+  .principles__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+  .principles article { padding:2rem; background:white; border:1px solid var(--color-line); border-radius:12px; }
+  .principles article > svg { width:38px; height:38px; color:var(--color-bronze); }
+  .principles h3 { margin:1.5rem 0 .7rem; font-size:1.4rem; }
+  .principles article p { margin:0; color:var(--color-muted); font-size:.86rem; }
+  .expertise { color:white; background:var(--color-navy); }
+  .expertise p { color:rgba(255,255,255,.65); }
+  .expertise a { width:max-content; margin-top:1.5rem; padding-bottom:.35rem; display:flex; gap:1.5rem; border-bottom:1px solid white; font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+  .expertise__points { display:grid; gap:1px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.12); }
+  .expertise__points > div { padding:1.35rem; display:grid; grid-template-columns:30px 1fr; gap:1rem; background:rgba(255,255,255,.05); }
+  .expertise__points svg { color:var(--color-bronze-light); }
+  .expertise__points span { color:rgba(255,255,255,.62); font-size:.8rem; }
+  .expertise__points strong { display:block; color:white; font-size:.9rem; }
+  .ohana__image img { width:100%; aspect-ratio:.9; display:block; object-fit:cover; }
+  .ohana p { color:var(--color-muted); }
+  .button { min-height:54px; margin-top:1rem; padding:0 1.5rem; display:inline-flex; align-items:center; gap:1.5rem; color:white; background:var(--color-bronze); font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+  @media (max-width:760px) {
+    .container { width:min(calc(100% - 32px),1180px); }
+    .section { padding:4.5rem 0; }
+    .hero { padding:5rem 0; }
+    .legacy__grid,.expertise__grid,.ohana__grid,.principles__head { grid-template-columns:1fr; gap:3rem; }
+    .legacy__image { margin-right:1.5rem; }
+    .principles__grid { grid-template-columns:1fr; }
+    .ohana__image { order:2; }
+  }
+</style>

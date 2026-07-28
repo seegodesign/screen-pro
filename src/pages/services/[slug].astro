@@ -33,7 +33,7 @@ const tel = "+18086518664";
 const email = "info@kauairetractablescreens.com";
 const siteUrl = "https://kauairetractablescreens.com";
 const pageUrl = `${siteUrl}/services/${slug}/`;
-const seoDescription = `${intro} Professional island-wide service and installation.`;
+const seoDescription = `${intro} Professional service and installation across Kauaʻi’s North, East, and South sides.`;
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -81,7 +81,7 @@ const jsonLd = {
     <ClientRouter />
   </head>
   <body>
-    <SiteHeader currentService={slug} quoteHref="#quote" />
+    <SiteHeader currentService={slug} quoteHref="/free-quote/" />
 
     <main>
       <section class="hero" style={`--hero-image: url("${heroImage}")`}>
@@ -91,7 +91,7 @@ const jsonLd = {
           <h1>{meta.heroKeyword}</h1>
           <p class="hero__lede">{intro}</p>
           <div class="hero__actions">
-            <a class="button button--bronze" href="#quote">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+            <a class="button button--bronze" href="/free-quote/">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
             <a class="button button--glass" href={`tel:${tel}`}>Call {phone}</a>
           </div>
         </div>
@@ -123,30 +123,6 @@ const jsonLd = {
           <div class="process__grid">
             {process.map((item) => <article><strong>{item.step.padStart(2, "0")}</strong><h3>{item.title}</h3><p>{item.body}</p></article>)}
           </div>
-        </div>
-      </section>
-
-      <section class="section quote" id="quote">
-        <div class="container quote__grid">
-          <div>
-            <p class="eyebrow">Free estimate</p>
-            <h2>Get a quote for<br /><em>{meta.title.toLowerCase()}.</em></h2>
-            <p>Tell us about your project and we’ll follow up to discuss the opening, your goals, and the right next step.</p>
-            <a class="quote__phone" href={`tel:${tel}`}><small>Call us directly</small><strong>{phone}</strong></a>
-            <a class="quote__email" href={`mailto:${email}`}>{email}</a>
-          </div>
-          <form class="quote-form" action={`mailto:${email}`} method="post" enctype="text/plain">
-            <input type="hidden" name="service" value={meta.title} />
-            <div class="form-grid">
-              <label><span>Full name *</span><input name="name" required /></label>
-              <label><span>Phone *</span><input type="tel" name="phone" required /></label>
-              <label><span>Email</span><input type="email" name="email" /></label>
-              <label><span>Property address *</span><input name="address" required /></label>
-              <label class="full"><span>Opening size / measurements</span><input name="measurements" placeholder={'e.g. 36" W × 80" H'} /></label>
-              <label class="full"><span>Project details *</span><textarea name="details" rows="4" required></textarea></label>
-            </div>
-            <button class="button button--bronze" type="submit">Request a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
-          </form>
         </div>
       </section>
 
@@ -238,18 +214,6 @@ const jsonLd = {
   .process__grid strong { width:42px; height:42px; display:grid; place-items:center; margin-bottom:2.5rem; color:#fff; background:var(--navy); border-radius:50%; font-size:.72rem; }
   .process__grid h3 { font-size:1.1rem; }
   .process__grid p { color:var(--muted); font-size:.86rem; }
-  .quote { color:#fff; background:var(--navy); }
-  .quote__grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:8%; }
-  .quote p { color:rgba(255,255,255,.65); }
-  .quote__phone { margin-top:2rem; display:grid; }
-  .quote__phone small { color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.14em; }
-  .quote__phone strong { color:var(--bronze-light); font-family:var(--display); font-size:1.6rem; }
-  .quote__email { color:rgba(255,255,255,.75); font-size:.82rem; }
-  .quote-form { padding:2.5rem; color:var(--ink); background:var(--cream); }
-  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.8rem; }
-  .form-grid label { display:grid; gap:.4rem; }
-  .form-grid label > span { font-size:.66rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
-  .form-grid .full { grid-column:1/-1; }
   input,textarea { width:100%; padding:.8rem 0; border:0; border-bottom:1px solid rgba(19,42,55,.25); border-radius:0; outline:0; background:transparent; font:inherit; }
   input:focus,textarea:focus { border-color:var(--bronze); }
   .faq { background:var(--cream); }
@@ -275,7 +239,7 @@ const jsonLd = {
   footer .site-credit { margin-left:0; color:rgba(255,255,255,.5); font-size:.7rem; }
   footer .site-credit:hover { color:#fff; }
   @media (max-width:900px) {
-    .overview__grid,.quote__grid,.faq__grid { gap:4rem; }
+    .overview__grid,.faq__grid { gap:4rem; }
     .process__grid { grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width:760px) {
@@ -294,12 +258,9 @@ const jsonLd = {
     .hero__inner { padding-block:4rem; }
     .breadcrumbs { margin-bottom:2.5rem; }
     .hero__actions { flex-direction:column; }
-    .overview__grid,.quote__grid,.faq__grid { grid-template-columns:1fr; gap:3rem; }
+    .overview__grid,.faq__grid { grid-template-columns:1fr; gap:3rem; }
     .process__grid { grid-template-columns:1fr; }
     .process__grid article { min-height:240px; }
-    .form-grid { grid-template-columns:1fr; }
-    .form-grid .full { grid-column:auto; }
-    .quote-form { padding:1.5rem; margin-inline:-8px; }
     .related__grid { grid-template-columns:1fr; }
     footer .container { align-items:flex-start; flex-direction:column; gap:1.25rem; }
     footer a { margin-left:0; }

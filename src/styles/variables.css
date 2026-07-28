@@ -31,3 +31,9 @@
   --container: 1240px;
   --shadow: 0 24px 70px rgba(10, 35, 50, 0.13);
 }
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-headline);
+}
