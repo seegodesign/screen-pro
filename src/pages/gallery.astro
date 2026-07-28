@@ -1,0 +1,63 @@
+---
+import { ClientRouter, fade } from "astro:transitions";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/variables.css";
+import "../styles/gallery.css";
+
+const galleryItems = [
+  { src: "/images/screen-installation-3.avif", title: "Motorized lanai screen", location: "North Shore", featured: true },
+  { src: "/images/screen-installation-2.avif", title: "Retractable French door screen", location: "East Side" },
+  { src: "/images/screen-installation-1.avif", title: "Custom window screens", location: "South Side" },
+  { src: "/images/Screen-Pro-Retractable-Doors-Kauai-2.avif", title: "Custom screen installation", location: "Kauaʻi" },
+  { src: "/images/kauai-luxury-motorized-screen.avif", title: "Large-opening motorized screen", location: "Kauaʻi", featured: true },
+  { src: "/images/kauai-retractable-screen-door.webp", title: "Retractable entry screen", location: "Kauaʻi" },
+  { src: "/images/kauai-sliding-screen-door.webp", title: "Sliding screen door", location: "Kauaʻi" },
+  { src: "/images/kauai-window-screens.webp", title: "Made-to-measure window screens", location: "Kauaʻi" },
+];
+---
+
+<!doctype html>
+<html lang="en" transition:animate={fade({ duration: 300 })}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Browse recent retractable door, motorized, window, sliding door, and hurricane screen installations by Screen Pro across Kauaʻi." />
+    <link rel="icon" href="/favicon.svg" />
+    <title>Screen Installation Gallery | Screen Pro Kauaʻi</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <SiteHeader quoteHref="/free-quote/" />
+    <main>
+      <section class="gallery-hero">
+        <div class="container gallery-hero__grid">
+          <div>
+            <p class="eyebrow">Recent work</p>
+            <h1>See our recent <em>installations</em></h1>
+          </div>
+          <p>Explore custom screen installations completed for homes across Kauaʻi, from discreet retractable doors to expansive motorized systems.</p>
+        </div>
+      </section>
+
+      <section class="gallery-page section" aria-label="Recent screen installations">
+        <div class="container gallery-page__grid">
+          {galleryItems.map((item) => (
+            <figure class:list={["gallery-card", { "gallery-card--featured": item.featured }]}>
+              <img src={item.src} alt={`${item.title} installed in ${item.location}`} loading="lazy" />
+              <figcaption><span>{item.title}</span><small>{item.location}</small></figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section class="gallery-cta">
+        <div class="container gallery-cta__inner">
+          <div><p class="eyebrow">Have an opening in mind?</p><h2>Let’s create the right<br /><em>screen for your space.</em></h2></div>
+          <a href="/free-quote/">Get a free quote <span>→</span></a>
+        </div>
+      </section>
+    </main>
+    <SiteFooter />
+  </body>
+</html>

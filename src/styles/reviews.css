@@ -1,0 +1,37 @@
+.reviews-hero { padding:7rem 0; color:white; background:linear-gradient(100deg,rgba(7,31,43,.9),rgba(18,50,74,.58)),url("/images/custom-screen-installation-kauai.jpg") center/cover; }
+.reviews-hero__grid { display:flex; align-items:end; justify-content:space-between; gap:4rem; }
+.reviews-hero h1 { margin:0; font-size:clamp(3rem,5.8vw,5.5rem); line-height:.98; }
+.reviews-rating { display:flex; align-items:center; gap:1rem; }
+.reviews-rating > strong { font-family:var(--font-headline); font-size:3.5rem; font-weight:400; line-height:1; }
+.reviews-rating span { display:grid; }
+.reviews-rating b,.review__stars { color:var(--color-rating-star); letter-spacing:.08em; }
+.reviews-rating small { color:rgba(255,255,255,.62); font-size:.65rem; }
+.reviews-page { background:var(--color-cream); }
+.reviews-page__intro { margin-bottom:3.5rem; display:grid; grid-template-columns:1fr 1fr; gap:8%; align-items:end; }
+.reviews-page__intro h2,.review-values__head h2,.reviews-cta h2 { margin:0; font-size:clamp(2.2rem,4vw,3.8rem); line-height:1; }
+.reviews-page__intro > p { max-width:500px; margin:0 0 .5rem; color:var(--color-muted); }
+.reviews-page__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; border:1px solid var(--color-line); background:var(--color-line); }
+.review { min-height:350px; margin:0; padding:2rem; display:flex; flex-direction:column; background:white; }
+.review > p { margin:2rem 0; font-family:var(--font-headline); font-size:1.25rem; line-height:1.55; }
+.review footer { margin-top:auto; display:flex; align-items:center; gap:.8rem; }
+.review footer > span { width:38px; height:38px; display:grid; flex:0 0 auto; place-items:center; color:white; background:var(--color-bronze); border-radius:50%; font-weight:700; }
+.review footer div { display:grid; }
+.review footer strong { color:var(--color-ink); font-size:.78rem; }
+.review footer small { color:var(--color-muted); font-size:.65rem; }
+.review-values { background:var(--color-sand); }
+.review-values__head { max-width:800px; margin-bottom:3.5rem; }
+.review-values__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+.review-values article { padding:2rem; background:white; border:1px solid var(--color-line); }
+.review-values article svg { width:36px; height:36px; color:var(--color-bronze); }
+.review-values h3 { margin:1.5rem 0 .7rem; font-size:1.4rem; }
+.review-values article p { margin:0; color:var(--color-muted); font-size:.88rem; }
+.reviews-cta { padding:6rem 0; color:white; background:var(--color-navy-deep); }
+.reviews-cta__inner { display:flex; align-items:end; justify-content:space-between; gap:3rem; }
+.reviews-cta__inner > a { min-height:54px; padding:0 1.5rem; display:inline-flex; align-items:center; gap:1.5rem; color:white; background:var(--color-bronze); font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+@media (max-width:760px) {
+  .reviews-hero { padding:5rem 0; }
+  .reviews-hero__grid,.reviews-cta__inner { align-items:flex-start; flex-direction:column; }
+  .reviews-page__intro { grid-template-columns:1fr; gap:2rem; }
+  .reviews-page__grid,.review-values__grid { grid-template-columns:1fr; }
+  .review { min-height:300px; }
+}

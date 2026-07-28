@@ -1,4 +1,5 @@
 ---
+import { ArrowUpRight } from "@lucide/astro";
 import type { ServiceCardData } from "../data/services";
 
 type Props = ServiceCardData;
@@ -14,7 +15,7 @@ const { num, slug, title, copy, tags, image } = Astro.props;
     <h3>{title}</h3>
     <p>{copy}</p>
     <ul>{tags.map((tag) => <li>{tag}</li>)}</ul>
-    <a href={`/services/${slug}/`} aria-label={`Learn more about ${title}`}>Learn more <span>↗</span></a>
+    <a href={`/services/${slug}/`} aria-label={`Learn more about ${title}`}>Learn more <ArrowUpRight aria-hidden="true" /></a>
   </div>
 </article>
 
@@ -31,6 +32,7 @@ const { num, slug, title, copy, tags, image } = Astro.props;
   ul { margin:.2rem 0 1.5rem; padding:0; display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; }
   li { padding:.25rem .55rem; color:#607079; background:var(--color-cream,#f9f5ef); font-size:.66rem; }
   a { margin-top:auto; padding-top:1rem; display:flex; justify-content:space-between; color:inherit; border-top:1px solid var(--color-line,rgba(19,42,55,.15)); font-size:.68rem; text-decoration:none; text-transform:uppercase; letter-spacing:.08em; font-weight:700; }
+  a svg { width:1rem; height:1rem; }
   @media (max-width:760px) {
     .service-card { min-height:480px; }
     .service-card__image { height:150px; flex-basis:150px; }

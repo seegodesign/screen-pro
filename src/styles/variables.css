@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Ovo:wght@400;700&display=swap");
+@import "./global.css";
+
 :root {
   --color-ink: #132a37;
   --color-navy: #102f43;
@@ -11,9 +14,21 @@
   --color-cream: #f8f6f1;
   --color-white: #fff;
   --color-line: rgba(19, 42, 55, 0.15);
-  --font-display: "Manrope", sans-serif;
-  --font-headline: Georgia, serif;
+  --font-display: "Ovo", serif;
+  --font-headline: "Ovo", serif;
   --font-body: "DM Sans", sans-serif;
+  --navy: #12324a;
+  --navy-deep: #071f2b;
+  --deep: #071f2b;
+  --bronze: #b98552;
+  --bronze-light: #d4aa7d;
+  --cream: #f9f5ef;
+  --sand: #e8ded0;
+  --ink: #132a37;
+  --muted: #63737a;
+  --line: rgba(19, 42, 55, 0.15);
+  --display: var(--font-display);
+  --body: var(--font-body);
   --size-xs: 0.75rem;
   --size-sm: 0.875rem;
   --size-base: 1rem;

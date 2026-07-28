@@ -1,0 +1,130 @@
+---
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq-accordion" data-faq-accordion>
+  {items.map((item) => (
+    <details>
+      <summary>
+        <span class="faq-accordion__question">{item.q}</span>
+        <span class="faq-accordion__icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="faq-accordion__content">
+        <p>{item.a}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<script>
+  const initializeFaqAccordions = () => {
+    document.querySelectorAll<HTMLElement>("[data-faq-accordion]").forEach((accordion) => {
+      if (accordion.dataset.ready === "true") return;
+      accordion.dataset.ready = "true";
+
+      accordion.querySelectorAll<HTMLDetailsElement>("details").forEach((details) => {
+        const summary = details.querySelector<HTMLElement>("summary");
+        const content = details.querySelector<HTMLElement>(".faq-accordion__content");
+        if (!summary || !content) return;
+
+        let animation: Animation | undefined;
+
+        summary.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (animation) return;
+
+          const opening = !details.open;
+          const startHeight = details.offsetHeight;
+          details.classList.toggle("is-closing", !opening);
+
+          if (opening) details.open = true;
+
+          const endHeight = opening
+            ? summary.offsetHeight + content.offsetHeight
+            : summary.offsetHeight;
+
+          details.style.overflow = "hidden";
+          animation = details.animate(
+            { height: [`${startHeight}px`, `${endHeight}px`] },
+            {
+              duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 320,
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            },
+          );
+
+          animation.addEventListener("finish", () => {
+            if (!opening) details.open = false;
+            details.classList.remove("is-closing");
+            details.style.removeProperty("height");
+            details.style.removeProperty("overflow");
+            animation = undefined;
+          });
+        });
+      });
+    });
+  };
+
+  initializeFaqAccordions();
+  document.addEventListener("astro:page-load", initializeFaqAccordions);
+</script>
+
+<style>
+  details {
+    border-top: 1px solid rgba(19, 42, 55, 0.2);
+  }
+
+  details:last-child {
+    border-bottom: 1px solid rgba(19, 42, 55, 0.2);
+  }
+
+  summary {
+    padding: 1.35rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-accordion__icon {
+    color: var(--bronze);
+    font-size: 1.25rem;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  details[open]:not(.is-closing) .faq-accordion__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-accordion__content {
+    overflow: hidden;
+  }
+
+  p {
+    margin: 0;
+    padding: 0 2rem 1.35rem 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-accordion__icon {
+      transition: none;
+    }
+  }
+</style>

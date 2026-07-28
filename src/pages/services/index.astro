@@ -1,10 +1,12 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
+import { ArrowUpRight } from "@lucide/astro";
 import ServiceCard from "../../components/ServiceCard.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { services } from "../../data/services";
 import "../../styles/variables.css";
+import "../../styles/services.css";
 
 const phone = "(808) 651-8664";
 const tel = "+18086518664";
@@ -17,9 +19,6 @@ const tel = "+18086518664";
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Explore custom retractable doors, motorized screens, window screens, sliding doors, hurricane protection, and screen repair on North, East, and South Kauaʻi." />
     <link rel="icon" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Screen Services on Kauaʻi | Screen Pro</title>
     <ClientRouter />
   </head>
@@ -50,7 +49,7 @@ const tel = "+18086518664";
       <section class="cta">
         <div class="container cta__inner">
           <div><p class="eyebrow">Not sure what you need?</p><h2>Start with a complimentary<br /><em>on-site consultation.</em></h2></div>
-          <a href="/contact/">Discuss your project <span>↗</span></a>
+          <a href="/contact/">Discuss your project <ArrowUpRight aria-hidden="true" /></a>
         </div>
       </section>
     </main>
@@ -58,45 +57,3 @@ const tel = "+18086518664";
     <SiteFooter />
   </body>
 </html>
-
-<style is:global>
-  * { box-sizing:border-box; }
-  body { margin:0; color:var(--color-ink); background:var(--color-cream); font-family:"DM Sans",sans-serif; line-height:1.65; }
-  a { color:inherit; text-decoration:none; }
-  h1,h2,h3,p { margin-top:0; }
-  h1,h2 { font-weight:500; letter-spacing:-.045em; }
-  h1 { margin:0; font-size:clamp(3rem,5.8vw,5.5rem); line-height:.98; }
-  h2 { margin:0; font-size:clamp(2.2rem,4vw,3.7rem); line-height:1; }
-  em { color:var(--color-bronze-light); font-family:Georgia,serif; font-weight:400; }
-  .container { width:min(calc(100% - 48px),1180px); margin-inline:auto; }
-  .eyebrow { margin-bottom:1.25rem; color:var(--color-bronze-light); font-size:.68rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
-  .eyebrow--dark { color:#567786; }
-  .hero { padding:7rem 0; color:white; background:linear-gradient(100deg,rgba(7,31,43,.96),rgba(18,50,74,.75)),url("/images/custom-screen-installation-kauai.jpg") center/cover; }
-  .hero__grid { display:grid; grid-template-columns:1.35fr .65fr; gap:8%; align-items:end; }
-  .hero__grid > p { max-width:440px; margin:0 0 .5rem; color:rgba(255,255,255,.7); }
-  .services { padding:7rem 0; }
-  .services__head { margin-bottom:3rem; display:grid; grid-template-columns:1fr 1fr; gap:8%; align-items:end; }
-  .services__head > p { max-width:480px; margin:0 0 .5rem; color:#63737a; }
-  .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-  .cta { padding:6rem 0; color:white; background:var(--color-navy-deep); }
-  .cta__inner { display:flex; align-items:end; justify-content:space-between; gap:3rem; }
-  .cta h2 { margin:0; }
-  .cta__inner > a { min-height:54px; padding:0 1.5rem; display:flex; align-items:center; gap:1.5rem; color:white; background:var(--color-bronze); font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
-  footer { padding:3rem 0; color:rgba(255,255,255,.72); background:#061a24; }
-  .footer__inner { display:flex; align-items:center; gap:2rem; }
-  .footer__inner img { width:170px; height:auto; }
-  .footer__inner p { margin:0 auto 0 0; }
-  .footer__inner nav { display:flex; gap:1.4rem; }
-  .footer__inner a:hover { color:var(--color-bronze-light); }
-  @media (max-width:980px) { .service-grid { grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:760px) {
-    .container { width:min(calc(100% - 32px),1180px); }
-    .hero { padding:5rem 0; }
-    .hero__grid,.services__head { grid-template-columns:1fr; gap:2rem; }
-    .services { padding:4.5rem 0; }
-    .service-grid { grid-template-columns:1fr; }
-    .cta__inner,.footer__inner { align-items:flex-start; flex-direction:column; }
-    .footer__inner p { margin:0; }
-    .footer__inner nav { flex-wrap:wrap; }
-  }
-</style>

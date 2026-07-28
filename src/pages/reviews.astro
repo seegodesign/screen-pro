@@ -1,0 +1,106 @@
+---
+import { ClientRouter, fade } from "astro:transitions";
+import { BadgeCheck, HeartHandshake, MessagesSquare } from "@lucide/astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/variables.css";
+import "../styles/reviews.css";
+
+const reviews = [
+  {
+    quote: "Screen Pro made the entire process easy. The communication was excellent, the installation was clean, and the retractable screens feel like they were always part of the house.",
+    name: "Malia R.",
+    place: "Princeville",
+    service: "Retractable screens",
+  },
+  {
+    quote: "We had a very wide lanai opening and wanted something that would disappear when not in use. The finished motorized screen is beautiful and works flawlessly.",
+    name: "David K.",
+    place: "Poʻipū",
+    service: "Motorized screens",
+  },
+  {
+    quote: "They repaired two old sliders other companies wanted to replace. Honest advice, quality parts, and both doors glide better than they have in years.",
+    name: "Anne P.",
+    place: "Kapaʻa",
+    service: "Screen repair",
+  },
+];
+
+const values = [
+  { icon: MessagesSquare, title: "Clear communication", copy: "Helpful guidance, straightforward recommendations, and updates throughout the project." },
+  { icon: BadgeCheck, title: "Careful workmanship", copy: "Accurate measurements, clean installation, and systems adjusted to operate properly." },
+  { icon: HeartHandshake, title: "Local support", copy: "A Kauaʻi-based team available for service, repairs, and long-term product support." },
+];
+---
+
+<!doctype html>
+<html lang="en" transition:animate={fade({ duration: 300 })}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Read reviews from Kauaʻi homeowners who chose Screen Pro for retractable screens, motorized screens, sliding screen doors, and screen repair." />
+    <link rel="icon" href="/favicon.svg" />
+    <title>Customer Reviews | Screen Pro Kauaʻi</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <SiteHeader quoteHref="/free-quote/" />
+
+    <main>
+      <section class="reviews-hero">
+        <div class="container reviews-hero__grid">
+          <div>
+            <p class="eyebrow">Homeowner reviews</p>
+            <h1>Trusted in homes<br /><em>across Kauaʻi.</em></h1>
+          </div>
+          <div class="reviews-rating">
+            <strong>5.0</strong>
+            <span><b aria-label="5 out of 5 stars">★★★★★</b><small>Local customer reviews</small></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews-page section">
+        <div class="container">
+          <div class="reviews-page__intro">
+            <div><p class="eyebrow eyebrow--dark">In their words</p><h2>Thoughtful service.<br /><em>Results that last.</em></h2></div>
+            <p>Every project starts with listening. These homeowners trusted us to recommend, install, or repair the right screen solution for their space.</p>
+          </div>
+          <div class="reviews-page__grid">
+            {reviews.map((review) => (
+              <blockquote class="review">
+                <div class="review__stars" aria-hidden="true">★★★★★</div>
+                <p>“{review.quote}”</p>
+                <footer>
+                  <span>{review.name.slice(0, 1)}</span>
+                  <div><strong>{review.name}</strong><small>{review.place}, Kauaʻi · {review.service}</small></div>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="review-values section">
+        <div class="container">
+          <div class="review-values__head"><p class="eyebrow eyebrow--dark">What clients value</p><h2>Professional from the first conversation<br /><em>through the final walkthrough.</em></h2></div>
+          <div class="review-values__grid">
+            {values.map(({ icon: Icon, title, copy }) => (
+              <article><Icon aria-hidden="true" /><h3>{title}</h3><p>{copy}</p></article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews-cta">
+        <div class="container reviews-cta__inner">
+          <div><p class="eyebrow">Ready to get started?</p><h2>Let’s make your home<br /><em>more comfortable.</em></h2></div>
+          <a href="/free-quote/">Get a free quote <span>→</span></a>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>

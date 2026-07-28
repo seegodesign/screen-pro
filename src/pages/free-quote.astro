@@ -13,20 +13,12 @@ import "../styles/variables.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Request a free quote for custom screen installation or repair on Kauaʻi’s North Shore, East Side, or South Shore." />
     <link rel="icon" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Request a Free Screen Quote | Screen Pro Kauaʻi</title>
     <ClientRouter />
   </head>
-  <body>
+  <body class="quote-page">
     <SiteHeader quoteHref="/free-quote/" />
     <main><QuoteSection /></main>
     <SiteFooter />
   </body>
 </html>
-
-<style>
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--color-navy-deep); }
-</style>
