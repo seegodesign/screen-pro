@@ -1,4 +1,5 @@
 ---
+import { ClientRouter, fade } from "astro:transitions";
 import { ArrowUpRight, BadgeCheck } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
@@ -51,7 +52,7 @@ const partners = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -61,6 +62,7 @@ const partners = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Our Screen Partners | Screen Pro Kauaʻi</title>
+    <ClientRouter />
   </head>
   <body>
     <SiteHeader quoteHref="/free-quote/" />
