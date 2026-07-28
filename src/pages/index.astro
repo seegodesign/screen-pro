@@ -8,7 +8,7 @@ import {
   ShieldCheck,
   Wrench,
 } from "@lucide/astro";
-import { serviceAreas } from "../data/service-areas";
+import { serviceAreas, serviceAreaRegions } from "../data/service-areas";
 
 const services = [
   {
@@ -180,10 +180,16 @@ const jsonLd = {
               {services.map((service) => <a href={`/services/${service.slug}/`}>{service.title}</a>)}
             </div>
           </div>
-          <a href="#brands">Brands</a>
           <a href="#about">About</a>
-          <a href="#reviews">Reviews</a>
+          <a href="#brands">Brands</a>
           <a href="#gallery">Gallery</a>
+          <a href="#reviews">Reviews</a>
+          <div class="nav-areas">
+            <button type="button" aria-haspopup="true">Service areas</button>
+            <div class="areas-dropdown">
+              {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`}>{area.name}</a>)}
+            </div>
+          </div>
         </nav>
         <a class="button button--dark header__cta" href="#contact">Get a quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
         <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
@@ -191,14 +197,20 @@ const jsonLd = {
       <div class="mobile-nav">
         <strong>Services</strong>
         {services.map((service) => <a href={`/services/${service.slug}/`}>{service.title}</a>)}
-        <a href="#brands">Brands</a><a href="#about">About</a>
-        <a href="#reviews">Reviews</a><a href="#gallery">Gallery</a><a href="#contact">Get a quote</a>
+        <strong>Service areas</strong>
+        {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`}>{area.name}</a>)}
+        <a href="#about">About</a><a href="#brands">Brands</a>
+        <a href="#gallery">Gallery</a><a href="#reviews">Reviews</a><a href="#service-area">Service areas</a><a href="#contact">Get a quote</a>
       </div>
     </header>
 
     <main>
       <section class="hero">
-        <div class="hero__media"></div>
+        <div class="hero__media">
+          <video autoplay muted loop playsinline preload="metadata" poster="/images/Screen-Pro-Retractable-Doors-Kauai43.jpg" aria-hidden="true" tabindex="-1">
+            <source src="/motorized-screen.webm" type="video/webm" />
+          </video>
+        </div>
         <div class="hero__shade"></div>
         <div class="container hero__content">
           <div class="eyebrow eyebrow--light"><span></span> Kauaʻi’s custom screen specialists</div>
@@ -323,15 +335,15 @@ const jsonLd = {
           <div class="gallery__grid">
             <figure class="gallery__item gallery__item--wide">
               <div class="gallery__photo gallery__photo--one"></div>
-              <figcaption><span>Motorized lanai screen</span><small>North Shore</small></figcaption>
+              <figcaption><div><span>Motorized lanai screen</span><small>North Shore</small></div><a class="gallery__cta gallery__cta--motorized" href="#contact">Plan yours <b>→</b></a></figcaption>
             </figure>
             <figure class="gallery__item">
               <div class="gallery__photo gallery__photo--two"></div>
-              <figcaption><span>Retractable French door</span><small>East Side</small></figcaption>
+              <figcaption><div><span>Retractable French door</span><small>East Side</small></div><a class="gallery__cta gallery__cta--door" href="#contact">Plan yours <b>→</b></a></figcaption>
             </figure>
             <figure class="gallery__item">
               <div class="gallery__photo gallery__photo--three"></div>
-              <figcaption><span>Custom window screens</span><small>South Side</small></figcaption>
+              <figcaption><div><span>Custom window screens</span><small>South Side</small></div><a class="gallery__cta gallery__cta--windows" href="#contact">Plan yours <b>→</b></a></figcaption>
             </figure>
           </div>
         </div>
@@ -357,13 +369,11 @@ const jsonLd = {
 
       <section class="area section" id="service-area">
         <div class="container area__grid">
-          <div class="area__map" aria-label="Stylized map of Kauai">
-            <svg viewBox="0 0 600 480" role="img">
-              <path d="M137 76c41-25 101-38 154-26 46 10 72 37 111 51 38 14 83 8 111 43 29 36 31 90 9 131-20 37-62 53-92 80-29 27-45 67-80 86-44 24-101 11-146-8-47-19-92-48-118-92-26-45-30-102-17-152 13-48 28-88 68-113Z"></path>
-              <circle cx="187" cy="105" r="7"></circle><text x="203" y="111">NORTH SHORE</text>
-              <circle cx="488" cy="235" r="7"></circle><text x="384" y="220">EAST SIDE</text>
-              <circle cx="350" cy="399" r="7"></circle><text x="270" y="430">SOUTH SIDE</text>
-            </svg>
+          <div class="area__map">
+            <img src="/images/map.avif" alt="Map of Kauaʻi service areas" />
+            <span class="area__label area__label--north">North Shore</span>
+            <span class="area__label area__label--east">East Side</span>
+            <span class="area__label area__label--south">South Side</span>
           </div>
           <div class="area__content">
             <div class="eyebrow"><span></span> Island-wide service</div>
@@ -517,18 +527,19 @@ const jsonLd = {
   .logo__type strong { font-family: var(--font-display); font-size: .96rem; letter-spacing: .12em; }
   .logo__type small { margin-top: .35rem; color: var(--color-bronze); font-size: .48rem; letter-spacing: .21em; font-weight: 700; }
   .nav { display: flex; align-items: center; gap: 2.1rem; font-size: .82rem; letter-spacing: .04em; font-weight: 600; }
-  .nav a:hover, .nav-services button:hover { color: var(--color-bronze); }
-  .nav-services { position: relative; }
-  .nav-services button { padding: 1.25rem 0; border: 0; color: inherit; background: transparent; cursor: default; font: inherit; letter-spacing: inherit; }
+  .nav a:hover, .nav-services button:hover, .nav-areas button:hover { color: var(--color-bronze); }
+  .nav-services, .nav-areas { position: relative; }
+  .nav-services button, .nav-areas button { padding: 1.25rem 0; border: 0; color: inherit; background: transparent; cursor: default; font: inherit; letter-spacing: inherit; }
   .nav-services button span { margin-left: .3rem; }
-  .services-dropdown { position: absolute; top: 100%; left: -1.25rem; width: 245px; display: grid; visibility: hidden; opacity: 0; background: white; border: 1px solid var(--color-line); box-shadow: var(--shadow); transform: translateY(-5px); transition: .2s ease; }
-  .nav-services:hover .services-dropdown, .nav-services:focus-within .services-dropdown { visibility: visible; opacity: 1; transform: none; }
-  .services-dropdown a { padding: .7rem .8rem; }
-  .services-dropdown a:hover { color: var(--color-bronze); background: var(--color-cream); }
+  .services-dropdown, .areas-dropdown { position: absolute; top: 100%; left: -1.25rem; width: 245px; display: grid; visibility: hidden; opacity: 0; background: white; border: 1px solid var(--color-line); box-shadow: var(--shadow); transform: translateY(-5px); transition: .2s ease; }
+  .nav-services:hover .services-dropdown, .nav-services:focus-within .services-dropdown, .nav-areas:hover .areas-dropdown, .nav-areas:focus-within .areas-dropdown { visibility: visible; opacity: 1; transform: none; }
+  .services-dropdown a, .areas-dropdown a { padding: .7rem .8rem; }
+  .services-dropdown a:hover, .areas-dropdown a:hover { color: var(--color-bronze); background: var(--color-cream); }
   .header__cta { min-height: 44px; padding-inline: 1.2rem; }
   .menu-button, .mobile-nav { display: none; }
   .hero { min-height: 740px; position: relative; display: flex; align-items: center; overflow: hidden; color: white; background: var(--color-navy); }
   .hero__media { position: absolute; inset: 0; background: url("/images/Screen-Pro-Retractable-Doors-Kauai43.jpg") center 52%/cover no-repeat; transform: scale(1.01); }
+  .hero__media video { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 52%; }
   .hero__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,31,43,.72) 0%, rgba(8,34,48,.43) 47%, rgba(8,34,48,.08) 78%), linear-gradient(0deg, rgba(8,29,41,.36), transparent 45%); }
   .hero__content { position: relative; z-index: 1; padding-bottom: 6rem; }
   .hero__lede { max-width: 600px; margin-bottom: 2rem; color: rgba(255,255,255,.82); font-size: 1.08rem; line-height: 1.75; }
@@ -595,8 +606,15 @@ const jsonLd = {
   .gallery__photo--two { background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=85"); }
   .gallery__photo--three { background-image: url("https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1100&q=85"); }
   .gallery__item figcaption { position: absolute; inset: auto 0 0; padding: 3rem 1.4rem 1.2rem; display: flex; justify-content: space-between; color: white; background: linear-gradient(transparent, rgba(9,30,42,.78)); }
+  .gallery__item figcaption > div { display: grid; gap: .25rem; }
   .gallery__item figcaption span { font-family: var(--font-display); font-size: 1rem; }
   .gallery__item figcaption small { opacity: .7; text-transform: uppercase; letter-spacing: .1em; }
+  .gallery__cta { min-height: 42px; padding: 0 1rem; display: inline-flex; align-items: center; align-self: end; gap: .75rem; color: white; font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: transform .25s ease, filter .25s ease; }
+  .gallery__cta:hover { color: white; filter: brightness(1.1); transform: translateY(-2px); }
+  .gallery__cta b { font-size: .9rem; }
+  .gallery__cta--motorized { background: var(--color-bronze); }
+  .gallery__cta--door { background: var(--color-navy); }
+  .gallery__cta--windows { background: var(--color-ocean); }
   .reviews { color: white; background: var(--color-navy); }
   .rating { display: flex; align-items: center; gap: 1rem; }
   .rating > strong { font-family: var(--font-display); font-size: 2.7rem; font-weight: 400; }
@@ -614,11 +632,16 @@ const jsonLd = {
   .review-card footer small { color: rgba(255,255,255,.5); font-size: .67rem; }
   .area { background: var(--color-cream); }
   .area__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
-  .area__map { background: #e8e2d7; }
-  .area__map svg { display: block; width: 100%; }
-  .area__map path { fill: #d4c8b6; stroke: #c1b098; stroke-width: 1; }
-  .area__map circle { fill: var(--color-bronze); }
-  .area__map text { fill: var(--color-ink); font-family: var(--font-body); font-size: 12px; letter-spacing: 2px; }
+  .area__map { position: relative; background: #e8e2d7; }
+  .area__map img { display: block; width: 100%; height: auto; }
+  .area__label { position: absolute; color: var(--color-ink); font-family: var(--font-body); font-size: .75rem; letter-spacing: .125rem; text-transform: uppercase; }
+  .area__label::before { width: .875rem; height: .875rem; position: absolute; top: 50%; border-radius: 50%; background: var(--color-bronze); content: ""; transform: translateY(-50%); }
+  .area__label--north { top: 23%; left: 34%; }
+  .area__label--north::before { right: calc(100% + .5rem); }
+  .area__label--east { top: 46%; right: 8%; }
+  .area__label--east::before { left: calc(100% + .5rem); }
+  .area__label--south { bottom: 9%; left: 45%; }
+  .area__label--south::before { right: calc(100% + .5rem); }
   .area__content > p { margin: 2rem 0; color: #63737a; }
   .area__content ul { padding: 0; border-top: 1px solid var(--color-line); list-style: none; }
   .area__content li { border-bottom: 1px solid var(--color-line); }
@@ -691,6 +714,7 @@ const jsonLd = {
     .mobile-nav strong { grid-column: 1 / -1; color: var(--color-bronze); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
     .hero { min-height: 690px; align-items: start; }
     .hero__media { background-position: 62% center; }
+    .hero__media video { object-position: 62% center; }
     .hero__shade { background: linear-gradient(90deg, rgba(7,31,43,.76), rgba(8,34,48,.25)), linear-gradient(0deg, rgba(8,29,41,.45), transparent 50%); }
     .hero__content { padding-top: 5rem; padding-bottom: 9rem; }
     h1 { font-size: clamp(2.6rem, 10.8vw, 3.7rem); }

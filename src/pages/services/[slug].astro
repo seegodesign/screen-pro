@@ -1,7 +1,7 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
-import { serviceAreas } from "../../data/service-areas";
+import { serviceAreas, serviceAreaRegions } from "../../data/service-areas";
 
 type Benefit = { title: string; body: string };
 type ProcessStep = Benefit & { step: string };
@@ -120,7 +120,13 @@ const jsonLd = {
               ))}
             </div>
           </div>
-          <a href="/#brands">Brands</a><a href="/#about">About</a><a href="/#reviews">Reviews</a><a href="/#gallery">Gallery</a>
+          <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
+          <div class="nav-areas">
+            <button type="button" aria-haspopup="true">Service areas</button>
+            <div class="areas-dropdown">
+              {Object.entries(serviceAreaRegions).map(([areaSlug, area]) => <a href={`/service-areas/${areaSlug}/`}>{area.name}</a>)}
+            </div>
+          </div>
         </nav>
         <a class="button button--dark header__cta" href="#quote">Get a quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
         <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
@@ -128,7 +134,9 @@ const jsonLd = {
       <div class="mobile-nav">
         <strong>Services</strong>
         {Object.entries(serviceMeta).map(([itemSlug, item]) => <a href={`/services/${itemSlug}/`}>{item.title}</a>)}
-        <a href="/#brands">Brands</a><a href="/#about">About</a><a href="/#reviews">Reviews</a><a href="/#gallery">Gallery</a>
+        <strong>Service areas</strong>
+        {Object.entries(serviceAreaRegions).map(([areaSlug, area]) => <a href={`/service-areas/${areaSlug}/`}>{area.name}</a>)}
+        <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
       </div>
     </header>
 
@@ -262,14 +270,14 @@ const jsonLd = {
   .header__inner { height:96px; display:flex; align-items:center; justify-content:space-between; }
   .logo img { width:220px; height:auto; display:block; }
   .nav { display:flex; align-items:center; gap:2rem; font-size:.82rem; font-weight:600; }
-  .nav > a:hover, .nav-services button:hover { color:var(--bronze); }
-  .nav-services { position:relative; }
-  .nav-services button { padding:1.25rem 0; border:0; color:inherit; background:transparent; cursor:default; font:inherit; }
+  .nav > a:hover, .nav-services button:hover, .nav-areas button:hover { color:var(--bronze); }
+  .nav-services,.nav-areas { position:relative; }
+  .nav-services button,.nav-areas button { padding:1.25rem 0; border:0; color:inherit; background:transparent; cursor:default; font:inherit; }
   .nav-services button span { margin-left:.3rem; }
-  .dropdown { position:absolute; top:100%; left:-1.25rem; width:245px; display:grid; visibility:hidden; opacity:0; background:#fff; border:1px solid var(--line); box-shadow:0 18px 50px rgba(7,31,43,.16); transform:translateY(-5px); transition:.2s; }
-  .nav-services:hover .dropdown, .nav-services:focus-within .dropdown { visibility:visible; opacity:1; transform:none; }
-  .dropdown a { padding:.7rem .8rem; }
-  .dropdown a:hover, .dropdown a[aria-current="page"] { color:var(--bronze); background:var(--cream); }
+  .dropdown,.areas-dropdown { position:absolute; top:100%; left:-1.25rem; width:245px; display:grid; visibility:hidden; opacity:0; background:#fff; border:1px solid var(--line); box-shadow:0 18px 50px rgba(7,31,43,.16); transform:translateY(-5px); transition:.2s; }
+  .nav-services:hover .dropdown, .nav-services:focus-within .dropdown, .nav-areas:hover .areas-dropdown, .nav-areas:focus-within .areas-dropdown { visibility:visible; opacity:1; transform:none; }
+  .dropdown a,.areas-dropdown a { padding:.7rem .8rem; }
+  .dropdown a:hover, .dropdown a[aria-current="page"],.areas-dropdown a:hover { color:var(--bronze); background:var(--cream); }
   .header__cta { min-height:44px; }
   .menu-button,.mobile-nav { display:none; }
   .hero { min-height:600px; position:relative; display:flex; align-items:center; background:linear-gradient(90deg,rgba(7,31,43,.82),rgba(8,34,48,.48) 65%,rgba(8,34,48,.18)),var(--hero-image) center/cover; }
