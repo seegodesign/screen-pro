@@ -101,30 +101,27 @@ const jsonLd = {
     <ClientRouter />
   </head>
   <body>
-    <div class="topbar">
-      <div class="container topbar__inner">
-        <p>Custom-fit screen solutions, built for island living.</p>
-        <div><span>Serving all of Kauaʻi</span><a href={`tel:${tel}`}>{phone}</a></div>
-      </div>
-    </div>
-    <header class="header">
-      <div class="container header__inner">
-        <a class="logo" href="/" aria-label="Screen Pro Retractable Doors home">
-          <img src="/images/logo.webp" width="400" height="154" alt="Screen Pro Retractable Doors" />
-        </a>
-        <nav class="nav" aria-label="Primary navigation">
-          <div class="nav-services">
-            <button type="button" aria-haspopup="true">Services</button>
-            <div class="dropdown">
-              {Object.entries(serviceMeta).map(([itemSlug, item]) => (
-                <a href={`/services/${itemSlug}/`} aria-current={itemSlug === slug ? "page" : undefined}>{item.title}</a>
-              ))}
-            </div>
+    <SiteHeader currentService={slug} quoteHref="#quote" />
+
+    <main>
+      <section class="hero" style={`--hero-image: url("${heroImage}")`}>
+        <div class="container hero__inner">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#services">Services</a><span>/</span><span>{meta.title}</span></nav>
+          <p class="eyebrow">Screen Pro Kauaʻi</p>
+          <h1>{meta.heroKeyword}</h1>
+          <p class="hero__lede">{intro}</p>
+          <div class="hero__actions">
+            <a class="button button--bronze" href="#quote">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+            <a class="button button--glass" href={`tel:${tel}`}>Call {phone}</a>
           </div>
-          <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
-          <div class="nav-areas">
-            <button type="button" aria-haspopup="true">Service areas</button>
-            <SiteHeader currentService={slug} quoteHref="#quote" />
+        </div>
+      </section>
+
+      <section class="section overview">
+        <div class="container overview__grid">
+          <div>
+            <p class="eyebrow eyebrow--dark">What’s included</p>
+            <h2>{meta.title} on Kauaʻi,<br /><em>done right.</em></h2>
             <p class="lead">{meta.description}</p>
             <ul class="check-list">{meta.bullets.map((bullet) => <li><span>✓</span>{bullet}</li>)}</ul>
             <a class="button button--dark" href={`tel:${tel}`}>Call for a free estimate</a>
