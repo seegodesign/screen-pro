@@ -20,7 +20,7 @@ export const serviceAreaRegions = {
     heroImage: "/images/Screen-Pro-Retractable-Doors-Kauai-2.avif",
     description:
       "Custom screen doors, window screens, motorized screens, and screen repair for homes in Hanalei, Princeville, and Kīlauea.",
-    expertiseHeading: "Designed around the view",
+    expertiseHeading: "Open-air living, protected",
     expertiseAccent: "on the North Shore.",
     intro:
       "North Shore homes are designed around open air, garden views, and covered outdoor living. Screen Pro measures, installs, and repairs screen systems that protect that connection without making the opening feel closed in.",

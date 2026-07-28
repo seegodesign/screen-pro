@@ -109,9 +109,11 @@ const phone = "(808) 651-8664";
         </a>
       ))
     }
-    <a href="/about/">About</a><a href="/partners/">Partners</a><a
-      href="/gallery/">Gallery</a
-    ><a href="/reviews/">Reviews</a><a href={quoteHref}>Get a quote</a>
+    <a href="/about/">About</a>
+    <a href="/partners/">Partners</a>
+    <a href="/gallery/">Gallery</a>
+    <a href="/reviews/">Reviews</a>
+    <a href={quoteHref}>Free quote</a>
   </nav>
 </header>
 
@@ -119,10 +121,34 @@ const phone = "(808) 651-8664";
   document.querySelectorAll(".site-header").forEach((header) => {
     const button = header.querySelector(".site-header__menu-button");
     const mobileNav = header.querySelector(".site-header__mobile-nav");
-    button?.addEventListener("click", () => {
-      const open =
-        mobileNav?.classList.toggle("site-header__mobile-nav--open") ?? false;
+
+    const setMenuOpen = (open) => {
+      mobileNav?.classList.toggle("site-header__mobile-nav--open", open);
       button.setAttribute("aria-expanded", String(open));
+      button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      document.documentElement.classList.toggle("site-menu-open", open);
+    };
+
+    button?.addEventListener("click", () => {
+      setMenuOpen(!mobileNav?.classList.contains("site-header__mobile-nav--open"));
+    });
+
+    mobileNav?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        mobileNav?.classList.contains("site-header__mobile-nav--open") &&
+        !mobileNav.contains(event.target) &&
+        !button?.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
     });
   });
 </script>
@@ -257,6 +283,26 @@ const phone = "(808) 651-8664";
     display: none;
   }
   @media (max-width: 1024px) {
+    :global(html.site-menu-open) {
+      overflow: hidden;
+    }
+    .site-header::after {
+      content: "";
+      position: fixed;
+      z-index: 21;
+      inset: 76px 0 0;
+      visibility: hidden;
+      opacity: 0;
+      background: rgba(7, 31, 43, 0.42);
+      transition:
+        opacity 0.3s ease,
+        visibility 0s linear 0.3s;
+    }
+    .site-header:has(.site-header__mobile-nav--open)::after {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 0s;
+    }
     .site-header__container {
       width: min(calc(100% - 32px), 1180px);
     }
@@ -266,6 +312,8 @@ const phone = "(808) 651-8664";
       display: none;
     }
     .site-header__inner {
+      position: relative;
+      z-index: 23;
       height: 76px;
     }
     .site-header__logo img {
@@ -286,30 +334,47 @@ const phone = "(808) 651-8664";
       background: #132a37;
     }
     .site-header__mobile-nav {
-      position: absolute;
-      inset: 76px 0 auto;
-      max-height: calc(100vh - 76px);
+      width: min(88vw, 420px);
+      height: calc(100dvh - 76px);
       padding: 1rem 16px 1.5rem;
+      position: fixed;
+      z-index: 22;
+      inset: 76px 0 0 auto;
+      display: grid;
       overflow: auto;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
+      align-content: start;
       gap: 1px;
+      visibility: hidden;
       background: #f9f5ef;
       box-shadow: 0 15px 40px rgba(7, 31, 43, 0.15);
+      transform: translateX(100%);
+      transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0.35s;
     }
     .site-header__mobile-nav--open {
-      display: grid;
+      visibility: visible;
+      transform: translateX(0);
+      transition-delay: 0s;
     }
     .site-header__mobile-nav strong,
     .site-header__mobile-nav a {
       padding: 0.8rem;
       background: #f7f3ec;
-      font-size: 0.78rem;
+      font-size: 0.9rem;
     }
     .site-header__mobile-nav strong {
       grid-column: 1/-1;
       color: #b98552;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header__mobile-nav,
+    .site-header::after {
+      transition-duration: 0s;
     }
   }
 </style>

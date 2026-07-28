@@ -1,7 +1,6 @@
 ---
 const phone = "(808) 651-8664";
 const tel = "+18086518664";
-const email = "info@kauairetractablescreens.com";
 ---
 
 <footer class="site-footer">
@@ -32,7 +31,6 @@ const email = "info@kauairetractablescreens.com";
       <div>
         <span>Contact</span>
         <a href={`tel:${tel}`}>{phone}</a>
-        <a href={`mailto:${email}`}>{email}</a>
       </div>
       <a class="site-footer__logo" href="/" aria-label="Screen Pro home">
         <img
@@ -129,7 +127,7 @@ const email = "info@kauairetractablescreens.com";
       gap: 2.5rem 1.5rem;
     }
     .site-footer__logo {
-      grid-column: 1/-1;
+      display: none;
     }
     .site-footer__bottom {
       flex-direction: column;

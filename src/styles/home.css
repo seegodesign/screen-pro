@@ -324,6 +324,14 @@ h2 em {
   display: flex;
   gap: 0.8rem;
 }
+.hero__actions .button {
+  min-width: 230px;
+  justify-content: space-between;
+  text-align: left;
+}
+.hero__actions .button--glass > span {
+  flex: 0 1 auto;
+}
 .hero__foot {
   position: absolute;
   z-index: 2;
@@ -416,7 +424,7 @@ h2 em {
 .intro__details span {
   display: grid;
   color: #718087;
-  font-size: 0.67rem;
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 .intro__details b {
@@ -511,7 +519,7 @@ h2 em {
 }
 .feature__badge span {
   color: #66777e;
-  font-size: 0.67rem;
+  font-size: 0.9rem;
 }
 .feature__content p {
   color: rgba(255, 255, 255, 0.65);
@@ -776,7 +784,7 @@ h2 em {
 }
 .review-card footer small {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 0.67rem;
+  font-size: 0.9rem;
 }
 .area {
   background: var(--color-cream);
