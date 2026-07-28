@@ -1,0 +1,100 @@
+---
+import { serviceMeta } from "../data/service-meta";
+import { serviceAreaRegions } from "../data/service-areas";
+
+interface Props {
+  currentService?: string;
+  currentArea?: string;
+  quoteHref?: string;
+}
+
+const { currentService, currentArea, quoteHref = "/#contact" } = Astro.props;
+const phone = "(808) 651-8664";
+---
+
+<div class="site-topbar">
+  <div class="site-header__container site-topbar__inner">
+    <p>Custom-fit screen solutions, built for island living.</p>
+    <div><span>Serving all of Kauaʻi</span><a href="tel:+18086518664">{phone}</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="site-header__container site-header__inner">
+    <a class="site-header__logo" href="/" aria-label="Screen Pro Retractable Doors home">
+      <img src="/images/logo.webp" width="400" height="154" alt="Screen Pro Retractable Doors" />
+    </a>
+    <nav class="site-header__nav" aria-label="Primary navigation">
+      <div class="site-header__menu">
+        <button type="button" aria-haspopup="true">Services</button>
+        <div class="site-header__dropdown">
+          {Object.entries(serviceMeta).map(([slug, service]) => <a href={`/services/${slug}/`} aria-current={slug === currentService ? "page" : undefined}>{service.title}</a>)}
+        </div>
+      </div>
+      <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
+      <div class="site-header__menu">
+        <button type="button" aria-haspopup="true">Service areas</button>
+        <div class="site-header__dropdown">
+          {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`} aria-current={slug === currentArea ? "page" : undefined}>{area.name}</a>)}
+        </div>
+      </div>
+    </nav>
+    <a class="site-header__cta" href={quoteHref}>Get a quote <span aria-hidden="true">↗</span></a>
+    <button class="site-header__menu-button" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+  <nav class="site-header__mobile-nav" aria-label="Mobile navigation">
+    <strong>Services</strong>
+    {Object.entries(serviceMeta).map(([slug, service]) => <a href={`/services/${slug}/`} aria-current={slug === currentService ? "page" : undefined}>{service.title}</a>)}
+    <strong>Service areas</strong>
+    {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`} aria-current={slug === currentArea ? "page" : undefined}>{area.name}</a>)}
+    <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a><a href={quoteHref}>Get a quote</a>
+  </nav>
+</header>
+
+<script is:inline data-astro-rerun>
+  document.querySelectorAll(".site-header").forEach((header) => {
+    const button = header.querySelector(".site-header__menu-button");
+    const mobileNav = header.querySelector(".site-header__mobile-nav");
+    button?.addEventListener("click", () => {
+      const open = mobileNav?.classList.toggle("site-header__mobile-nav--open") ?? false;
+      button.setAttribute("aria-expanded", String(open));
+    });
+  });
+</script>
+
+<style>
+  .site-header__container { width:min(calc(100% - 48px),1180px); margin-inline:auto; }
+  .site-topbar { color:rgba(255,255,255,.84); background:#071f2b; font: .7rem/1.6 "DM Sans",sans-serif; letter-spacing:.05em; }
+  .site-topbar__inner { height:36px; display:flex; align-items:center; justify-content:space-between; }
+  .site-topbar p { margin:0; }
+  .site-topbar__inner div { display:flex; gap:2rem; }
+  .site-topbar a { color:#d4aa7d; font-weight:700; text-decoration:none; }
+  .site-header { position:sticky; z-index:20; top:0; background:#f9f5ef; font-family:"DM Sans",sans-serif; }
+  .site-header__inner { height:96px; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+  .site-header__logo img { width:220px; height:auto; display:block; }
+  .site-header__nav { display:flex; align-items:center; gap:2rem; color:#132a37; font-size:.8rem; font-weight:600; }
+  .site-header a { color:inherit; text-decoration:none; }
+  .site-header__nav > a:hover,.site-header__menu button:hover { color:#b98552; }
+  .site-header__menu { position:relative; }
+  .site-header__menu button { padding:1.25rem 0; border:0; color:inherit; background:transparent; cursor:default; font:inherit; }
+  .site-header__dropdown { position:absolute; top:100%; left:-1.25rem; width:245px; display:grid; visibility:hidden; opacity:0; background:#fff; border:1px solid rgba(19,42,55,.15); box-shadow:0 18px 50px rgba(7,31,43,.16); transform:translateY(-5px); transition:.2s; }
+  .site-header__menu:hover .site-header__dropdown,.site-header__menu:focus-within .site-header__dropdown { visibility:visible; opacity:1; transform:none; }
+  .site-header__dropdown a { padding:.7rem .8rem; }
+  .site-header__dropdown a:hover,.site-header__dropdown a[aria-current="page"] { color:#b98552; background:#f7f3ec; }
+  .site-header__cta { min-height:44px; padding:0 1.2rem; display:inline-flex; align-items:center; justify-content:center; gap:1.2rem; color:#fff !important; background:#12324a; font-size:.72rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+  .site-header__cta span { font-size:1rem; }
+  .site-header__menu-button,.site-header__mobile-nav { display:none; }
+  @media (max-width:760px) {
+    :global(body) { padding-bottom:52px; }
+    .site-header__container { width:min(calc(100% - 32px),1180px); }
+    .site-topbar,.site-header__nav,.site-header__cta { display:none; }
+    .site-header__inner { height:76px; }
+    .site-header__logo img { width:180px; }
+    .site-header__menu-button { width:42px; height:42px; padding:0 10px; display:grid; align-content:center; gap:6px; border:1px solid rgba(19,42,55,.15); background:transparent; }
+    .site-header__menu-button span { height:1px; background:#132a37; }
+    .site-header__mobile-nav { position:absolute; inset:76px 0 auto; max-height:calc(100vh - 76px); padding:1rem 16px 1.5rem; overflow:auto; grid-template-columns:repeat(2,1fr); gap:1px; background:#f9f5ef; box-shadow:0 15px 40px rgba(7,31,43,.15); }
+    .site-header__mobile-nav--open { display:grid; }
+    .site-header__mobile-nav strong,.site-header__mobile-nav a { padding:.8rem; background:#f7f3ec; font-size:.78rem; }
+    .site-header__mobile-nav strong { grid-column:1/-1; color:#b98552; letter-spacing:.1em; text-transform:uppercase; }
+  }
+</style>

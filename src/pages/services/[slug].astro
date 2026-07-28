@@ -1,7 +1,8 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
+import SiteHeader from "../../components/SiteHeader.astro";
 import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
-import { serviceAreas, serviceAreaRegions } from "../../data/service-areas";
+import { serviceAreas } from "../../data/service-areas";
 
 type Benefit = { title: string; body: string };
 type ProcessStep = Benefit & { step: string };
@@ -123,42 +124,7 @@ const jsonLd = {
           <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
           <div class="nav-areas">
             <button type="button" aria-haspopup="true">Service areas</button>
-            <div class="areas-dropdown">
-              {Object.entries(serviceAreaRegions).map(([areaSlug, area]) => <a href={`/service-areas/${areaSlug}/`}>{area.name}</a>)}
-            </div>
-          </div>
-        </nav>
-        <a class="button button--dark header__cta" href="#quote">Get a quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-        <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
-      </div>
-      <div class="mobile-nav">
-        <strong>Services</strong>
-        {Object.entries(serviceMeta).map(([itemSlug, item]) => <a href={`/services/${itemSlug}/`}>{item.title}</a>)}
-        <strong>Service areas</strong>
-        {Object.entries(serviceAreaRegions).map(([areaSlug, area]) => <a href={`/service-areas/${areaSlug}/`}>{area.name}</a>)}
-        <a href="/#about">About</a><a href="/#brands">Brands</a><a href="/#gallery">Gallery</a><a href="/#reviews">Reviews</a>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero" style={`--hero-image: url("${heroImage}")`}>
-        <div class="container hero__inner">
-          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#services">Services</a><span>/</span><span>{meta.title}</span></nav>
-          <p class="eyebrow">Screen Pro Kauaʻi</p>
-          <h1>{meta.heroKeyword}</h1>
-          <p class="hero__lede">{intro}</p>
-          <div class="hero__actions">
-            <a class="button button--bronze" href="#quote">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-            <a class="button button--glass" href={`tel:${tel}`}>Call {phone}</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section overview">
-        <div class="container overview__grid">
-          <div>
-            <p class="eyebrow eyebrow--dark">What’s included</p>
-            <h2>{meta.title} on Kauaʻi,<br /><em>done right.</em></h2>
+            <SiteHeader currentService={slug} quoteHref="#quote" />
             <p class="lead">{meta.description}</p>
             <ul class="check-list">{meta.bullets.map((bullet) => <li><span>✓</span>{bullet}</li>)}</ul>
             <a class="button button--dark" href={`tel:${tel}`}>Call for a free estimate</a>
@@ -226,14 +192,6 @@ const jsonLd = {
 
     <footer><div class="container"><img src="/images/logo-light.webp" width="1723" height="522" alt="Screen Pro Retractable Doors" /><p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p><a href={`tel:${tel}`}>{phone}</a><a class="site-credit" href="https://seegodesign.com" target="_blank" rel="noopener noreferrer">Site by Seego Design</a></div></footer>
     <a class="mobile-call" href={`tel:${tel}`}>Call now <span>{phone}</span></a>
-    <script is:inline data-astro-rerun>
-      const button = document.querySelector(".menu-button");
-      const mobileNav = document.querySelector(".mobile-nav");
-      button?.addEventListener("click", () => {
-        const open = mobileNav?.classList.toggle("mobile-nav--open") ?? false;
-        button.setAttribute("aria-expanded", String(open));
-      });
-    </script>
   </body>
 </html>
 

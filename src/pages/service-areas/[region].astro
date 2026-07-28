@@ -1,5 +1,6 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
+import SiteHeader from "../../components/SiteHeader.astro";
 import { serviceAreaRegions, type ServiceAreaSlug } from "../../data/service-areas";
 import { serviceMeta } from "../../data/service-meta";
 
@@ -77,24 +78,7 @@ const jsonLd = {
     <ClientRouter />
   </head>
   <body>
-    <div class="topbar">
-      <div class="container topbar__inner"><p>Custom-fit screen solutions, built for island living.</p><div><span>Serving all of Kauaʻi</span><a href={`tel:${tel}`}>{phone}</a></div></div>
-    </div>
-    <header class="header">
-      <div class="container header__inner">
-        <a class="logo" href="/" aria-label="Screen Pro Retractable Doors home"><img src="/images/logo.webp" width="400" height="154" alt="Screen Pro Retractable Doors" /></a>
-        <nav class="nav" aria-label="Primary navigation">
-          <a href="/#services">Services</a><a href="/#about">About</a><a href="/#gallery">Gallery</a>
-          <div class="nav-areas">
-            <button type="button" aria-haspopup="true">Service areas</button>
-            <div class="areas-dropdown">
-              {Object.entries(serviceAreaRegions).map(([areaSlug, item]) => <a href={`/service-areas/${areaSlug}/`} aria-current={areaSlug === region ? "page" : undefined}>{item.name}</a>)}
-            </div>
-          </div>
-        </nav>
-        <a class="button button--dark" href="#quote">Get a quote <span aria-hidden="true">↗</span></a>
-      </div>
-    </header>
+    <SiteHeader currentArea={region} quoteHref="#quote" />
 
     <main>
       <section class="hero">
@@ -181,7 +165,7 @@ const jsonLd = {
   .header { position:sticky; z-index:20; top:0; background:var(--cream); }
   .header__inner { height:96px; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
   .logo img { width:220px; height:auto; display:block; }
-  .nav { display:flex; gap:2rem; font-size:.8rem; font-weight:600; }
+  .nav { display:flex; align-items:center; gap:2rem; font-size:.8rem; font-weight:600; }
   .nav a:hover,.nav-areas button:hover { color:var(--bronze); }
   .nav-areas { position:relative; }
   .nav-areas button { padding:1.25rem 0; border:0; color:inherit; background:transparent; cursor:default; font:inherit; }

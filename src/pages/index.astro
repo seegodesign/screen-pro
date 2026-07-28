@@ -8,7 +8,8 @@ import {
   ShieldCheck,
   Wrench,
 } from "@lucide/astro";
-import { serviceAreas, serviceAreaRegions } from "../data/service-areas";
+import SiteHeader from "../components/SiteHeader.astro";
+import { serviceAreas } from "../data/service-areas";
 
 const services = [
   {
@@ -158,51 +159,7 @@ const jsonLd = {
     <ClientRouter />
   </head>
   <body>
-    <div class="topbar">
-      <div class="container topbar__inner">
-        <p>Custom-fit screen solutions, built for island living.</p>
-        <div class="topbar__meta">
-          <span>Serving all of Kauaʻi</span>
-          <a href={`tel:${tel}`}>{phone}</a>
-        </div>
-      </div>
-    </div>
-
-    <header class="header">
-      <div class="container header__inner">
-        <a class="logo logo--nav" href="/" aria-label="Screen Pro Retractable Doors home">
-          <img src="/images/logo.webp" width="400" height="154" alt="Screen Pro Retractable Doors" />
-        </a>
-        <nav class="nav" aria-label="Primary navigation">
-          <div class="nav-services">
-            <button type="button" aria-haspopup="true">Services</button>
-            <div class="services-dropdown">
-              {services.map((service) => <a href={`/services/${service.slug}/`}>{service.title}</a>)}
-            </div>
-          </div>
-          <a href="#about">About</a>
-          <a href="#brands">Brands</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#reviews">Reviews</a>
-          <div class="nav-areas">
-            <button type="button" aria-haspopup="true">Service areas</button>
-            <div class="areas-dropdown">
-              {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`}>{area.name}</a>)}
-            </div>
-          </div>
-        </nav>
-        <a class="button button--dark header__cta" href="#contact">Get a quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-        <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
-      </div>
-      <div class="mobile-nav">
-        <strong>Services</strong>
-        {services.map((service) => <a href={`/services/${service.slug}/`}>{service.title}</a>)}
-        <strong>Service areas</strong>
-        {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`}>{area.name}</a>)}
-        <a href="#about">About</a><a href="#brands">Brands</a>
-        <a href="#gallery">Gallery</a><a href="#reviews">Reviews</a><a href="#service-area">Service areas</a><a href="#contact">Get a quote</a>
-      </div>
-    </header>
+    <SiteHeader quoteHref="#contact" />
 
     <main>
       <section class="hero">
@@ -437,19 +394,6 @@ const jsonLd = {
     </footer>
     <a class="mobile-call" href={`tel:${tel}`}>Call now <span>{phone}</span></a>
 
-    <script is:inline data-astro-rerun>
-      const button = document.querySelector(".menu-button");
-      const menu = document.querySelector(".mobile-nav");
-      button?.addEventListener("click", () => {
-        const open = button.getAttribute("aria-expanded") === "true";
-        button.setAttribute("aria-expanded", String(!open));
-        menu?.classList.toggle("mobile-nav--open");
-      });
-      menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-        menu.classList.remove("mobile-nav--open");
-        button?.setAttribute("aria-expanded", "false");
-      }));
-    </script>
   </body>
 </html>
 
