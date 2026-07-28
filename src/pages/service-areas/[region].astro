@@ -1,0 +1,245 @@
+---
+import { ClientRouter, fade } from "astro:transitions";
+import { serviceAreaRegions, type ServiceAreaSlug } from "../../data/service-areas";
+import { serviceMeta } from "../../data/service-meta";
+
+export function getStaticPaths() {
+  return Object.entries(serviceAreaRegions).map(([region, area]) => ({
+    params: { region },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props as { area: (typeof serviceAreaRegions)[ServiceAreaSlug] };
+const region = Astro.params.region as ServiceAreaSlug;
+const phone = "(808) 651-8664";
+const tel = "+18086518664";
+const siteUrl = "https://kauairetractablescreens.com";
+const pageUrl = `${siteUrl}/service-areas/${region}/`;
+const services = Object.entries(serviceMeta);
+const otherRegions = Object.entries(serviceAreaRegions).filter(([slug]) => slug !== region);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: area.title,
+      description: area.description,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#business` },
+    },
+    {
+      "@type": "Service",
+      "@id": `${pageUrl}#service`,
+      name: `Screen installation and repair in ${area.name}`,
+      description: area.description,
+      url: pageUrl,
+      provider: { "@id": `${siteUrl}/#business` },
+      areaServed: area.towns.map((town) => ({ "@type": "City", name: `${town}, Hawaii` })),
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: `Screen services in ${area.name}`,
+        itemListElement: services.map(([, service]) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: service.title },
+        })),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+        { "@type": "ListItem", position: 2, name: "Service Areas", item: `${siteUrl}/#service-area` },
+        { "@type": "ListItem", position: 3, name: area.name, item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" transition:animate={fade({ duration: 350 })}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={area.description} />
+    <meta name="theme-color" content="#12324a" />
+    <link rel="canonical" href={pageUrl} />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <title>{area.title} | Screen Pro</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar__inner"><p>Custom-fit screen solutions, built for island living.</p><div><span>Serving all of Kauaʻi</span><a href={`tel:${tel}`}>{phone}</a></div></div>
+    </div>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="/" aria-label="Screen Pro Retractable Doors home"><img src="/images/logo.webp" width="400" height="154" alt="Screen Pro Retractable Doors" /></a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/#services">Services</a><a href="/#about">About</a><a href="/#gallery">Gallery</a><a href="/#service-area">Service areas</a>
+        </nav>
+        <a class="button button--dark" href="#quote">Get a quote <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__content">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#service-area">Service areas</a><span>/</span><span>{area.name}</span></nav>
+          <p class="eyebrow">Island-wide service</p>
+          <h1>{area.title}</h1>
+          <p>{area.description}</p>
+          <a class="button button--bronze" href="#quote">Schedule a free consultation <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="section intro">
+        <div class="container split">
+          <div><p class="eyebrow eyebrow--dark">Local screen expertise</p><h2>Built for open-air living<br /><em>in {area.name}.</em></h2></div>
+          <div class="prose"><p>{area.intro}</p><p>{area.conditions}</p></div>
+        </div>
+      </section>
+
+      <section class="section towns">
+        <div class="container">
+          <div class="section-head"><div><p class="eyebrow eyebrow--dark">Communities we serve</p><h2>Screen service throughout<br /><em>{area.shortName}.</em></h2></div><p>We provide on-site consultations, custom measurement, installation, and repair throughout these communities.</p></div>
+          <div class="town-grid">
+            {area.towns.map((town, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{town}</h3><p>{area.townCopy[town]}</p><a href="#quote">Request service in {town} <b>→</b></a></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section services">
+        <div class="container">
+          <div class="section-head"><div><p class="eyebrow eyebrow--dark">What we install and repair</p><h2>Screen solutions for<br /><em>every opening.</em></h2></div><p>Each system is measured for your home and selected for the opening, exposure, and daily use.</p></div>
+          <div class="service-grid">
+            {services.map(([slug, service]) => <a href={`/services/${slug}/`}><h3>{service.title}</h3><p>{service.description}</p><span>Explore service →</span></a>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section regions">
+        <div class="container split">
+          <div><p class="eyebrow">Also serving</p><h2>Screen Pro serves<br /><em>all of Kauaʻi.</em></h2></div>
+          <div class="region-links">{otherRegions.map(([slug, item]) => <a href={`/service-areas/${slug}/`}><span>{item.name}</span><b>→</b></a>)}</div>
+        </div>
+      </section>
+
+      <section class="section quote" id="quote">
+        <div class="container quote__grid">
+          <div><p class="eyebrow">Start your project</p><h2>Request screen service<br /><em>in {area.name}.</em></h2><p>Tell us about your opening or repair. We’ll follow up to answer questions and arrange a complimentary on-site consultation.</p><a class="phone" href={`tel:${tel}`}>{phone}</a></div>
+          <form class="form" name={`service-area-${region}`} method="POST" action="/?submitted=true#contact">
+            <label>Name<input name="name" autocomplete="name" required /></label>
+            <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
+            <label>Email<input name="email" type="email" autocomplete="email" /></label>
+            <label>Town<select name="town" required><option value="">Select your town</option>{area.towns.map((town) => <option value={town}>{town}</option>)}</select></label>
+            <label class="full">How can we help?<textarea name="message" rows="3"></textarea></label>
+            <button class="button button--bronze full" type="submit">Request a free quote <span aria-hidden="true">↗</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="container footer__inner"><img src="/images/logo-light.webp" width="1723" height="522" alt="Screen Pro Retractable Doors" /><p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p><a href={`tel:${tel}`}>{phone}</a><a class="credit" href="https://seegodesign.com" target="_blank" rel="noopener noreferrer">Site by Seego Design</a></div></footer>
+  </body>
+</html>
+
+<style>
+  :root { --navy:#12324a; --deep:#071f2b; --bronze:#b98552; --cream:#f9f5ef; --sand:#e8ded0; --ink:#132a37; --muted:#63737a; --line:rgba(19,42,55,.15); --display:Georgia,serif; --body:"DM Sans",sans-serif; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; color:var(--ink); background:var(--cream); font-family:var(--body); line-height:1.65; }
+  a { color:inherit; text-decoration:none; }
+  p,h1,h2,h3 { margin-top:0; }
+  h1,h2,h3 { font-family:var(--display); }
+  h1,h2 { font-weight:500; letter-spacing:-.045em; line-height:1.06; }
+  h1 { max-width:850px; margin-bottom:1.5rem; color:#fff; font-size:clamp(2.7rem,5.4vw,4.9rem); }
+  h2 { font-size:clamp(2.25rem,4.2vw,4rem); }
+  h2 em { color:var(--bronze); font-weight:400; }
+  h3 { font-size:1.35rem; }
+  .container { width:min(1160px,calc(100% - 40px)); margin-inline:auto; }
+  .section { padding:clamp(5rem,9vw,8rem) 0; }
+  .topbar { color:rgba(255,255,255,.84); background:var(--deep); font-size:.7rem; }
+  .topbar__inner { height:36px; display:flex; justify-content:space-between; align-items:center; }
+  .topbar p { margin:0; }
+  .topbar__inner div { display:flex; gap:2rem; }
+  .topbar a { color:#d4aa7d; font-weight:700; }
+  .header { position:sticky; z-index:20; top:0; background:var(--cream); }
+  .header__inner { height:96px; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+  .logo img { width:220px; height:auto; display:block; }
+  .nav { display:flex; gap:2rem; font-size:.8rem; font-weight:600; }
+  .nav a:hover { color:var(--bronze); }
+  .button { min-height:52px; padding:0 1.4rem; display:inline-flex; align-items:center; justify-content:center; gap:1.2rem; color:#fff; border:1px solid transparent; cursor:pointer; font:700 .72rem var(--body); letter-spacing:.09em; text-transform:uppercase; }
+  .button--dark { background:var(--navy); }
+  .button--bronze { background:var(--bronze); }
+  .hero { min-height:610px; display:flex; align-items:center; color:#fff; background:linear-gradient(100deg,rgba(7,31,43,.96),rgba(8,34,48,.76) 58%,rgba(8,34,48,.42)),url("/images/Screen-Pro-Retractable-Doors-Kauai43.jpg") center/cover; }
+  .hero__content { padding-block:5rem; }
+  .hero__content > p:not(.eyebrow) { max-width:680px; margin-bottom:2rem; color:rgba(255,255,255,.78); font-size:1.05rem; }
+  .breadcrumbs { margin-bottom:4rem; display:flex; gap:.7rem; color:rgba(255,255,255,.48); font-size:.7rem; }
+  .eyebrow { margin-bottom:1.2rem; color:#d4aa7d; font-size:.68rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+  .eyebrow--dark { color:var(--bronze); }
+  .split { display:grid; grid-template-columns:1fr 1fr; gap:8rem; align-items:start; }
+  .prose { padding-top:1rem; color:var(--muted); font-size:1.02rem; }
+  .prose p + p { margin-top:1.5rem; }
+  .towns { background:#fff; }
+  .section-head { margin-bottom:3rem; display:grid; grid-template-columns:1.3fr .7fr; gap:5rem; align-items:end; }
+  .section-head > p { color:var(--muted); }
+  .town-grid { display:grid; grid-template-columns:repeat(2,1fr); border:1px solid var(--line); }
+  .town-grid article { min-height:260px; padding:2rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .town-grid article:nth-child(2n) { border-right:0; }
+  .town-grid article > span { color:var(--bronze); font-size:.7rem; }
+  .town-grid h3 { margin:1.7rem 0 .7rem; font-size:1.8rem; }
+  .town-grid p { color:var(--muted); }
+  .town-grid a { font-size:.7rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+  .town-grid a b { margin-left:.5rem; color:var(--bronze); }
+  .services { background:var(--sand); }
+  .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(19,42,55,.14); border:1px solid rgba(19,42,55,.14); }
+  .service-grid a { min-height:250px; padding:2rem; display:flex; flex-direction:column; background:var(--cream); }
+  .service-grid p { color:var(--muted); font-size:.86rem; }
+  .service-grid span { margin-top:auto; color:var(--bronze); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .regions { color:#fff; background:var(--navy); }
+  .region-links { border-top:1px solid rgba(255,255,255,.18); }
+  .region-links a { padding:1.2rem 0; display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,.18); }
+  .region-links b { color:#d4aa7d; }
+  .quote { color:#fff; background:var(--deep); }
+  .quote__grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:8%; }
+  .quote__grid > div > p:not(.eyebrow) { color:rgba(255,255,255,.62); }
+  .phone { color:#d4aa7d; font-family:var(--display); font-size:1.7rem; }
+  .form { padding:2.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.2rem 1.5rem; color:var(--ink); background:var(--cream); }
+  .form label { display:grid; gap:.35rem; color:var(--muted); font-size:.67rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .form input,.form select,.form textarea { width:100%; padding:.75rem 0; color:var(--ink); background:transparent; border:0; border-bottom:1px solid rgba(19,42,55,.25); border-radius:0; outline:0; font:inherit; }
+  .full { grid-column:1/-1; }
+  footer { padding:3rem 0; color:rgba(255,255,255,.65); background:#061b27; }
+  .footer__inner { display:flex; align-items:center; gap:2.5rem; }
+  footer img { width:200px; height:auto; }
+  footer p { max-width:360px; margin:0; }
+  footer .footer__inner > a:first-of-type { margin-left:auto; color:#fff; }
+  footer .credit { color:rgba(255,255,255,.45); font-size:.68rem; }
+  @media (max-width:900px) {
+    .nav { display:none; }
+    .header__inner { height:76px; }
+    .logo img { width:180px; }
+    .split,.quote__grid,.section-head { grid-template-columns:1fr; gap:2.5rem; }
+    .service-grid { grid-template-columns:repeat(2,1fr); }
+    .footer__inner { align-items:flex-start; flex-direction:column; gap:1rem; }
+    footer .footer__inner > a:first-of-type { margin-left:0; }
+  }
+  @media (max-width:600px) {
+    .topbar { display:none; }
+    .header .button { min-height:42px; padding:0 .8rem; font-size:.6rem; }
+    .hero { min-height:570px; }
+    .breadcrumbs { margin-bottom:2.5rem; }
+    .town-grid,.service-grid,.form { grid-template-columns:1fr; }
+    .town-grid article { border-right:0; }
+    .full { grid-column:auto; }
+    .form { padding:1.5rem; }
+  }
+</style>

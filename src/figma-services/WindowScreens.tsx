@@ -4,7 +4,7 @@ export default function WindowScreens() {
   return (
     <ServicePage
       slug="window-screens"
-      heroImage="https://images.unsplash.com/photo-1776186243408-3c0489503faa?w=1600&h=900&fit=crop&auto=format"
+      heroImage="/images/kauai-window-screens.webp"
       intro="New window screens, re-screening, and aluminum frame replacement for Kauai homes. Available in white or bronze frames with charcoal or light gray mesh."
       benefits={[
         {

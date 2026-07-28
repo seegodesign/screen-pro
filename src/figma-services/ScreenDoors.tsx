@@ -4,7 +4,7 @@ export default function ScreenDoors() {
   return (
     <ServicePage
       slug="screen-doors"
-      heroImage="https://images.unsplash.com/photo-1760067538559-49b2bfb5f42a?w=1600&h=900&fit=crop&auto=format"
+      heroImage="/images/kauai-retractable-screen-door.webp"
       intro="Custom-measured screen doors for Kauai homes — swing doors, French doors, patio sliders, and security screens. Every door is built to fit your exact opening."
       benefits={[
         {

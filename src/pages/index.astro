@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   Wrench,
 } from "@lucide/astro";
+import { serviceAreas } from "../data/service-areas";
 
 const services = [
   {
@@ -107,17 +108,17 @@ const jsonLd = {
       "@id": businessId,
       name: "Screen Pro Retractable Doors",
       url: `${siteUrl}/`,
-      logo: `${siteUrl}/images/logo.png`,
+      logo: `${siteUrl}/images/logo.webp`,
       image: `${siteUrl}/images/kauai-luxury-motorized-screen.jpg`,
       description:
         "Custom retractable screen doors, motorized screens, window screens, sliding screen doors, hurricane screens, and screen repair for homes across Kauaʻi.",
       telephone: tel,
       email: "info@kauairetractablescreens.com",
       foundingDate: "1998",
-      areaServed: {
-        "@type": "AdministrativeArea",
-        name: "Kauaʻi, Hawaii",
-      },
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
+        ...serviceAreas.map((town) => ({ "@type": "City", name: `${town}, Hawaii` })),
+      ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Screen installation and repair services",
@@ -128,10 +129,10 @@ const jsonLd = {
             name: service.title,
             description: service.copy,
             provider: { "@id": businessId },
-            areaServed: {
-              "@type": "AdministrativeArea",
-              name: "Kauaʻi, Hawaii",
-            },
+            areaServed: [
+              { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
+              ...serviceAreas.map((town) => ({ "@type": "City", name: `${town}, Hawaii` })),
+            ],
           },
         })),
       },
@@ -170,7 +171,7 @@ const jsonLd = {
     <header class="header">
       <div class="container header__inner">
         <a class="logo logo--nav" href="/" aria-label="Screen Pro Retractable Doors home">
-          <img src="/images/logo.png" width="400" height="154" alt="Screen Pro Retractable Doors" />
+          <img src="/images/logo.webp" width="400" height="154" alt="Screen Pro Retractable Doors" />
         </a>
         <nav class="nav" aria-label="Primary navigation">
           <div class="nav-services">
@@ -184,7 +185,7 @@ const jsonLd = {
           <a href="#reviews">Reviews</a>
           <a href="#gallery">Gallery</a>
         </nav>
-        <a class="button button--dark header__cta" href="#contact">Get a quote <span>↗</span></a>
+        <a class="button button--dark header__cta" href="#contact">Get a quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
         <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
       </div>
       <div class="mobile-nav">
@@ -204,7 +205,7 @@ const jsonLd = {
           <h1>Premium screen solutions<br /><em>for Kauaʻi homes.</em></h1>
           <p class="hero__lede">Premium screen solutions designed for Kauaʻi homes—from discreet retractable doors to wide-format motorized screens, built and installed to last.</p>
           <div class="hero__actions">
-            <a class="button button--bronze" href="#contact">Get a free quote <span>↗</span></a>
+            <a class="button button--bronze" href="#contact">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
             <a class="button button--glass" href={`tel:${tel}`}>
               <span class="button__icon">⌕</span><span><small>Call us today</small>{phone}</span>
             </a>
@@ -286,7 +287,7 @@ const jsonLd = {
               <div><strong>02</strong><span><b>Installed professionally</b>Detailed work, respectful job sites.</span></div>
               <div><strong>03</strong><span><b>Serviceable for years</b>Quality parts we can maintain later.</span></div>
             </div>
-            <a class="button button--bronze" href="#contact">Schedule a consultation <span>↗</span></a>
+            <a class="button button--bronze" href="#contact">Schedule a consultation <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
           </div>
         </div>
       </section>
@@ -354,7 +355,7 @@ const jsonLd = {
         </div>
       </section>
 
-      <section class="area section">
+      <section class="area section" id="service-area">
         <div class="container area__grid">
           <div class="area__map" aria-label="Stylized map of Kauai">
             <svg viewBox="0 0 600 480" role="img">
@@ -367,11 +368,11 @@ const jsonLd = {
           <div class="area__content">
             <div class="eyebrow"><span></span> Island-wide service</div>
             <h2>Island-wide screen service<br /><em>across Kauaʻi.</em></h2>
-            <p>From Hanalei and Princeville to Kapaʻa, Līhuʻe, Kōloa, and Poʻipū, we bring experienced screen installation and repair directly to your home.</p>
+            <p>From Hanalei and Princeville to Anahola, Kapaʻa, Līhuʻe, Kōloa, and Poʻipū, we bring experienced screen installation and repair directly to your home.</p>
             <ul>
-              <li><span>North Shore</span><small>Hanalei · Princeville · Kīlauea</small></li>
-              <li><span>East Side</span><small>Kapaʻa · Wailua · Līhuʻe</small></li>
-              <li><span>South Side</span><small>Kōloa · Poʻipū · Kalaheo</small></li>
+              <li><a href="/service-areas/north-shore-kauai/"><span>North Shore</span><small>Hanalei · Princeville · Kīlauea</small><b>→</b></a></li>
+              <li><a href="/service-areas/east-side-kauai/"><span>East Side</span><small>Anahola · Kapaʻa · Wailua · Līhuʻe</small><b>→</b></a></li>
+              <li><a href="/service-areas/south-shore-kauai/"><span>South Shore</span><small>Kōloa · Poʻipū · Kalāheo</small><b>→</b></a></li>
             </ul>
           </div>
         </div>
@@ -399,7 +400,7 @@ const jsonLd = {
               <label><span>Opening size (optional)</span><input type="text" name="measurements" placeholder="Approx. width × height" /></label>
               <label class="upload"><span>Project photos (optional)</span><input type="file" name="photos" accept="image/*" multiple /><i>＋ Add photos</i></label>
             </div>
-            <button class="button button--bronze quote-form__submit" type="submit">Send quote request <span>↗</span></button>
+            <button class="button button--bronze quote-form__submit" type="submit">Send quote request <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
             <small class="quote-form__note">By submitting, you agree that we may contact you about your project.</small>
           </form>
         </div>
@@ -410,19 +411,18 @@ const jsonLd = {
       <div class="container">
         <div class="footer__top">
           <a class="logo logo--light" href="#">
-            <svg class="logo__mark" viewBox="0 0 46 46"><rect x="3" y="3" width="40" height="40" rx="2"></rect><path d="M11 33 22.7 10 35 33M15.7 24h14.5"></path></svg>
-            <span class="logo__type"><strong>SCREEN PRO</strong><small>RETRACTABLE DOORS</small></span>
+            <img src="/images/logo-light.webp" width="1723" height="522" alt="Screen Pro Retractable Doors" />
           </a>
           <p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p>
-          <a class="button button--outline" href="#contact">Get a free quote <span>↗</span></a>
+          <a class="button button--outline" href="#contact">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
         </div>
         <div class="footer__middle">
           <div><span>Explore</span><a href="#services">Services</a><a href="#brands">Brands</a><a href="#about">About</a><a href="#gallery">Gallery</a></div>
           <div><span>Services</span><a href="/services/screen-doors/">Retractable screens</a><a href="/services/motorized-screens/">Motorized screens</a><a href="/services/screen-repair/">Screen repair</a><a href="/services/hurricane-screens/">Hurricane screens</a></div>
-          <div><span>Service area</span><p>Island-wide Kauaʻi<br />North Shore · East Side · South Side</p></div>
+          <div><span>Service areas</span><a href="/service-areas/north-shore-kauai/">North Shore Kauaʻi</a><a href="/service-areas/east-side-kauai/">East Side Kauaʻi</a><a href="/service-areas/south-shore-kauai/">South Shore Kauaʻi</a></div>
           <div><span>Contact</span><a href={`tel:${tel}`}>{phone}</a><a href="mailto:info@kauairetractablescreens.com">info@kauairetractablescreens.com</a></div>
         </div>
-        <div class="footer__bottom"><span>© {new Date().getFullYear()} Screen Pro Retractable Doors</span><span>Family owned · Serving Kauaʻi since 1998</span></div>
+        <div class="footer__bottom"><span>© {new Date().getFullYear()} Screen Pro Retractable Doors</span><span>Family owned · Serving Kauaʻi since 1998</span><a href="https://seegodesign.com" target="_blank" rel="noopener noreferrer">Site by Seego Design</a></div>
       </div>
     </footer>
     <a class="mobile-call" href={`tel:${tel}`}>Call now <span>{phone}</span></a>
@@ -492,6 +492,9 @@ const jsonLd = {
   .eyebrow--light { color: rgba(255,255,255,.7); }
   .button { min-height: 54px; padding: 0 1.5rem; display: inline-flex; align-items: center; justify-content: center; gap: 1.5rem; border: 1px solid transparent; cursor: pointer; font-size: .76rem; letter-spacing: .09em; text-transform: uppercase; font-weight: 700; transition: .25s ease; }
   .button:hover { transform: translateY(-2px); }
+  .button__arrow { width: 1.8rem; height: 1.8rem; display: grid; flex: 0 0 auto; place-items: center; border: 1px solid currentColor; border-radius: 50%; transition: transform .25s ease, background-color .25s ease; }
+  .button__arrow svg { width: .85rem; height: .85rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .button:hover .button__arrow { background: rgba(255,255,255,.12); transform: translate(2px,-2px); }
   .button--dark { color: white; background: var(--color-navy); }
   .button--bronze { color: white; background: var(--color-bronze); }
   .button--bronze:hover { background: #a97543; }
@@ -505,10 +508,10 @@ const jsonLd = {
   .topbar p { margin: 0; }
   .topbar__meta { display: flex; gap: 2rem; }
   .topbar__meta a { color: white; font-weight: 600; }
-  .header { position: sticky; z-index: 20; top: 0; background: white; }
-  .header__inner { height: 82px; display: flex; align-items: center; justify-content: space-between; }
+  .header { position: sticky; z-index: 20; top: 0; background: #F9F5EF; }
+  .header__inner { height: 96px; display: flex; align-items: center; justify-content: space-between; }
   .logo { display: flex; align-items: center; gap: .75rem; color: var(--color-navy); }
-  .logo--nav img { width: 190px; height: auto; display: block; }
+  .logo--nav img { width: 220px; height: auto; display: block; }
   .logo__mark { width: 40px; height: 40px; fill: none; stroke: currentColor; stroke-width: 1.5; }
   .logo__type { display: grid; line-height: 1; }
   .logo__type strong { font-family: var(--font-display); font-size: .96rem; letter-spacing: .12em; }
@@ -518,7 +521,7 @@ const jsonLd = {
   .nav-services { position: relative; }
   .nav-services button { padding: 1.25rem 0; border: 0; color: inherit; background: transparent; cursor: default; font: inherit; letter-spacing: inherit; }
   .nav-services button span { margin-left: .3rem; }
-  .services-dropdown { position: absolute; top: 100%; left: -1.25rem; width: 245px; padding: .6rem; display: grid; visibility: hidden; opacity: 0; background: white; border: 1px solid var(--color-line); box-shadow: var(--shadow); transform: translateY(-5px); transition: .2s ease; }
+  .services-dropdown { position: absolute; top: 100%; left: -1.25rem; width: 245px; display: grid; visibility: hidden; opacity: 0; background: white; border: 1px solid var(--color-line); box-shadow: var(--shadow); transform: translateY(-5px); transition: .2s ease; }
   .nav-services:hover .services-dropdown, .nav-services:focus-within .services-dropdown { visibility: visible; opacity: 1; transform: none; }
   .services-dropdown a { padding: .7rem .8rem; }
   .services-dropdown a:hover { color: var(--color-bronze); background: var(--color-cream); }
@@ -538,7 +541,6 @@ const jsonLd = {
   .hero__location { margin-left: auto; display: flex; align-items: center; gap: .8rem; color: rgba(255,255,255,.7); font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; }
   .hero__location i { width: 4px; height: 4px; background: var(--color-bronze-light); border-radius: 50%; }
   .intro { position: relative; overflow: hidden; background: var(--color-sand); }
-  .intro::after { content: "SP"; position: absolute; right: -1.5rem; bottom: -7.5rem; color: rgba(19,42,55,.035); font-family: var(--font-headline); font-size: 21rem; line-height: 1; pointer-events: none; }
   .intro__grid { position: relative; z-index: 1; display: grid; grid-template-columns: .9fr 1.1fr; gap: 8rem; align-items: center; }
   .intro__grid > div:first-child { padding-left: 1.5rem; border-left: 3px solid var(--color-bronze); }
   .intro__copy { padding: 3rem; background: rgba(255,255,255,.82); box-shadow: 0 18px 55px rgba(19,42,55,.08); }
@@ -619,9 +621,12 @@ const jsonLd = {
   .area__map text { fill: var(--color-ink); font-family: var(--font-body); font-size: 12px; letter-spacing: 2px; }
   .area__content > p { margin: 2rem 0; color: #63737a; }
   .area__content ul { padding: 0; border-top: 1px solid var(--color-line); list-style: none; }
-  .area__content li { padding: 1rem 0; display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-line); }
+  .area__content li { border-bottom: 1px solid var(--color-line); }
+  .area__content li a { padding: 1rem 0; display: grid; grid-template-columns: 8rem 1fr auto; align-items: center; gap: 1rem; }
+  .area__content li a:hover { color: var(--color-bronze); }
   .area__content li span { font-family: var(--font-display); font-weight: 600; }
   .area__content li small { color: #6d7c82; }
+  .area__content li b { color: var(--color-bronze); }
   .contact { color: white; background: var(--color-navy-deep); }
   .contact__grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8%; align-items: start; }
   .contact__content > p { max-width: 470px; margin: 2rem 0; color: rgba(255,255,255,.62); }
@@ -650,7 +655,7 @@ const jsonLd = {
   .quote-form__submit { width: 100%; margin-top: 1.8rem; border: 0; }
   .quote-form__note { display: block; margin-top: .8rem; color: #7a878d; text-align: center; font-size: .62rem; }
   .footer { padding: 4rem 0 1.5rem; color: rgba(255,255,255,.75); background: #061b27; }
-  .logo--light { color: white; }
+  .logo--light img { width: 220px; height: auto; display: block; }
   .footer__top { padding-bottom: 3rem; display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; gap: 4rem; border-bottom: 1px solid rgba(255,255,255,.13); }
   .footer__top p { margin: 0; max-width: 370px; font-family: var(--font-display); font-size: 1.1rem; }
   .footer__middle { padding: 3rem 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; border-bottom: 1px solid rgba(255,255,255,.13); }
@@ -659,6 +664,7 @@ const jsonLd = {
   .footer__middle p { margin: 0; }
   .footer__middle a:hover { color: white; }
   .footer__bottom { padding-top: 1.5rem; display: flex; justify-content: space-between; color: rgba(255,255,255,.35); font-size: .65rem; }
+  .footer__bottom a:hover { color: white; }
   .mobile-call { display: none; }
 
   @media (max-width: 980px) {
@@ -674,12 +680,12 @@ const jsonLd = {
     .container { width: min(calc(100% - 32px), var(--container)); }
     .section { padding: 4.5rem 0; }
     .topbar { display: none; }
-    .header__inner { height: 70px; }
-    .logo--nav img { width: 165px; }
+    .header__inner { height: 76px; }
+    .logo--nav img { width: 180px; }
     .nav, .header__cta { display: none; }
     .menu-button { width: 42px; height: 42px; padding: 0 10px; display: grid; align-content: center; gap: 6px; background: transparent; border: 1px solid var(--color-line); }
     .menu-button span { height: 1px; background: var(--color-ink); }
-    .mobile-nav { position: absolute; inset: 70px 0 auto; padding: 1rem 16px 1.5rem; display: none; grid-template-columns: repeat(2, 1fr); gap: 1px; background: white; border-top: 1px solid var(--color-line); box-shadow: var(--shadow); }
+    .mobile-nav { position: absolute; inset: 76px 0 auto; padding: 1rem 16px 1.5rem; display: none; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #F9F5EF; border-top: 1px solid var(--color-line); box-shadow: var(--shadow); }
     .mobile-nav--open { display: grid; }
     .mobile-nav a, .mobile-nav strong { padding: .8rem; background: var(--color-cream); font-size: .8rem; }
     .mobile-nav strong { grid-column: 1 / -1; color: var(--color-bronze); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }

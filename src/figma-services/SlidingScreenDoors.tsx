@@ -4,7 +4,7 @@ export default function SlidingScreenDoors() {
   return (
     <ServicePage
       slug="sliding-screen-doors"
-      heroImage="https://images.unsplash.com/photo-1783125127094-ea962d41ba42?w=1600&h=900&fit=crop&auto=format"
+      heroImage="/images/kauai-sliding-screen-door.webp"
       intro="Heavy-duty aluminum sliding screen doors for Kauai homes — smooth, quiet, and built to handle Hawaii's humidity, salt air, and daily use."
       benefits={[
         {

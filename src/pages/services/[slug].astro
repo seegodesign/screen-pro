@@ -1,6 +1,7 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
+import { serviceAreas } from "../../data/service-areas";
 
 type Benefit = { title: string; body: string };
 type ProcessStep = Benefit & { step: string };
@@ -63,7 +64,10 @@ const jsonLd = {
       description: intro,
       url: pageUrl,
       image: heroImage,
-      areaServed: { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
+        ...serviceAreas.map((town) => ({ "@type": "City", name: `${town}, Hawaii` })),
+      ],
       provider: { "@id": `${siteUrl}/#business` },
     },
     {
@@ -105,7 +109,7 @@ const jsonLd = {
     <header class="header">
       <div class="container header__inner">
         <a class="logo" href="/" aria-label="Screen Pro Retractable Doors home">
-          <img src="/images/logo.png" width="400" height="154" alt="Screen Pro Retractable Doors" />
+          <img src="/images/logo.webp" width="400" height="154" alt="Screen Pro Retractable Doors" />
         </a>
         <nav class="nav" aria-label="Primary navigation">
           <div class="nav-services">
@@ -118,7 +122,7 @@ const jsonLd = {
           </div>
           <a href="/#brands">Brands</a><a href="/#about">About</a><a href="/#reviews">Reviews</a><a href="/#gallery">Gallery</a>
         </nav>
-        <a class="button button--dark header__cta" href="#quote">Get a quote <span>↗</span></a>
+        <a class="button button--dark header__cta" href="#quote">Get a quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
         <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
       </div>
       <div class="mobile-nav">
@@ -136,7 +140,7 @@ const jsonLd = {
           <h1>{meta.heroKeyword}</h1>
           <p class="hero__lede">{intro}</p>
           <div class="hero__actions">
-            <a class="button button--bronze" href="#quote">Get a free quote <span>↗</span></a>
+            <a class="button button--bronze" href="#quote">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
             <a class="button button--glass" href={`tel:${tel}`}>Call {phone}</a>
           </div>
         </div>
@@ -190,7 +194,7 @@ const jsonLd = {
               <label class="full"><span>Opening size / measurements</span><input name="measurements" placeholder={'e.g. 36" W × 80" H'} /></label>
               <label class="full"><span>Project details *</span><textarea name="details" rows="4" required></textarea></label>
             </div>
-            <button class="button button--bronze" type="submit">Request a free quote <span>↗</span></button>
+            <button class="button button--bronze" type="submit">Request a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></button>
           </form>
         </div>
       </section>
@@ -212,7 +216,7 @@ const jsonLd = {
       </section>
     </main>
 
-    <footer><div class="container"><img src="/images/logo.png" width="400" height="154" alt="Screen Pro Retractable Doors" /><p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p><a href={`tel:${tel}`}>{phone}</a></div></footer>
+    <footer><div class="container"><img src="/images/logo-light.webp" width="1723" height="522" alt="Screen Pro Retractable Doors" /><p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p><a href={`tel:${tel}`}>{phone}</a><a class="site-credit" href="https://seegodesign.com" target="_blank" rel="noopener noreferrer">Site by Seego Design</a></div></footer>
     <a class="mobile-call" href={`tel:${tel}`}>Call now <span>{phone}</span></a>
     <script is:inline data-astro-rerun>
       const button = document.querySelector(".menu-button");
@@ -236,13 +240,16 @@ const jsonLd = {
   h1,h2,h3,p { margin-top:0; }
   h1,h2,h3 { font-family:var(--display); }
   h1,h2 { font-weight:500; letter-spacing:-.045em; line-height:1.06; }
-  h1 { max-width:780px; margin-bottom:1.5rem; font-size:clamp(3rem,6.5vw,5.8rem); color:#fff; }
+  h1 { max-width:720px; margin-bottom:1.5rem; font-size:clamp(2.6rem,5.3vw,4.8rem); color:#fff; }
   h2 { font-size:clamp(2.35rem,4.5vw,4.2rem); }
   h2 em { color:var(--bronze); font-family:Georgia,serif; font-weight:400; }
   h3 { line-height:1.3; }
   .eyebrow { margin-bottom:1.3rem; color:var(--bronze-light); font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
   .eyebrow--dark { color:var(--bronze); }
   .button { min-height:54px; padding:0 1.5rem; display:inline-flex; align-items:center; justify-content:center; gap:1.5rem; border:1px solid transparent; color:#fff; font-size:.74rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+  .button__arrow { width:1.8rem; height:1.8rem; display:grid; flex:0 0 auto; place-items:center; border:1px solid currentColor; border-radius:50%; transition:transform .25s ease,background-color .25s ease; }
+  .button__arrow svg { width:.85rem; height:.85rem; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+  .button:hover .button__arrow { background:rgba(255,255,255,.12); transform:translate(2px,-2px); }
   .button--dark { background:var(--navy); }
   .button--bronze { background:var(--bronze); }
   .button--glass { border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.08); }
@@ -251,15 +258,15 @@ const jsonLd = {
   .topbar p { margin:0; }
   .topbar__inner div { display:flex; gap:2rem; }
   .topbar a { color:#fff; font-weight:600; }
-  .header { position:sticky; z-index:20; top:0; background:#fff; }
-  .header__inner { height:82px; display:flex; align-items:center; justify-content:space-between; }
-  .logo img { width:190px; height:auto; display:block; }
+  .header { position:sticky; z-index:20; top:0; background:#F9F5EF; }
+  .header__inner { height:96px; display:flex; align-items:center; justify-content:space-between; }
+  .logo img { width:220px; height:auto; display:block; }
   .nav { display:flex; align-items:center; gap:2rem; font-size:.82rem; font-weight:600; }
   .nav > a:hover, .nav-services button:hover { color:var(--bronze); }
   .nav-services { position:relative; }
   .nav-services button { padding:1.25rem 0; border:0; color:inherit; background:transparent; cursor:default; font:inherit; }
   .nav-services button span { margin-left:.3rem; }
-  .dropdown { position:absolute; top:100%; left:-1.25rem; width:245px; padding:.6rem; display:grid; visibility:hidden; opacity:0; background:#fff; border:1px solid var(--line); box-shadow:0 18px 50px rgba(7,31,43,.16); transform:translateY(-5px); transition:.2s; }
+  .dropdown { position:absolute; top:100%; left:-1.25rem; width:245px; display:grid; visibility:hidden; opacity:0; background:#fff; border:1px solid var(--line); box-shadow:0 18px 50px rgba(7,31,43,.16); transform:translateY(-5px); transition:.2s; }
   .nav-services:hover .dropdown, .nav-services:focus-within .dropdown { visibility:visible; opacity:1; transform:none; }
   .dropdown a { padding:.7rem .8rem; }
   .dropdown a:hover, .dropdown a[aria-current="page"] { color:var(--bronze); background:var(--cream); }
@@ -320,9 +327,11 @@ const jsonLd = {
   .related__grid p { margin:0; color:var(--muted); font-size:.82rem; }
   footer { padding:3rem 0; color:rgba(255,255,255,.65); background:var(--navy-deep); }
   footer .container { display:flex; align-items:center; gap:3rem; }
-  footer img { width:165px; height:auto; filter:brightness(0) invert(1); }
+  footer img { width:200px; height:auto; }
   footer p { max-width:440px; margin:0; }
   footer a { margin-left:auto; color:#fff; }
+  footer .site-credit { margin-left:0; color:rgba(255,255,255,.5); font-size:.7rem; }
+  footer .site-credit:hover { color:#fff; }
   .mobile-call { display:none; }
   @media (max-width:900px) {
     .overview__grid,.quote__grid,.faq__grid { gap:4rem; }
@@ -333,11 +342,11 @@ const jsonLd = {
     .container { width:min(calc(100% - 32px),1180px); }
     .section { padding:4.5rem 0; }
     .topbar,.nav,.header__cta { display:none; }
-    .header__inner { height:70px; }
-    .logo img { width:165px; }
+    .header__inner { height:76px; }
+    .logo img { width:180px; }
     .menu-button { width:42px; height:42px; padding:0 10px; display:grid; align-content:center; gap:6px; border:1px solid var(--line); background:transparent; }
     .menu-button span { height:1px; background:var(--ink); }
-    .mobile-nav { position:absolute; inset:70px 0 auto; max-height:calc(100vh - 70px); padding:1rem 16px 1.5rem; overflow:auto; grid-template-columns:1fr 1fr; gap:1px; background:#fff; box-shadow:0 15px 40px rgba(7,31,43,.15); }
+    .mobile-nav { position:absolute; inset:76px 0 auto; max-height:calc(100vh - 76px); padding:1rem 16px 1.5rem; overflow:auto; grid-template-columns:1fr 1fr; gap:1px; background:#F9F5EF; box-shadow:0 15px 40px rgba(7,31,43,.15); }
     .mobile-nav--open { display:grid; }
     .mobile-nav strong,.mobile-nav a { padding:.8rem; background:var(--cream); font-size:.78rem; }
     .mobile-nav strong { grid-column:1/-1; color:var(--bronze); text-transform:uppercase; letter-spacing:.1em; }

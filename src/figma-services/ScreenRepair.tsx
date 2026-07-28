@@ -4,7 +4,7 @@ export default function ScreenRepair() {
   return (
     <ServicePage
       slug="screen-repair"
-      heroImage="https://images.unsplash.com/photo-1775377573460-451e1a260156?w=1600&h=900&fit=crop&auto=format"
+      heroImage="/images/kauai-broken-screen-repair.webp"
       intro="Screen repair on Kauai — re-screening, wheel replacement, hydraulic tube repair, clip fixes, and frame assessment. We fix screens others won't touch."
       benefits={[
         {
