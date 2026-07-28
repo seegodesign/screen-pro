@@ -1,0 +1,360 @@
+---
+import { ClientRouter, fade } from "astro:transitions";
+import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
+
+type Benefit = { title: string; body: string };
+type ProcessStep = Benefit & { step: string };
+type Faq = { q: string; a: string };
+
+export function getStaticPaths() {
+  return Object.keys(serviceMeta).map((slug) => ({ params: { slug } }));
+}
+
+const slug = Astro.params.slug as ServiceSlug;
+const meta = serviceMeta[slug];
+if (!meta) return Astro.redirect("/#services");
+
+const sources = import.meta.glob("../../figma-services/*.tsx", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+const source = sources[`../../figma-services/${meta.source}`];
+
+const decode = (value: string) => JSON.parse(`"${value}"`) as string;
+const prop = (name: string) => {
+  const match = source.match(new RegExp(`${name}="((?:\\\\.|[^"])*)"`));
+  if (!match) throw new Error(`Missing ${name} in ${meta.source}`);
+  return decode(match[1]);
+};
+const block = (name: string, nextName: string) => {
+  const match = source.match(new RegExp(`${name}=\\{\\[([\\s\\S]*?)\\]\\}\\s+${nextName}=`));
+  if (!match) throw new Error(`Missing ${name} in ${meta.source}`);
+  return match[1];
+};
+const pairs = (value: string, first: string, second: string) =>
+  [...value.matchAll(new RegExp(`${first}:\\s*"((?:\\\\.|[^"])*)"[\\s\\S]*?${second}:\\s*"((?:\\\\.|[^"])*)"`, "g"))]
+    .map((match) => ({ [first]: decode(match[1]), [second]: decode(match[2]) }));
+
+const heroImage = prop("heroImage");
+const intro = prop("intro");
+const benefits = pairs(block("benefits", "process"), "title", "body") as Benefit[];
+const process = [...block("process", "faqs").matchAll(/step:\s*"((?:\\.|[^"])*)",\s*title:\s*"((?:\\.|[^"])*)",\s*body:\s*"((?:\\.|[^"])*)"/g)]
+  .map((match) => ({ step: decode(match[1]), title: decode(match[2]), body: decode(match[3]) })) as ProcessStep[];
+const faqs = pairs(block("faqs", "relatedSlugs"), "q", "a") as Faq[];
+const relatedMatch = source.match(/relatedSlugs=\{\[([\s\S]*?)\]\}/);
+const relatedSlugs = [...(relatedMatch?.[1] ?? "").matchAll(/"([^"]+)"/g)].map((match) => match[1] as ServiceSlug);
+const related = relatedSlugs.map((relatedSlug) => ({ slug: relatedSlug, ...serviceMeta[relatedSlug] }));
+
+const phone = "(808) 651-8664";
+const tel = "+18086518664";
+const email = "info@kauairetractablescreens.com";
+const siteUrl = "https://kauairetractablescreens.com";
+const pageUrl = `${siteUrl}/services/${slug}/`;
+const seoDescription = `${intro} Professional island-wide service and installation.`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${pageUrl}#service`,
+      name: meta.title,
+      serviceType: meta.title,
+      description: intro,
+      url: pageUrl,
+      image: heroImage,
+      areaServed: { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
+      provider: { "@id": `${siteUrl}/#business` },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: { "@type": "Answer", text: faq.a },
+      })),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" transition:animate={fade({ duration: 350 })}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={seoDescription} />
+    <meta name="theme-color" content="#12324a" />
+    <link rel="canonical" href={pageUrl} />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <title>{meta.heroKeyword} | Screen Pro Retractable Doors</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <p>Custom-fit screen solutions, built for island living.</p>
+        <div><span>Serving all of Kauaʻi</span><a href={`tel:${tel}`}>{phone}</a></div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="/" aria-label="Screen Pro Retractable Doors home">
+          <img src="/images/logo.png" width="400" height="154" alt="Screen Pro Retractable Doors" />
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <div class="nav-services">
+            <button type="button" aria-haspopup="true">Services</button>
+            <div class="dropdown">
+              {Object.entries(serviceMeta).map(([itemSlug, item]) => (
+                <a href={`/services/${itemSlug}/`} aria-current={itemSlug === slug ? "page" : undefined}>{item.title}</a>
+              ))}
+            </div>
+          </div>
+          <a href="/#brands">Brands</a><a href="/#about">About</a><a href="/#reviews">Reviews</a><a href="/#gallery">Gallery</a>
+        </nav>
+        <a class="button button--dark header__cta" href="#quote">Get a quote <span>↗</span></a>
+        <button class="menu-button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+      </div>
+      <div class="mobile-nav">
+        <strong>Services</strong>
+        {Object.entries(serviceMeta).map(([itemSlug, item]) => <a href={`/services/${itemSlug}/`}>{item.title}</a>)}
+        <a href="/#brands">Brands</a><a href="/#about">About</a><a href="/#reviews">Reviews</a><a href="/#gallery">Gallery</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" style={`--hero-image: url("${heroImage}")`}>
+        <div class="container hero__inner">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#services">Services</a><span>/</span><span>{meta.title}</span></nav>
+          <p class="eyebrow">Screen Pro Kauaʻi</p>
+          <h1>{meta.heroKeyword}</h1>
+          <p class="hero__lede">{intro}</p>
+          <div class="hero__actions">
+            <a class="button button--bronze" href="#quote">Get a free quote <span>↗</span></a>
+            <a class="button button--glass" href={`tel:${tel}`}>Call {phone}</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section overview">
+        <div class="container overview__grid">
+          <div>
+            <p class="eyebrow eyebrow--dark">What’s included</p>
+            <h2>{meta.title} on Kauaʻi,<br /><em>done right.</em></h2>
+            <p class="lead">{meta.description}</p>
+            <ul class="check-list">{meta.bullets.map((bullet) => <li><span>✓</span>{bullet}</li>)}</ul>
+            <a class="button button--dark" href={`tel:${tel}`}>Call for a free estimate</a>
+          </div>
+          <div>
+            <p class="eyebrow eyebrow--dark">Why it matters</p>
+            <div class="benefit-list">
+              {benefits.map((benefit, index) => (
+                <article><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{benefit.title}</h3><p>{benefit.body}</p></div></article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process">
+        <div class="container">
+          <div class="section-head"><p class="eyebrow eyebrow--dark">How it works</p><h2>Our process,<br /><em>from quote to completion.</em></h2></div>
+          <div class="process__grid">
+            {process.map((item) => <article><strong>{item.step.padStart(2, "0")}</strong><h3>{item.title}</h3><p>{item.body}</p></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section quote" id="quote">
+        <div class="container quote__grid">
+          <div>
+            <p class="eyebrow">Free estimate</p>
+            <h2>Get a quote for<br /><em>{meta.title.toLowerCase()}.</em></h2>
+            <p>Tell us about your project and we’ll follow up to discuss the opening, your goals, and the right next step.</p>
+            <a class="quote__phone" href={`tel:${tel}`}><small>Call us directly</small><strong>{phone}</strong></a>
+            <a class="quote__email" href={`mailto:${email}`}>{email}</a>
+          </div>
+          <form class="quote-form" action={`mailto:${email}`} method="post" enctype="text/plain">
+            <input type="hidden" name="service" value={meta.title} />
+            <div class="form-grid">
+              <label><span>Full name *</span><input name="name" required /></label>
+              <label><span>Phone *</span><input type="tel" name="phone" required /></label>
+              <label><span>Email</span><input type="email" name="email" /></label>
+              <label><span>Property address *</span><input name="address" required /></label>
+              <label class="full"><span>Opening size / measurements</span><input name="measurements" placeholder={'e.g. 36" W × 80" H'} /></label>
+              <label class="full"><span>Project details *</span><textarea name="details" rows="4" required></textarea></label>
+            </div>
+            <button class="button button--bronze" type="submit">Request a free quote <span>↗</span></button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section faq">
+        <div class="container faq__grid">
+          <div><p class="eyebrow eyebrow--dark">FAQ</p><h2>Common<br /><em>questions.</em></h2></div>
+          <div>{faqs.map((faq) => <details><summary>{faq.q}<span>+</span></summary><p>{faq.a}</p></details>)}</div>
+        </div>
+      </section>
+
+      <section class="section related">
+        <div class="container">
+          <div class="section-head"><p class="eyebrow eyebrow--dark">More services</p><h2>Explore other<br /><em>screen solutions.</em></h2></div>
+          <div class="related__grid">
+            {related.map((item) => <a href={`/services/${item.slug}/`}><span>Learn more ↗</span><h3>{item.title}</h3><p>{item.description}</p></a>)}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="container"><img src="/images/logo.png" width="400" height="154" alt="Screen Pro Retractable Doors" /><p>Premium, custom-fit screens for the homes and lifestyles of Kauaʻi.</p><a href={`tel:${tel}`}>{phone}</a></div></footer>
+    <a class="mobile-call" href={`tel:${tel}`}>Call now <span>{phone}</span></a>
+    <script is:inline data-astro-rerun>
+      const button = document.querySelector(".menu-button");
+      const mobileNav = document.querySelector(".mobile-nav");
+      button?.addEventListener("click", () => {
+        const open = mobileNav?.classList.toggle("mobile-nav--open") ?? false;
+        button.setAttribute("aria-expanded", String(open));
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  :root { --navy:#12324a; --navy-deep:#071f2b; --bronze:#b98552; --bronze-light:#d4aa7d; --cream:#f7f3ec; --sand:#e8ded0; --ink:#132a37; --muted:#65757c; --line:rgba(19,42,55,.15); --display:Georgia,serif; --body:"DM Sans",sans-serif; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; color:var(--ink); background:#fff; font-family:var(--body); line-height:1.65; }
+  a { color:inherit; text-decoration:none; }
+  .container { width:min(calc(100% - 48px),1180px); margin-inline:auto; }
+  .section { padding:7rem 0; }
+  h1,h2,h3,p { margin-top:0; }
+  h1,h2,h3 { font-family:var(--display); }
+  h1,h2 { font-weight:500; letter-spacing:-.045em; line-height:1.06; }
+  h1 { max-width:780px; margin-bottom:1.5rem; font-size:clamp(3rem,6.5vw,5.8rem); color:#fff; }
+  h2 { font-size:clamp(2.35rem,4.5vw,4.2rem); }
+  h2 em { color:var(--bronze); font-family:Georgia,serif; font-weight:400; }
+  h3 { line-height:1.3; }
+  .eyebrow { margin-bottom:1.3rem; color:var(--bronze-light); font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+  .eyebrow--dark { color:var(--bronze); }
+  .button { min-height:54px; padding:0 1.5rem; display:inline-flex; align-items:center; justify-content:center; gap:1.5rem; border:1px solid transparent; color:#fff; font-size:.74rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+  .button--dark { background:var(--navy); }
+  .button--bronze { background:var(--bronze); }
+  .button--glass { border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.08); }
+  .topbar { color:rgba(255,255,255,.84); background:var(--navy-deep); font-size:.7rem; }
+  .topbar__inner { height:36px; display:flex; align-items:center; justify-content:space-between; }
+  .topbar p { margin:0; }
+  .topbar__inner div { display:flex; gap:2rem; }
+  .topbar a { color:#fff; font-weight:600; }
+  .header { position:sticky; z-index:20; top:0; background:#fff; }
+  .header__inner { height:82px; display:flex; align-items:center; justify-content:space-between; }
+  .logo img { width:190px; height:auto; display:block; }
+  .nav { display:flex; align-items:center; gap:2rem; font-size:.82rem; font-weight:600; }
+  .nav > a:hover, .nav-services button:hover { color:var(--bronze); }
+  .nav-services { position:relative; }
+  .nav-services button { padding:1.25rem 0; border:0; color:inherit; background:transparent; cursor:default; font:inherit; }
+  .nav-services button span { margin-left:.3rem; }
+  .dropdown { position:absolute; top:100%; left:-1.25rem; width:245px; padding:.6rem; display:grid; visibility:hidden; opacity:0; background:#fff; border:1px solid var(--line); box-shadow:0 18px 50px rgba(7,31,43,.16); transform:translateY(-5px); transition:.2s; }
+  .nav-services:hover .dropdown, .nav-services:focus-within .dropdown { visibility:visible; opacity:1; transform:none; }
+  .dropdown a { padding:.7rem .8rem; }
+  .dropdown a:hover, .dropdown a[aria-current="page"] { color:var(--bronze); background:var(--cream); }
+  .header__cta { min-height:44px; }
+  .menu-button,.mobile-nav { display:none; }
+  .hero { min-height:600px; position:relative; display:flex; align-items:center; background:linear-gradient(90deg,rgba(7,31,43,.82),rgba(8,34,48,.48) 65%,rgba(8,34,48,.18)),var(--hero-image) center/cover; }
+  .hero__inner { padding-block:5.5rem; position:relative; }
+  .breadcrumbs { display:flex; gap:.65rem; margin-bottom:3.5rem; color:rgba(255,255,255,.55); font-size:.7rem; }
+  .breadcrumbs a:hover { color:#fff; }
+  .hero__lede { max-width:670px; margin-bottom:2rem; color:rgba(255,255,255,.78); font-size:1.08rem; }
+  .hero__actions { display:flex; gap:.8rem; }
+  .overview { background:var(--cream); }
+  .overview__grid { display:grid; grid-template-columns:1fr 1fr; gap:8rem; align-items:start; }
+  .lead { color:var(--muted); font-size:1.03rem; }
+  .check-list { margin:2rem 0; padding:0; display:grid; gap:.85rem; list-style:none; }
+  .check-list li { display:flex; gap:.8rem; align-items:center; }
+  .check-list span { width:24px; height:24px; display:grid; place-items:center; color:#fff; background:var(--bronze); border-radius:50%; font-size:.7rem; }
+  .benefit-list { border-top:1px solid var(--line); }
+  .benefit-list article { padding:1.5rem 0; display:grid; grid-template-columns:42px 1fr; gap:1rem; border-bottom:1px solid var(--line); }
+  .benefit-list article > span { color:var(--bronze); font-size:.7rem; }
+  .benefit-list h3 { margin-bottom:.5rem; font-size:1.1rem; }
+  .benefit-list p { margin:0; color:var(--muted); font-size:.88rem; }
+  .process { background:#fff; }
+  .section-head { max-width:730px; margin-bottom:3.5rem; }
+  .process__grid { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+  .process__grid article { min-height:300px; padding:2rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .process__grid strong { width:42px; height:42px; display:grid; place-items:center; margin-bottom:2.5rem; color:#fff; background:var(--navy); border-radius:50%; font-size:.72rem; }
+  .process__grid h3 { font-size:1.1rem; }
+  .process__grid p { color:var(--muted); font-size:.86rem; }
+  .quote { color:#fff; background:var(--navy); }
+  .quote__grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:8%; }
+  .quote p { color:rgba(255,255,255,.65); }
+  .quote__phone { margin-top:2rem; display:grid; }
+  .quote__phone small { color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.14em; }
+  .quote__phone strong { color:var(--bronze-light); font-family:var(--display); font-size:1.6rem; }
+  .quote__email { color:rgba(255,255,255,.75); font-size:.82rem; }
+  .quote-form { padding:2.5rem; color:var(--ink); background:var(--cream); }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.8rem; }
+  .form-grid label { display:grid; gap:.4rem; }
+  .form-grid label > span { font-size:.66rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .form-grid .full { grid-column:1/-1; }
+  input,textarea { width:100%; padding:.8rem 0; border:0; border-bottom:1px solid rgba(19,42,55,.25); border-radius:0; outline:0; background:transparent; font:inherit; }
+  input:focus,textarea:focus { border-color:var(--bronze); }
+  .faq { background:var(--sand); }
+  .faq__grid { display:grid; grid-template-columns:.65fr 1.35fr; gap:8rem; }
+  .faq details { border-top:1px solid rgba(19,42,55,.2); }
+  .faq details:last-child { border-bottom:1px solid rgba(19,42,55,.2); }
+  .faq summary { padding:1.35rem 0; display:flex; justify-content:space-between; cursor:pointer; list-style:none; font-weight:600; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary span { color:var(--bronze); font-size:1.25rem; }
+  .faq details[open] summary span { transform:rotate(45deg); }
+  .faq details p { padding-right:2rem; color:var(--muted); font-size:.9rem; }
+  .related__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+  .related__grid a { min-height:240px; padding:2rem; display:flex; flex-direction:column; border:1px solid var(--line); transition:.25s; }
+  .related__grid a:hover { transform:translateY(-4px); box-shadow:0 15px 45px rgba(7,31,43,.1); }
+  .related__grid span { color:var(--bronze); font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .related__grid h3 { margin-top:auto; margin-bottom:.5rem; font-size:1.25rem; }
+  .related__grid p { margin:0; color:var(--muted); font-size:.82rem; }
+  footer { padding:3rem 0; color:rgba(255,255,255,.65); background:var(--navy-deep); }
+  footer .container { display:flex; align-items:center; gap:3rem; }
+  footer img { width:165px; height:auto; filter:brightness(0) invert(1); }
+  footer p { max-width:440px; margin:0; }
+  footer a { margin-left:auto; color:#fff; }
+  .mobile-call { display:none; }
+  @media (max-width:900px) {
+    .overview__grid,.quote__grid,.faq__grid { gap:4rem; }
+    .process__grid { grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:760px) {
+    body { padding-bottom:52px; }
+    .container { width:min(calc(100% - 32px),1180px); }
+    .section { padding:4.5rem 0; }
+    .topbar,.nav,.header__cta { display:none; }
+    .header__inner { height:70px; }
+    .logo img { width:165px; }
+    .menu-button { width:42px; height:42px; padding:0 10px; display:grid; align-content:center; gap:6px; border:1px solid var(--line); background:transparent; }
+    .menu-button span { height:1px; background:var(--ink); }
+    .mobile-nav { position:absolute; inset:70px 0 auto; max-height:calc(100vh - 70px); padding:1rem 16px 1.5rem; overflow:auto; grid-template-columns:1fr 1fr; gap:1px; background:#fff; box-shadow:0 15px 40px rgba(7,31,43,.15); }
+    .mobile-nav--open { display:grid; }
+    .mobile-nav strong,.mobile-nav a { padding:.8rem; background:var(--cream); font-size:.78rem; }
+    .mobile-nav strong { grid-column:1/-1; color:var(--bronze); text-transform:uppercase; letter-spacing:.1em; }
+    .hero { min-height:570px; background-position:62% center; }
+    .hero__inner { padding-block:4rem; }
+    .breadcrumbs { margin-bottom:2.5rem; }
+    .hero__actions { flex-direction:column; }
+    .overview__grid,.quote__grid,.faq__grid { grid-template-columns:1fr; gap:3rem; }
+    .process__grid { grid-template-columns:1fr; }
+    .process__grid article { min-height:240px; }
+    .form-grid { grid-template-columns:1fr; }
+    .form-grid .full { grid-column:auto; }
+    .quote-form { padding:1.5rem; margin-inline:-8px; }
+    .related__grid { grid-template-columns:1fr; }
+    footer .container { align-items:flex-start; flex-direction:column; gap:1.25rem; }
+    footer a { margin-left:0; }
+    .mobile-call { position:fixed; z-index:50; inset:auto 0 0; height:52px; padding:0 1.2rem; display:flex; align-items:center; justify-content:space-between; color:#fff; background:var(--bronze); font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+  }
+  @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*::before,*::after{transition-duration:.01ms!important} }
+</style>
