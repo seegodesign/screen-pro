@@ -1,5 +1,6 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
+import { ArrowRight } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/variables.css";
@@ -54,7 +55,7 @@ const galleryItems = [
       <section class="gallery-cta">
         <div class="container gallery-cta__inner">
           <div><p class="eyebrow">Have an opening in mind?</p><h2>Let’s create the right<br /><em>screen for your space.</em></h2></div>
-          <a href="/free-quote/">Get a free quote <span>→</span></a>
+          <a href="/free-quote/">Get a free quote <ArrowRight aria-hidden="true" /></a>
         </div>
       </section>
     </main>

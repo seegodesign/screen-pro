@@ -134,6 +134,10 @@ h2 em {
   text-transform: uppercase;
   font-weight: 700;
 }
+.text-link svg {
+  width: 1rem;
+  height: 1rem;
+}
 .topbar {
   color: rgba(255, 255, 255, 0.84);
   background: var(--color-navy-deep);
@@ -722,7 +726,11 @@ h2 em {
   transform: translateY(-2px);
 }
 .gallery__cta b {
-  font-size: 0.9rem;
+  display: inline-flex;
+}
+.gallery__cta b svg {
+  width: 0.9rem;
+  height: 0.9rem;
 }
 .gallery__cta--motorized {
   background: var(--color-bronze);
@@ -906,7 +914,12 @@ h2 em {
   color: #6d7c82;
 }
 .area__content li b {
+  display: inline-flex;
   color: var(--color-bronze);
+}
+.area__content li b svg {
+  width: 1rem;
+  height: 1rem;
 }
 .footer {
   padding: 4rem 0 1.5rem;

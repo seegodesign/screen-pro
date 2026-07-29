@@ -1,6 +1,6 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
-import { BadgeCheck, HeartHandshake, MessagesSquare } from "@lucide/astro";
+import { ArrowRight, BadgeCheck, HeartHandshake, MessagesSquare } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/variables.css";
@@ -96,7 +96,7 @@ const values = [
       <section class="reviews-cta">
         <div class="container reviews-cta__inner">
           <div><p class="eyebrow">Ready to get started?</p><h2>Let’s make your home<br /><em>more comfortable.</em></h2></div>
-          <a href="/free-quote/">Get a free quote <span>→</span></a>
+          <a href="/free-quote/">Get a free quote <ArrowRight aria-hidden="true" /></a>
         </div>
       </section>
     </main>
