@@ -1,6 +1,6 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
-import { ArrowUpRight } from "@lucide/astro";
+import { ArrowUpRight, Phone } from "@lucide/astro";
 import FaqAccordion from "../../components/FaqAccordion.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
@@ -13,6 +13,13 @@ import "../../styles/service-detail.css";
 type Benefit = { title: string; body: string };
 type ProcessStep = Benefit & { step: string };
 type Faq = { q: string; a: string };
+type PowerScreenSeries = {
+  name: string;
+  idealFor: string;
+  maxWidth: string;
+  maxDrop: string;
+  summary: string;
+};
 
 export function getStaticPaths() {
   return Object.keys(serviceMeta).map((slug) => ({ params: { slug } }));
@@ -27,6 +34,7 @@ const heroImage = content.heroImage;
 const intro = content.intro;
 const benefits = content.benefits as Benefit[];
 const process = content.process as ProcessStep[];
+const series = ("series" in content ? content.series : []) as PowerScreenSeries[];
 const faqs = content.faqs as Faq[];
 const relatedSlugs = content.relatedSlugs as ServiceSlug[];
 const related = relatedSlugs.map((relatedSlug) => ({ slug: relatedSlug, ...serviceMeta[relatedSlug] }));
@@ -92,7 +100,7 @@ const jsonLd = {
           <p class="hero__lede">{intro}</p>
           <div class="hero__actions">
             <a class="button button--bronze" href="/free-quote/">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-            <a class="button button--glass" href={`tel:${tel}`}>Call {phone}</a>
+            <a class="button button--glass" href={`tel:${tel}`}>Call {phone} <Phone aria-hidden="true" /></a>
           </div>
         </div>
       </section>
@@ -104,7 +112,7 @@ const jsonLd = {
             <h2>{meta.title} on Kauaʻi,<br /><em>done right.</em></h2>
             <p class="lead">{meta.description}</p>
             <ul class="check-list">{meta.bullets.map((bullet) => <li><span>✓</span>{bullet}</li>)}</ul>
-            <a class="button button--dark" href={`tel:${tel}`}>Call for a free estimate</a>
+            <a class="button button--dark" href={`tel:${tel}`}>Call for a free estimate <Phone aria-hidden="true" /></a>
           </div>
           <div>
             <p class="eyebrow eyebrow--dark">Why it matters</p>
@@ -125,6 +133,32 @@ const jsonLd = {
           </div>
         </div>
       </section>
+
+      {series.length > 0 && (
+        <section class="section series-guide">
+          <div class="container">
+            <div class="series-guide__head">
+              <div><p class="eyebrow eyebrow--dark">Power screen sizing</p><h2>Which series fits<br /><em>your opening?</em></h2></div>
+              <p>Rainier power screen series are sized for different spans and drops. We measure the opening and confirm the right housing, fabric, and mounting configuration.</p>
+            </div>
+            <div class="series-guide__grid">
+              {series.map((item, index) => (
+                <article>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <p>{item.idealFor}</p>
+                  <h3>{item.name} Power Screen</h3>
+                  <div class="series-guide__dimensions">
+                    <div><small>Up to</small><strong>{item.maxWidth}</strong><small>wide</small></div>
+                    <div><small>Up to</small><strong>{item.maxDrop}</strong><small>high</small></div>
+                  </div>
+                  <p>{item.summary}</p>
+                </article>
+              ))}
+            </div>
+            <small class="series-guide__note">Maximum dimensions vary by fabric, mounting method, and site conditions. Final sizing is confirmed during consultation.</small>
+          </div>
+        </section>
+      )}
 
       <section class="section faq">
         <div class="container faq__grid">

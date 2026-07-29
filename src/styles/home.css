@@ -578,6 +578,10 @@ h2 em {
   display: flex;
   align-items: center;
 }
+.brand-row__identity:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 6px;
+}
 .brand-row__logo {
   width: auto;
   max-width: 180px;
@@ -585,15 +589,44 @@ h2 em {
   max-height: 58px;
   object-fit: contain;
   object-position: left center;
+  transition: opacity 0.2s ease;
+}
+.brand-row__identity:hover .brand-row__logo {
+  opacity: 0.65;
 }
 .brand-row__logo--monochrome {
   filter: brightness(0) saturate(100%);
   opacity: 0.82;
 }
-.brand-row p {
+.brand-row__content {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+}
+.brand-row__content p {
   margin: 0;
   color: #64747b;
   font-size: 1rem;
+}
+.brand-row__content a {
+  padding-bottom: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--color-bronze);
+  border-bottom: 1px solid currentColor;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.brand-row__content a svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.2s ease;
+}
+.brand-row__content a:hover svg {
+  transform: translate(2px, -2px);
 }
 .sr-only {
   position: absolute;
@@ -1117,7 +1150,7 @@ h2 em {
     grid-template-columns: 32px 1fr;
     gap: 0.7rem;
   }
-  .brand-row p {
+  .brand-row__content {
     grid-column: 2 / 3;
   }
   .brand-row__logo {

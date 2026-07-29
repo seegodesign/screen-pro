@@ -42,7 +42,7 @@ export const serviceAreaRegions = {
     title: "Screen Doors & Screen Repair on East Side Kauaʻi",
     heroImage: "/images/Screen-Pro-Retractable-Doors-Kauai.jpg",
     description:
-      "Professional screen installation and repair in Anahola, Kapaʻa, Wailua, and Līhuʻe, including custom doors, windows, and motorized screens.",
+      "Professional screen installation and repair in Anahola, Kapaʻa, Wailua, and Līhuʻe, including custom doors, windows, and power screens.",
     expertiseHeading: "Fresh air, fewer tradeoffs",
     expertiseAccent: "on the East Side.",
     intro:
@@ -67,7 +67,7 @@ export const serviceAreaRegions = {
     title: "Screen Doors & Screen Repair on South Shore Kauaʻi",
     heroImage: "/images/screen-installation-3.avif",
     description:
-      "Custom screen doors, motorized screens, window screens, and repairs for homes in Kōloa, Poʻipū, and Kalāheo.",
+      "Custom screen doors, power screens, window screens, and repairs for homes in Kōloa, Poʻipū, and Kalāheo.",
     expertiseHeading: "A seamless indoor-outdoor flow",
     expertiseAccent: "on the South Shore.",
     intro:

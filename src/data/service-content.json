@@ -72,11 +72,11 @@
   },
   "motorized-screens": {
     "heroImage": "/images/kauai-luxury-motorized-screen.avif",
-    "intro": "Premium motorized screens for Kauai lanais, decks, and large openings. Remote-controlled, custom-fit, and built for the kinds of spaces that manual screens can't handle.",
+    "intro": "Premium motorized power screens for Kauai lanais, decks, and large openings. Remote-controlled, custom-fit, and built for the kinds of spaces that manual screens can't handle.",
     "benefits": [
       {
         "title": "Designed for Large Openings",
-        "body": "Motorized screens shine on wide lanai openings, large deck spans, and open-concept indoor-outdoor spaces where manual screens would be impractical or ugly. We size systems for openings up to 30+ feet wide."
+        "body": "Power screens shine on wide lanai openings, large deck spans, and open-concept indoor-outdoor spaces where manual screens would be impractical or ugly. We size systems for openings up to 45 feet wide."
       },
       {
         "title": "Sun Shade and Bug Protection in One",
@@ -84,7 +84,7 @@
       },
       {
         "title": "Disappears When Not Needed",
-        "body": "When retracted, motorized screens tuck into a compact housing at the top of the opening, leaving the view and the architecture completely unobstructed."
+        "body": "When retracted, power screens tuck into a compact housing at the top of the opening, leaving the view and the architecture completely unobstructed."
       },
       {
         "title": "Premium Brands, Professional Installation",
@@ -113,14 +113,37 @@
         "body": "We program your remote, test full travel in both directions, and walk you through operation and basic maintenance."
       }
     ],
-    "faqs": [
+    "series": [
       {
-        "q": "What motorized screen brands do you install on Kauai?",
-        "a": "Rainier is our preferred brand for most residential motorized screens because motorized shades, awnings, and screens are its specialty. We also install Wizard systems, including large retractable and motorized options, and specify the right system for the opening."
+        "name": "Series 3",
+        "idealFor": "Small to medium openings",
+        "maxWidth": "10 ft",
+        "maxDrop": "7 ft",
+        "summary": "A compact power screen system suited to windows and smaller residential openings."
       },
       {
-        "q": "How wide of an opening can a motorized screen cover?",
-        "a": "Depending on the system, motorized screens can cover single openings up to 20 feet wide without a center post, and much wider with coupled or paired systems. We'll tell you exactly what's achievable for your opening."
+        "name": "Series 4",
+        "idealFor": "Medium to larger openings",
+        "maxWidth": "18 ft",
+        "maxDrop": "10 ft",
+        "summary": "The most common residential choice, with increased style options for lanais, decks, and wide openings."
+      },
+      {
+        "name": "Series 5",
+        "idealFor": "Maximum overall coverage",
+        "maxWidth": "45 ft",
+        "maxDrop": "20 ft",
+        "summary": "A large format system for expansive outdoor living areas and demanding architectural openings."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What power screen brands do you install on Kauai?",
+        "a": "Rainier is our preferred brand for most residential power screens because motorized shades, awnings, and screens are its specialty. We also install Wizard systems, including large retractable and motorized options, and specify the right system for the opening."
+      },
+      {
+        "q": "How wide of an opening can a power screen cover?",
+        "a": "Depending on the system, power screens can cover single openings up to 45 feet wide. We'll tell you exactly what's achievable for your opening."
       },
       {
         "q": "What fabric options are available for motorized screens?",
@@ -128,10 +151,10 @@
       },
       {
         "q": "Which motorized screen series is right for my opening?",
-        "a": "Smaller Series 3 systems are commonly used for modest window openings, while Series 4 handles the majority of residential projects and can accommodate openings up to about 10 feet tall. Larger openings require a site-specific system recommendation."
+        "a": "Series 3 covers small to medium openings up to 10 feet wide by 7 feet high. Series 4 handles medium to larger openings up to 18 feet wide by 10 feet high. Series 5 provides maximum coverage up to 45 feet wide by 20 feet high. Final capacity depends on the selected fabric, mounting, and project conditions."
       },
       {
-        "q": "Can motorized screens be operated without a remote?",
+        "q": "Can power screens be operated without a remote?",
         "a": "Yes. Most systems can be wired to a wall switch in addition to or instead of a remote. Some systems are also compatible with smart home integration. We discuss your preferred control setup during the consultation."
       },
       {
@@ -139,8 +162,8 @@
         "a": "Most motor and fabric issues are serviceable. We support the systems we install and can diagnose and repair motor, track, or fabric problems. This is one of the reasons we only install brands with real service support."
       },
       {
-        "q": "How much do motorized screens cost on Kauai?",
-        "a": "Pricing depends on opening size, fabric, brand, and installation complexity. Motorized screens are a premium product, but they're built to last and add real value to a home. Contact us for a no-obligation quote."
+        "q": "How much do power screens cost on Kauai?",
+        "a": "Pricing depends on opening size, fabric, brand, and installation complexity. Power screens are a premium product, but they're built to last and add real value to a home. Contact us for a no-obligation quote."
       }
     ],
     "relatedSlugs": [

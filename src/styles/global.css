@@ -6,6 +6,27 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: var(--color-bronze) var(--color-navy-deep);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-navy-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid var(--color-navy-deep);
+  border-radius: 999px;
+  background: var(--color-bronze);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-bronze-light);
 }
 
 body {

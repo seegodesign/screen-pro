@@ -9,6 +9,7 @@ h3 { line-height:1.3; }
 .eyebrow { margin-bottom:1.3rem; color:var(--bronze-light); font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
 .eyebrow--dark { color:var(--bronze); }
 .button { min-height:54px; padding:0 1.5rem; display:inline-flex; align-items:center; justify-content:center; gap:1.5rem; border:1px solid transparent; color:#fff; font-size:.74rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.button > svg { width:1rem; height:1rem; flex:0 0 auto; }
 .button__arrow { width:1.8rem; height:1.8rem; display:grid; flex:0 0 auto; place-items:center; border:1px solid currentColor; border-radius:50%; transition:transform .25s ease,background-color .25s ease; }
 .button__arrow svg { width:.85rem; height:.85rem; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 .button:hover .button__arrow { background:rgba(255,255,255,.12); transform:translate(2px,-2px); }
@@ -58,6 +59,21 @@ h3 { line-height:1.3; }
 .process__grid strong { width:42px; height:42px; display:grid; place-items:center; margin-bottom:2.5rem; color:#fff; background:var(--navy); border-radius:50%; font-size:.72rem; }
 .process__grid h3 { font-size:1.1rem; }
 .process__grid p { color:var(--muted); font-size:.86rem; }
+.series-guide { background:var(--sand); }
+.series-guide__head { margin-bottom:3.5rem; display:grid; grid-template-columns:1fr 1fr; gap:8rem; align-items:end; }
+.series-guide__head h2 { margin:0; }
+.series-guide__head > p { max-width:500px; margin:0 0 .5rem; color:var(--muted); }
+.series-guide__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; border:1px solid var(--line); background:var(--line); }
+.series-guide__grid article { min-height:430px; padding:2rem; display:flex; flex-direction:column; background:var(--cream); }
+.series-guide__grid article > span { color:var(--bronze); font-size:.68rem; font-weight:700; letter-spacing:.1em; }
+.series-guide__grid article > p:first-of-type { margin:2.5rem 0 .6rem; color:var(--bronze); font-size:.68rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
+.series-guide__grid h3 { margin:0; font-size:1.7rem; line-height:1.15; }
+.series-guide__dimensions { margin:2rem 0; display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.series-guide__dimensions div { padding:1rem; display:grid; background:white; }
+.series-guide__dimensions strong { color:var(--navy); font-family:var(--display); font-size:1.8rem; font-weight:400; }
+.series-guide__dimensions small { color:var(--muted); font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; }
+.series-guide__grid article > p:last-child { margin:auto 0 0; color:var(--muted); font-size:.86rem; }
+.series-guide__note { margin-top:1rem; display:block; color:var(--muted); font-size:.68rem; }
 input,textarea { width:100%; padding:.8rem 0; border:0; border-bottom:1px solid rgba(19,42,55,.25); border-radius:0; outline:0; background:transparent; font:inherit; }
 input:focus,textarea:focus { border-color:var(--bronze); }
 .faq { background:var(--cream); }
@@ -77,7 +93,7 @@ footer a { margin-left:auto; color:#fff; }
 footer .site-credit { margin-left:0; color:rgba(255,255,255,.5); font-size:.7rem; }
 footer .site-credit:hover { color:#fff; }
 @media (max-width:900px) {
-  .overview__grid,.faq__grid { gap:4rem; }
+  .overview__grid,.faq__grid,.series-guide__head { gap:4rem; }
   .process__grid { grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:760px) {
@@ -96,9 +112,11 @@ footer .site-credit:hover { color:#fff; }
   .hero__inner { padding-block:4rem; }
   .breadcrumbs { margin-bottom:2.5rem; }
   .hero__actions { flex-direction:column; }
-  .overview__grid,.faq__grid { grid-template-columns:1fr; gap:3rem; }
+  .overview__grid,.faq__grid,.series-guide__head { grid-template-columns:1fr; gap:3rem; }
   .process__grid { grid-template-columns:1fr; }
   .process__grid article { min-height:240px; }
+  .series-guide__grid { grid-template-columns:1fr; }
+  .series-guide__grid article { min-height:380px; }
   .related__grid { grid-template-columns:1fr; }
   footer .container { align-items:flex-start; flex-direction:column; gap:1.25rem; }
   footer a { margin-left:0; }

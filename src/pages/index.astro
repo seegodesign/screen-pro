@@ -1,6 +1,7 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import {
+  ArrowUpRight,
   BadgeCheck,
   Factory,
   Handshake,
@@ -23,30 +24,35 @@ const brands = [
     "ClearView",
     "Premium retractable door systems with an exceptionally clean profile.",
     "/images/brand-logos/clearview.png",
+    "https://clearviewdoor.com/",
     true,
   ],
   [
     "Rainier Shading",
-    "Our preferred motorized screens for refined outdoor living spaces.",
+    "Our preferred power screens for refined outdoor living spaces.",
     "/images/brand-logos/rainier.avif",
+    "https://rainiershading.com/",
     true,
   ],
   [
     "Wizard Screens & Shades",
     "Versatile retractable and motorized options for custom openings.",
     "/images/brand-logos/wizard.svg",
+    "https://www.wizardscreens.com/",
     true,
   ],
   [
     "Centor",
     "High-end systems engineered for expansive, large-format openings.",
     "/images/brand-logos/centor.svg",
+    "https://centor.com/us/screens",
     true,
   ],
   [
     "Hurricane Fabric",
     "Tested fabric protection that deploys quickly and stores compactly.",
     "/images/brand-logos/hurricane-fabric.webp",
+    "https://www.hurricanefabric.com/",
     false,
   ],
 ];
@@ -138,7 +144,7 @@ const jsonLd = {
       logo: `${siteUrl}/images/logo.webp`,
       image: `${siteUrl}/images/kauai-luxury-motorized-screen.jpg`,
       description:
-        "Custom retractable screen doors, motorized screens, window screens, sliding screen doors, hurricane screens, and screen repair for homes on North, East, and South Kauaʻi.",
+        "Custom retractable screen doors, motorized power screens, window screens, sliding screen doors, hurricane screens, and screen repair for homes on North, East, and South Kauaʻi.",
       telephone: tel,
       email: "info@kauairetractablescreens.com",
       foundingDate: "1998",
@@ -181,7 +187,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Premium custom screen doors, window screens, motorized screens, hurricane screens, and screen repair for homes on Kauaʻi’s North Shore, East Side, and South Shore."
+      content="Premium custom screen doors, window screens, power screens, hurricane screens, and screen repair for homes on Kauaʻi’s North Shore, East Side, and South Shore."
     />
     <meta name="theme-color" content="#12324a" />
     <link rel="icon" href="/favicon.svg" />
@@ -400,10 +406,16 @@ const jsonLd = {
           </div>
           <div class="brand-list">
             {
-              brands.map(([name, copy, logo, monochrome], index) => (
+              brands.map(([name, copy, logo, url, monochrome], index) => (
                 <article class="brand-row">
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <div class="brand-row__identity">
+                  <a
+                    class="brand-row__identity"
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit ${name} website`}
+                  >
                     <img
                       class:list={[
                         "brand-row__logo",
@@ -414,8 +426,13 @@ const jsonLd = {
                       loading="lazy"
                     />
                     <h3 class="sr-only">{name}</h3>
+                  </a>
+                  <div class="brand-row__content">
+                    <p>{copy}</p>
+                    <a href={url} target="_blank" rel="noopener noreferrer">
+                      Open website <ArrowUpRight aria-hidden="true" />
+                    </a>
                   </div>
-                  <p>{copy}</p>
                 </article>
               ))
             }
