@@ -4,6 +4,7 @@ import { Clock3, Mail, Phone } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { siteSettings } from "../data/site-settings";
+import page from "../data/pages/contact.json";
 import "../styles/variables.css";
 ---
 
@@ -12,9 +13,9 @@ import "../styles/variables.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Contact Screen Pro for custom screen installation and repair on Kauaʻi’s North Shore, East Side, and South Shore." />
+    <meta name="description" content={page.seoDescription} />
     <link rel="icon" href="/favicon.svg" />
-    <title>Contact Screen Pro | Screen Services on Kauaʻi</title>
+    <title>{page.seoTitle}</title>
     <ClientRouter />
   </head>
   <body>
@@ -23,47 +24,41 @@ import "../styles/variables.css";
     <main>
       <section class="contact-hero">
         <div class="container">
-          <p class="eyebrow">Start a conversation</p>
-          <h1>Let’s talk about<br /><em>your screen project.</em></h1>
-          <p class="lede">Tell us what you need and where you’re located. We’ll follow up with helpful advice and the right next step for your Kauaʻi home or business.</p>
+          <p class="eyebrow">{page.hero.eyebrow}</p>
+          <h1>{page.hero.title}<br /><em>{page.hero.accent}</em></h1>
+          <p class="lede">{page.hero.description}</p>
         </div>
       </section>
 
       <section class="contact-section" id="contact-form">
         <div class="container contact-grid">
           <aside>
-            <p class="eyebrow eyebrow--dark">Contact Screen Pro</p>
-            <h2>Local help,<br /><em>without the hard sell.</em></h2>
-            <p>Questions are welcome. Reach out directly or send a few project details through the form.</p>
+            <p class="eyebrow eyebrow--dark">{page.intro.eyebrow}</p>
+            <h2>{page.intro.title}<br /><em>{page.intro.accent}</em></h2>
+            <p>{page.intro.description}</p>
             <div class="contact-methods">
-              <a href={`tel:${siteSettings.phoneNumber}`}><Phone aria-hidden="true" /><span><small>Call us</small><strong>{siteSettings.phoneDisplay}</strong></span></a>
-              <a href={`mailto:${siteSettings.email}`}><Mail aria-hidden="true" /><span><small>Email us</small><strong>{siteSettings.email}</strong></span></a>
-              <div><Clock3 aria-hidden="true" /><span><small>Response time</small><strong>Usually within one business day</strong></span></div>
+              <a href={`tel:${siteSettings.phoneNumber}`}><Phone aria-hidden="true" /><span><small>{page.contactLabels.phone}</small><strong>{siteSettings.phoneDisplay}</strong></span></a>
+              <a href={`mailto:${siteSettings.email}`}><Mail aria-hidden="true" /><span><small>{page.contactLabels.email}</small><strong>{siteSettings.email}</strong></span></a>
+              <div><Clock3 aria-hidden="true" /><span><small>{page.contactLabels.response}</small><strong>{page.contactLabels.responseValue}</strong></span></div>
             </div>
           </aside>
 
           <form action={`mailto:${siteSettings.email}`} method="post" enctype="text/plain">
             <div class="form-grid">
-              <label>Name *<input name="name" autocomplete="name" required /></label>
-              <label>Phone *<input name="phone" type="tel" autocomplete="tel" required /></label>
-              <label>Email *<input name="email" type="email" autocomplete="email" required /></label>
-              <label>Town<input name="town" autocomplete="address-level2" /></label>
-              <label class="full">What can we help with?
+              <label>{page.form.nameLabel}<input name="name" autocomplete="name" required /></label>
+              <label>{page.form.phoneLabel}<input name="phone" type="tel" autocomplete="tel" required /></label>
+              <label>{page.form.emailLabel}<input name="email" type="email" autocomplete="email" required /></label>
+              <label>{page.form.townLabel}<input name="town" autocomplete="address-level2" /></label>
+              <label class="full">{page.form.serviceLabel}
                 <select name="service">
-                  <option value="">Select a service</option>
-                  <option>Retractable screen doors</option>
-                  <option>Motorized screens</option>
-                  <option>Window screens</option>
-                  <option>Sliding screen doors</option>
-                  <option>Hurricane screens</option>
-                  <option>Screen repair</option>
-                  <option>Not sure yet</option>
+                  <option value="">{page.form.servicePlaceholder}</option>
+                  {page.form.serviceOptions.map((option) => <option>{option}</option>)}
                 </select>
               </label>
-              <label class="full">Project details *<textarea name="message" rows="5" required></textarea></label>
+              <label class="full">{page.form.messageLabel}<textarea name="message" rows="5" required></textarea></label>
             </div>
-            <button type="submit">Send message</button>
-            <small class="form-note">Submitting opens your email app with these details ready to send.</small>
+            <button type="submit">{page.form.submitLabel}</button>
+            <small class="form-note">{page.form.note}</small>
           </form>
         </div>
       </section>

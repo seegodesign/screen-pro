@@ -37,11 +37,11 @@ const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
         alt={siteSettings.businessName}
       />
     </a>
-    <nav class="site-header__nav" aria-label="Primary navigation">
+    <nav class="site-header__nav" aria-label={siteSettings.nav.primaryLabel}>
       <div class="site-header__menu">
-        <button type="button" aria-haspopup="true">Services</button>
+        <button type="button" aria-haspopup="true">{siteSettings.nav.services}</button>
         <div class="site-header__dropdown">
-          <a href="/services/">All services</a>
+          <a href="/services/">{siteSettings.nav.allServices}</a>
           {
             Object.entries(serviceMeta).map(([slug, service]) => (
               <a
@@ -54,13 +54,13 @@ const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
           }
         </div>
       </div>
-      <a href="/about/">About</a><a href="/partners/">Partners</a><a
-        href="/gallery/">Gallery</a
+      <a href="/about/">{siteSettings.nav.about}</a><a href="/partners/">{siteSettings.nav.partners}</a><a
+        href="/gallery/">{siteSettings.nav.gallery}</a
       ><a
-        href="/reviews/">Reviews</a
+        href="/reviews/">{siteSettings.nav.reviews}</a
       >
       <div class="site-header__menu">
-        <button type="button" aria-haspopup="true">Service areas</button>
+        <button type="button" aria-haspopup="true">{siteSettings.nav.serviceAreas}</button>
         <div class="site-header__dropdown">
           {
             Object.entries(serviceAreaRegions).map(([slug, area]) => (
@@ -76,18 +76,20 @@ const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
       </div>
     </nav>
     <a class="site-header__cta" href={quoteHref}
-      >Free quote <MessageSquareText aria-hidden="true" /></a
+      >{siteSettings.nav.freeQuote} <MessageSquareText aria-hidden="true" /></a
     >
     <button
       class="site-header__menu-button"
       type="button"
-      aria-label="Open menu"
+      aria-label={siteSettings.nav.openMenu}
+      data-open-label={siteSettings.nav.openMenu}
+      data-close-label={siteSettings.nav.closeMenu}
       aria-expanded="false"><span></span><span></span><span></span></button
     >
   </div>
-  <nav class="site-header__mobile-nav" aria-label="Mobile navigation">
-    <strong>Services</strong>
-    <a href="/services/">All services</a>
+  <nav class="site-header__mobile-nav" aria-label={siteSettings.nav.mobileLabel}>
+    <strong>{siteSettings.nav.services}</strong>
+    <a href="/services/">{siteSettings.nav.allServices}</a>
     {
       Object.entries(serviceMeta).map(([slug, service]) => (
         <a
@@ -98,7 +100,7 @@ const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
         </a>
       ))
     }
-    <strong>Service areas</strong>
+    <strong>{siteSettings.nav.serviceAreas}</strong>
     {
       Object.entries(serviceAreaRegions).map(([slug, area]) => (
         <a
@@ -109,11 +111,11 @@ const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
         </a>
       ))
     }
-    <a href="/about/">About</a>
-    <a href="/partners/">Partners</a>
-    <a href="/gallery/">Gallery</a>
-    <a href="/reviews/">Reviews</a>
-    <a href={quoteHref}>Free quote</a>
+    <a href="/about/">{siteSettings.nav.about}</a>
+    <a href="/partners/">{siteSettings.nav.partners}</a>
+    <a href="/gallery/">{siteSettings.nav.gallery}</a>
+    <a href="/reviews/">{siteSettings.nav.reviews}</a>
+    <a href={quoteHref}>{siteSettings.nav.freeQuote}</a>
   </nav>
 </header>
 
@@ -125,7 +127,7 @@ const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
     const setMenuOpen = (open) => {
       mobileNav?.classList.toggle("site-header__mobile-nav--open", open);
       button.setAttribute("aria-expanded", String(open));
-      button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      button.setAttribute("aria-label", open ? button.dataset.closeLabel : button.dataset.openLabel);
       document.documentElement.classList.toggle("site-menu-open", open);
     };
 

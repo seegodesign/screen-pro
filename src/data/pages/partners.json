@@ -1,0 +1,25 @@
+{
+  "seoTitle": "Our Screen Partners | Screen Pro Kauaʻi",
+  "seoDescription": "Explore Screen Pro’s trusted retractable and power screen partners: ClearView, Rainier Shading, Centor, and Wizard Screens & Shades.",
+  "hero": {
+    "eyebrow": "Trusted manufacturers",
+    "title": "Better screens begin with",
+    "accent": "better partners.",
+    "description": "We choose manufacturers for product quality, thoughtful engineering, long-term serviceability, and dependable support, not simply for the widest catalog."
+  },
+  "intro": {
+    "eyebrow": "Authorized systems",
+    "title": "Products we trust.",
+    "accent": "Support that stays local.",
+    "description": "Through our partnerships with ClearView, Rainier, Wizard, and Centor, we help you compare systems, specify the right product, manage ordering, and provide professional installation and ongoing service."
+  },
+  "partnerBadge": "Screen Pro partner",
+  "manufacturerLinkLabel": "Visit manufacturer website",
+  "cta": {
+    "eyebrow": "Not sure which system fits?",
+    "title": "We’ll help you compare",
+    "accent": "the right options.",
+    "label": "Start your project",
+    "url": "/contact/"
+  }
+}

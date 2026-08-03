@@ -1,6 +1,7 @@
 ---
 import { ArrowUpRight } from "@lucide/astro";
 import type { ServiceCardData } from "../data/services";
+import { siteSettings } from "../data/site-settings";
 
 type Props = ServiceCardData;
 const { num, slug, title, copy, tags, image } = Astro.props;
@@ -15,7 +16,7 @@ const { num, slug, title, copy, tags, image } = Astro.props;
     <h3>{title}</h3>
     <p>{copy}</p>
     <ul>{tags.map((tag) => <li>{tag}</li>)}</ul>
-    <a href={`/services/${slug}/`} aria-label={`Learn more about ${title}`}>Learn more <ArrowUpRight aria-hidden="true" /></a>
+    <a href={`/services/${slug}/`} aria-label={`${siteSettings.nav.learnMore}: ${title}`}>{siteSettings.nav.learnMore} <ArrowUpRight aria-hidden="true" /></a>
   </div>
 </article>
 

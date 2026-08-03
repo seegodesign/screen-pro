@@ -1,0 +1,70 @@
+{
+  "services": [
+    {
+      "slug": "screen-doors",
+      "title": "Screen Doors",
+      "heroKeyword": "Custom Screen Doors",
+      "description": "Custom-measured screen doors for swing doors, French doors, patios, and other residential openings across North, East, South, and West Kauaʻi.",
+      "bullets": [
+        "Single, double, and French door systems",
+        "White aluminum frames",
+        "Kickplate, grille, bar, and security options"
+      ]
+    },
+    {
+      "slug": "motorized-screens",
+      "title": "Motorized Screens",
+      "heroKeyword": "Motorized Screens",
+      "description": "Remote-controlled screen and shade systems for lanais, decks, outdoor kitchens, and large architectural openings.",
+      "bullets": [
+        "Large-format screen systems",
+        "Insect and solar shade fabrics",
+        "Rainier and Wizard systems"
+      ]
+    },
+    {
+      "slug": "window-screens",
+      "title": "Window Screens",
+      "heroKeyword": "Window Screens",
+      "description": "New window screens, aluminum frame replacement, and precise re-screening for homes across North, East, South, and West Kauaʻi.",
+      "bullets": [
+        "New custom aluminum frames",
+        "Re-screening and hardware repair",
+        "Black, charcoal, or light gray mesh"
+      ]
+    },
+    {
+      "slug": "sliding-screen-doors",
+      "title": "Sliding Screen Doors",
+      "heroKeyword": "Sliding Screen Doors",
+      "description": "Custom-built aluminum sliding screen doors designed for smooth operation in Hawaiʻi’s coastal climate.",
+      "bullets": [
+        "Premium all-aluminum frames",
+        "Smooth, serviceable nylon wheels",
+        "Single and double-door systems"
+      ]
+    },
+    {
+      "slug": "hurricane-screens",
+      "title": "Hurricane Screens",
+      "heroKeyword": "Hurricane Screens",
+      "description": "Custom hurricane screen systems that protect openings while remaining quick to deploy and compact to store.",
+      "bullets": [
+        "Hurricane Fabric systems",
+        "Custom anchoring hardware",
+        "Inside or outside deployment"
+      ]
+    },
+    {
+      "slug": "screen-repair",
+      "title": "Screen Repair",
+      "heroKeyword": "Screen Repair",
+      "description": "On-site re-screening, hardware replacement, and repair for window, door, retractable, and motorized screens.",
+      "bullets": [
+        "Mesh and spline replacement",
+        "Wheels, clips, springs, and latches",
+        "Honest repair-or-replace assessment"
+      ]
+    }
+  ]
+}

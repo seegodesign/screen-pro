@@ -8,6 +8,7 @@ import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
 import serviceContent from "../../data/service-content.json";
 import { serviceAreas } from "../../data/service-areas";
 import { siteSettings } from "../../data/site-settings";
+import servicesPage from "../../data/pages/services.json";
 import "../../styles/variables.css";
 import "../../styles/service-detail.css";
 
@@ -42,7 +43,7 @@ const related = relatedSlugs.map((relatedSlug) => ({ slug: relatedSlug, ...servi
 
 const siteUrl = siteSettings.siteUrl;
 const pageUrl = `${siteUrl}/services/${slug}/`;
-const seoDescription = `${intro} Professional service and installation across Kauaʻi’s North, East, and South sides.`;
+const seoDescription = `${intro} Professional service and installation across Kauaʻi’s North, East, South, and West sides.`;
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -92,13 +93,13 @@ const jsonLd = {
     <main>
       <section class="hero" style={`--hero-image: url("${heroImage}")`}>
         <div class="container hero__inner">
-          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#services">Services</a><span>/</span><span>{meta.title}</span></nav>
-          <p class="eyebrow">Screen Pro Kauaʻi</p>
+          <nav class="breadcrumbs" aria-label={siteSettings.nav.breadcrumbLabel}><a href="/">{siteSettings.nav.home}</a><span>/</span><a href="/#services">{siteSettings.nav.services}</a><span>/</span><span>{meta.title}</span></nav>
+          <p class="eyebrow">{servicesPage.detail.heroEyebrow}</p>
           <h1>{meta.heroKeyword}</h1>
           <p class="hero__lede">{intro}</p>
           <div class="hero__actions">
-            <a class="button button--bronze" href="/free-quote/">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-            <a class="button button--glass" href={`tel:${siteSettings.phoneNumber}`}>Call {siteSettings.phoneDisplay} <Phone aria-hidden="true" /></a>
+            <a class="button button--bronze" href="/free-quote/">{servicesPage.detail.quoteLabel} <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
+            <a class="button button--glass" href={`tel:${siteSettings.phoneNumber}`}>{servicesPage.detail.callLabel} {siteSettings.phoneDisplay} <Phone aria-hidden="true" /></a>
           </div>
         </div>
       </section>
@@ -106,14 +107,14 @@ const jsonLd = {
       <section class="section overview">
         <div class="container overview__grid">
           <div>
-            <p class="eyebrow eyebrow--dark">What’s included</p>
-            <h2>{meta.title} on Kauaʻi,<br /><em>done right.</em></h2>
+            <p class="eyebrow eyebrow--dark">{servicesPage.detail.overviewEyebrow}</p>
+            <h2>{meta.title} {servicesPage.detail.overviewSuffix}<br /><em>{servicesPage.detail.overviewAccent}</em></h2>
             <p class="lead">{meta.description}</p>
             <ul class="check-list">{meta.bullets.map((bullet) => <li><span>✓</span>{bullet}</li>)}</ul>
-            <a class="button button--dark" href={`tel:${siteSettings.phoneNumber}`}>Call for a free estimate <Phone aria-hidden="true" /></a>
+            <a class="button button--dark" href={`tel:${siteSettings.phoneNumber}`}>{servicesPage.detail.estimateLabel} <Phone aria-hidden="true" /></a>
           </div>
           <div>
-            <p class="eyebrow eyebrow--dark">Why it matters</p>
+            <p class="eyebrow eyebrow--dark">{servicesPage.detail.benefitsEyebrow}</p>
             <div class="benefit-list">
               {benefits.map((benefit, index) => (
                 <article><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{benefit.title}</h3><p>{benefit.body}</p></div></article>
@@ -125,7 +126,7 @@ const jsonLd = {
 
       <section class="section process">
         <div class="container">
-          <div class="section-head"><p class="eyebrow eyebrow--dark">How it works</p><h2>Our process,<br /><em>from quote to completion.</em></h2></div>
+          <div class="section-head"><p class="eyebrow eyebrow--dark">{servicesPage.detail.processEyebrow}</p><h2>{servicesPage.detail.processTitle}<br /><em>{servicesPage.detail.processAccent}</em></h2></div>
           <div class="process__grid">
             {process.map((item) => <article><strong>{item.step.padStart(2, "0")}</strong><h3>{item.title}</h3><p>{item.body}</p></article>)}
           </div>
@@ -136,40 +137,40 @@ const jsonLd = {
         <section class="section series-guide">
           <div class="container">
             <div class="series-guide__head">
-              <div><p class="eyebrow eyebrow--dark">Power screen sizing</p><h2>Which series fits<br /><em>your opening?</em></h2></div>
-              <p>Rainier power screen series are sized for different spans and drops. We measure the opening and confirm the right housing, fabric, and mounting configuration.</p>
+              <div><p class="eyebrow eyebrow--dark">{servicesPage.detail.seriesEyebrow}</p><h2>{servicesPage.detail.seriesTitle}<br /><em>{servicesPage.detail.seriesAccent}</em></h2></div>
+              <p>{servicesPage.detail.seriesDescription}</p>
             </div>
             <div class="series-guide__grid">
               {series.map((item, index) => (
                 <article>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <p>{item.idealFor}</p>
-                  <h3>{item.name} Power Screen</h3>
+                  <h3>{item.name} {servicesPage.detail.seriesNameSuffix}</h3>
                   <div class="series-guide__dimensions">
-                    <div><small>Up to</small><strong>{item.maxWidth}</strong><small>wide</small></div>
-                    <div><small>Up to</small><strong>{item.maxDrop}</strong><small>high</small></div>
+                    <div><small>{servicesPage.detail.dimensionPrefix}</small><strong>{item.maxWidth}</strong><small>{servicesPage.detail.widthLabel}</small></div>
+                    <div><small>{servicesPage.detail.dimensionPrefix}</small><strong>{item.maxDrop}</strong><small>{servicesPage.detail.heightLabel}</small></div>
                   </div>
                   <p>{item.summary}</p>
                 </article>
               ))}
             </div>
-            <small class="series-guide__note">Maximum dimensions vary by fabric, mounting method, and site conditions. Final sizing is confirmed during consultation.</small>
+            <small class="series-guide__note">{servicesPage.detail.seriesNote}</small>
           </div>
         </section>
       )}
 
       <section class="section faq">
         <div class="container faq__grid">
-          <div><p class="eyebrow eyebrow--dark">FAQ</p><h2>Common<br /><em>questions.</em></h2></div>
+          <div><p class="eyebrow eyebrow--dark">{servicesPage.detail.faqEyebrow}</p><h2>{servicesPage.detail.faqTitle}<br /><em>{servicesPage.detail.faqAccent}</em></h2></div>
           <FaqAccordion items={faqs} />
         </div>
       </section>
 
       <section class="section related">
         <div class="container">
-          <div class="section-head"><p class="eyebrow eyebrow--dark">More services</p><h2>Explore other<br /><em>screen solutions.</em></h2></div>
+          <div class="section-head"><p class="eyebrow eyebrow--dark">{servicesPage.detail.relatedEyebrow}</p><h2>{servicesPage.detail.relatedTitle}<br /><em>{servicesPage.detail.relatedAccent}</em></h2></div>
           <div class="related__grid">
-            {related.map((item) => <a href={`/services/${item.slug}/`}><h3>{item.title}</h3><p>{item.description}</p><span>Learn more <ArrowUpRight aria-hidden="true" /></span></a>)}
+            {related.map((item) => <a href={`/services/${item.slug}/`}><h3>{item.title}</h3><p>{item.description}</p><span>{servicesPage.detail.relatedLinkLabel} <ArrowUpRight aria-hidden="true" /></span></a>)}
           </div>
         </div>
       </section>

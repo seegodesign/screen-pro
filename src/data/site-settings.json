@@ -2,7 +2,7 @@
   "identity": {
     "businessName": "Screen Pro Retractable Doors",
     "siteUrl": "https://kauairetractablescreens.com",
-    "defaultMetaDescription": "Custom retractable screen doors, motorized power screens, window screens, sliding screen doors, hurricane screens, and screen repair for homes on North, East, and South Kauaʻi."
+    "defaultMetaDescription": "Custom retractable screen doors, motorized power screens, window screens, sliding screen doors, hurricane screens, and screen repair across North, East, South, and West Kauaʻi."
   },
   "contact": {
     "phoneDisplay": "(808) 651-8664",
@@ -11,7 +11,34 @@
   },
   "business": {
     "tagline": "Custom-fit screen solutions, built for island living.",
-    "serviceAreaLabel": "Serving North, East & South Kauaʻi",
+    "serviceAreaLabel": "Serving North, East, South & West Kauaʻi",
     "foundingYear": 1998
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "allServices": "All services",
+    "about": "About",
+    "partners": "Partners",
+    "gallery": "Gallery",
+    "reviews": "Reviews",
+    "serviceAreas": "Service areas",
+    "freeQuote": "Free quote",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "learnMore": "Learn more",
+    "primaryLabel": "Primary navigation",
+    "mobileLabel": "Mobile navigation",
+    "breadcrumbLabel": "Breadcrumb"
+  },
+  "footer": {
+    "exploreHeading": "Explore",
+    "servicesHeading": "Services",
+    "serviceAreasHeading": "Service areas",
+    "contactHeading": "Contact",
+    "familyOwnedPrefix": "Family owned · Serving Kauaʻi since",
+    "siteByLabel": "Site by",
+    "siteByName": "Seego Design",
+    "siteByUrl": "https://seegodesign.com"
   }
 }

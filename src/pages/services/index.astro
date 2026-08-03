@@ -5,6 +5,7 @@ import ServiceCard from "../../components/ServiceCard.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { services } from "../../data/services";
+import page from "../../data/pages/services.json";
 import "../../styles/variables.css";
 import "../../styles/services.css";
 
@@ -15,9 +16,9 @@ import "../../styles/services.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Explore custom retractable doors, power screens, window screens, sliding doors, hurricane protection, and screen repair on North, East, and South Kauaʻi." />
+    <meta name="description" content={page.seoDescription} />
     <link rel="icon" href="/favicon.svg" />
-    <title>Screen Services on Kauaʻi | Screen Pro</title>
+    <title>{page.seoTitle}</title>
     <ClientRouter />
   </head>
   <body>
@@ -27,18 +28,18 @@ import "../../styles/services.css";
       <section class="hero">
         <div class="container hero__grid">
           <div>
-            <p class="eyebrow">Our services</p>
-            <h1>Custom screen solutions<br /><em>for island living.</em></h1>
+            <p class="eyebrow">{page.hero.eyebrow}</p>
+            <h1>{page.hero.title}<br /><em>{page.hero.accent}</em></h1>
           </div>
-          <p>From a single repair to a fully motorized lanai, every system is measured, specified, and installed for your opening and the way you use your space.</p>
+          <p>{page.hero.description}</p>
         </div>
       </section>
 
       <section class="services">
         <div class="container">
           <div class="services__head">
-            <div><p class="eyebrow eyebrow--dark">What we do</p><h2>Doors, windows, lanais<br /><em>and everything between.</em></h2></div>
-            <p>Explore our complete range of custom installation and repair services for Kauaʻi’s North Shore, East Side, and South Shore.</p>
+            <div><p class="eyebrow eyebrow--dark">{page.intro.eyebrow}</p><h2>{page.intro.title}<br /><em>{page.intro.accent}</em></h2></div>
+            <p>{page.intro.description}</p>
           </div>
           <div class="service-grid">{services.map((service) => <ServiceCard {...service} />)}</div>
         </div>
@@ -46,8 +47,8 @@ import "../../styles/services.css";
 
       <section class="cta">
         <div class="container cta__inner">
-          <div><p class="eyebrow">Not sure what you need?</p><h2>Start with a complimentary<br /><em>on-site consultation.</em></h2></div>
-          <a href="/contact/">Discuss your project <ArrowUpRight aria-hidden="true" /></a>
+          <div><p class="eyebrow">{page.cta.eyebrow}</p><h2>{page.cta.title}<br /><em>{page.cta.accent}</em></h2></div>
+          <a href={page.cta.url}>{page.cta.label} <ArrowUpRight aria-hidden="true" /></a>
         </div>
       </section>
     </main>

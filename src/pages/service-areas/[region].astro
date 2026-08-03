@@ -8,6 +8,7 @@ import "../../styles/service-area.css";
 import { serviceAreaRegions, type ServiceAreaSlug } from "../../data/service-areas";
 import { serviceMeta } from "../../data/service-meta";
 import { siteSettings } from "../../data/site-settings";
+import page from "../../data/pages/service-areas.json";
 
 export function getStaticPaths() {
   return Object.entries(serviceAreaRegions).map(([region, area]) => ({
@@ -74,7 +75,7 @@ const jsonLd = {
     <link rel="canonical" href={pageUrl} />
     <link rel="icon" href="/favicon.svg" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <title>{area.title} | Screen Pro</title>
+    <title>{area.title}{page.titleSuffix}</title>
     <ClientRouter />
   </head>
   <body>
@@ -83,42 +84,42 @@ const jsonLd = {
     <main>
       <section class="hero" style={`--hero-image: url("${area.heroImage}")`}>
         <div class="container hero__content">
-          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#service-area">Service areas</a><span>/</span><span>{area.name}</span></nav>
-          <p class="eyebrow">Local Kauaʻi service</p>
+          <nav class="breadcrumbs" aria-label={siteSettings.nav.breadcrumbLabel}><a href="/">{page.breadcrumbs.home}</a><span>/</span><a href="/#service-area">{page.breadcrumbs.areas}</a><span>/</span><span>{area.name}</span></nav>
+          <p class="eyebrow">{page.heroEyebrow}</p>
           <h1>{area.title}</h1>
           <p>{area.description}</p>
-          <a class="button button--bronze" href="/free-quote/">Schedule a free consultation <ArrowUpRight aria-hidden="true" /></a>
+          <a class="button button--bronze" href={page.heroCtaUrl}>{page.heroCtaLabel} <ArrowUpRight aria-hidden="true" /></a>
         </div>
       </section>
 
       <section class="section intro">
         <div class="container split">
-          <div><p class="eyebrow eyebrow--dark">Local screen expertise</p><h2>{area.expertiseHeading}<br /><em>{area.expertiseAccent}</em></h2></div>
+          <div><p class="eyebrow eyebrow--dark">{page.expertiseEyebrow}</p><h2>{area.expertiseHeading}<br /><em>{area.expertiseAccent}</em></h2></div>
           <div class="prose"><p>{area.intro}</p><p>{area.conditions}</p></div>
         </div>
       </section>
 
       <section class="section towns">
         <div class="container">
-          <div class="section-head"><div><p class="eyebrow eyebrow--dark">Communities we serve</p><h2>Screen service throughout<br /><em>{area.shortName}.</em></h2></div><p>We provide on-site consultations, custom measurement, installation, and repair throughout these communities.</p></div>
+          <div class="section-head"><div><p class="eyebrow eyebrow--dark">{page.communities.eyebrow}</p><h2>{page.communities.title}<br /><em>{area.shortName}.</em></h2></div><p>{page.communities.description}</p></div>
           <div class="town-grid">
-            {area.towns.map((town, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{town}</h3><p>{area.townCopy[town]}</p><a href="/free-quote/">Request service in {town} <b><ArrowRight aria-hidden="true" /></b></a></article>)}
+            {area.towns.map((town, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{town}</h3><p>{area.townCopy[town]}</p><a href="/free-quote/">{page.communities.requestPrefix} {town} <b><ArrowRight aria-hidden="true" /></b></a></article>)}
           </div>
         </div>
       </section>
 
       <section class="section services">
         <div class="container">
-          <div class="section-head"><div><p class="eyebrow eyebrow--dark">What we install and repair</p><h2>Screen solutions for<br /><em>every opening.</em></h2></div><p>Each system is measured for your home and selected for the opening, exposure, and daily use.</p></div>
+          <div class="section-head"><div><p class="eyebrow eyebrow--dark">{page.services.eyebrow}</p><h2>{page.services.title}<br /><em>{page.services.accent}</em></h2></div><p>{page.services.description}</p></div>
           <div class="service-grid">
-            {services.map(([slug, service]) => <a href={`/services/${slug}/`}><h3>{service.title}</h3><p>{service.description}</p><span>Explore service <ArrowRight aria-hidden="true" /></span></a>)}
+            {services.map(([slug, service]) => <a href={`/services/${slug}/`}><h3>{service.title}</h3><p>{service.description}</p><span>{page.services.linkLabel} <ArrowRight aria-hidden="true" /></span></a>)}
           </div>
         </div>
       </section>
 
       <section class="section regions">
         <div class="container split">
-          <div><p class="eyebrow">Also serving</p><h2>Our other Kauaʻi<br /><em>service areas.</em></h2></div>
+          <div><p class="eyebrow">{page.otherAreas.eyebrow}</p><h2>{page.otherAreas.title}<br /><em>{page.otherAreas.accent}</em></h2></div>
           <div class="region-links">{otherRegions.map(([slug, item]) => <a href={`/service-areas/${slug}/`}><span>{item.name}</span><b><ArrowRight aria-hidden="true" /></b></a>)}</div>
         </div>
       </section>

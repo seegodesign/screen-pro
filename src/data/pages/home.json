@@ -1,0 +1,188 @@
+{
+  "seoTitle": "Screen Doors Kauai | Retractable, Motorized & Screen Repair",
+  "seoDescription": "Premium custom screen doors, window screens, power screens, hurricane screens, and screen repair for homes across Kauaʻi’s North Shore, East Side, South Shore, and West Side.",
+  "hero": {
+    "eyebrow": "Kauaʻi’s custom screen experts",
+    "title": "Premium screen solutions",
+    "accent": "for Kaua'i homes.",
+    "description": "Locally owned installation of retractable screen doors, patio screens, and lanai enclosures, engineered for trade winds, salt air, and island living. Serving communities across all four sides of Kauaʻi.",
+    "video": "/motorized-screen.webm",
+    "poster": "/images/hero-video-poster.webp",
+    "quoteLabel": "Get a free quote",
+    "quoteUrl": "/free-quote/",
+    "phoneLabel": "Call us today",
+    "trust": [
+      {
+        "value": "25+",
+        "label": "Years serving Kauaʻi homeowners"
+      },
+      {
+        "value": "5.0",
+        "label": "Local customer rating"
+      }
+    ],
+    "regions": [
+      "North Shore",
+      "East Side",
+      "South Shore",
+      "West Side"
+    ]
+  },
+  "intro": {
+    "eyebrow": "More than a screen company",
+    "title": "Kauaʻi’s complete",
+    "accent": "screen service company.",
+    "lead": "The right screen should feel like it was designed with your home, not added after the fact.",
+    "description": "We help Kauaʻi homeowners choose, install, and maintain the right screen system, from a single window repair to a fully motorized lanai. We specify quality aluminum, proven hardware, and systems we can service down the road.",
+    "details": [
+      {
+        "title": "Custom fit",
+        "copy": "Measured on site"
+      },
+      {
+        "title": "Four regions",
+        "copy": "North · East · South · West"
+      },
+      {
+        "title": "Built to last",
+        "copy": "Serviceable systems"
+      }
+    ],
+    "linkLabel": "Why choose us",
+    "linkUrl": "#why"
+  },
+  "servicesSection": {
+    "eyebrow": "What we do",
+    "title": "Custom screens for doors,",
+    "accent": "windows & lanais.",
+    "description": "Custom work for doors, windows, decks, lanais, and large architectural openings throughout our Kauaʻi service areas."
+  },
+  "why": {
+    "eyebrow": "Why Screen Pro",
+    "title": "Why choose",
+    "accent": "us?",
+    "description": "We are Kauaʻi’s exclusive dealer for leading retractable screen and power-shade systems. For more than 25 years, we have gone the extra mile to deliver thoughtful recommendations, careful installation, and lasting local support.",
+    "reasons": [
+      {
+        "icon": "badge",
+        "title": "Quality products",
+        "copy": "We select proven retractable screen and shade systems that meet our standards for durability, clean design, and dependable everyday performance.",
+        "image": "/images/screen-installation-1.avif"
+      },
+      {
+        "icon": "handshake",
+        "title": "Personal service",
+        "copy": "From the first site visit through long-term support, you work with a local team that listens carefully, communicates clearly, and stands behind the work.",
+        "image": "/images/screen-installation-2.avif"
+      },
+      {
+        "icon": "ruler",
+        "title": "Professional installation",
+        "copy": "Every opening is measured precisely and installed with close attention to fit, finish, smooth operation, and respect for your home or business.",
+        "image": "/images/screen-installation-3.avif"
+      }
+    ],
+    "values": [
+      {
+        "icon": "shield",
+        "title": "Reliable",
+        "copy": "Reliability is ingrained in our company culture. Count on consistent performance, timely projects, and a steadfast commitment to your needs, giving you confidence in every door and window solution.",
+        "image": "/images/custom-screen-installation-kauai.jpg"
+      },
+      {
+        "icon": "heart",
+        "title": "Family owned",
+        "copy": "We are more than a business; we are family. Integrity, personal care, and community shape every interaction. When you choose Screen Pro, you become a valued member of our ʻohana.",
+        "image": "/images/Screen-Pro-Retractable-Doors-Kauai.jpg"
+      },
+      {
+        "icon": "factory",
+        "title": "OEM dealer",
+        "copy": "As an authorized OEM dealer, we provide genuine products from leading manufacturers, pairing the latest innovations and highest-quality options with knowledgeable local craftsmanship.",
+        "image": "/images/closing-screen-slider-door.avif"
+      }
+    ]
+  },
+  "feature": {
+    "image": "/images/kauai-luxury-motorized-screen.jpg",
+    "imageAlt": "Custom-fit screen installation at a Kauaʻi home",
+    "badgeTitle": "Custom fit",
+    "badgeCopy": "Measured & installed on site",
+    "eyebrow": "Built around your home",
+    "title": "Custom-fit screen installation",
+    "accent": "built for Kauaʻi homes.",
+    "lead": "They should work smoothly, look intentional, and let the breeze in without competing with your view.",
+    "description": "That is why we begin with an on-site consultation. We look at the opening, traffic flow, exposure, and how you use the space, then recommend the system that makes sense. No hard sell. No one-size-fits-all shortcut.",
+    "points": [
+      {
+        "title": "Measured precisely",
+        "copy": "Custom fabricated for a clean fit."
+      },
+      {
+        "title": "Installed professionally",
+        "copy": "Detailed work, respectful job sites."
+      },
+      {
+        "title": "Serviceable for years",
+        "copy": "Quality parts we can maintain later."
+      }
+    ],
+    "linkLabel": "Schedule a consultation",
+    "linkUrl": "/free-quote/"
+  },
+  "brandsSection": {
+    "eyebrow": "Trusted systems",
+    "title": "Trusted retractable & motorized",
+    "accent": "screen brands.",
+    "description": "We partner with manufacturers whose products meet our standards for performance, finish, and long-term serviceability.",
+    "linkLabel": "Open website"
+  },
+  "gallerySection": {
+    "eyebrow": "Recent work",
+    "title": "Recent screen installations",
+    "accent": "on Kauaʻi.",
+    "linkLabel": "View full gallery",
+    "linkUrl": "/gallery/",
+    "itemLinkLabel": "Plan yours",
+    "itemLinkUrl": "/free-quote/"
+  },
+  "reviewsSection": {
+    "eyebrow": "Homeowner reviews",
+    "title": "Kauaʻi screen installation",
+    "accent": "& repair reviews.",
+    "rating": "5.0",
+    "ratingLabel": "Based on local customer reviews",
+    "linkLabel": "View all testimonials",
+    "linkUrl": "/reviews/"
+  },
+  "area": {
+    "map": "/images/map.avif",
+    "mapAlt": "Map of Kauaʻi service areas",
+    "eyebrow": "Four service regions",
+    "title": "Screen service across",
+    "accent": "all of Kauaʻi.",
+    "description": "From Hanalei and Princeville to Anahola, Kapaʻa, Līhuʻe, Kōloa, Poʻipū, Hanapēpē, Waimea, and Kekaha, we bring experienced screen installation and repair directly to your home.",
+    "regions": [
+      {
+        "name": "North Shore",
+        "towns": "Hanalei · Princeville · Kīlauea",
+        "url": "/service-areas/north-shore-kauai/"
+      },
+      {
+        "name": "East Side",
+        "towns": "Anahola · Kapaʻa · Wailua · Līhuʻe",
+        "url": "/service-areas/east-side-kauai/"
+      },
+      {
+        "name": "South Shore",
+        "towns": "Kōloa · Poʻipū · Kalāheo",
+        "url": "/service-areas/south-shore-kauai/"
+      },
+      {
+        "name": "West Side",
+        "towns": "Hanapēpē · Waimea · Kekaha",
+        "url": "/service-areas/west-side-kauai/"
+      }
+    ]
+  }
+}

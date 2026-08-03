@@ -4,10 +4,12 @@ import { ArrowUpRight, BadgeCheck, HeartHandshake, ShieldCheck, Waves } from "@l
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { siteSettings } from "../data/site-settings";
+import page from "../data/pages/about.json";
 import "../styles/variables.css";
 import "../styles/about.css";
 
 const yearsInBusiness = new Date().getFullYear() - siteSettings.foundingYear;
+const principleIcons = { waves: Waves, shield: ShieldCheck, heart: HeartHandshake };
 ---
 
 <!doctype html>
@@ -15,9 +17,9 @@ const yearsInBusiness = new Date().getFullYear() - siteSettings.foundingYear;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={`Family-owned since ${siteSettings.foundingYear}, Screen Pro provides custom retractable and power screen solutions backed by more than ${yearsInBusiness - 1} years of experience on Kauaʻi.`} />
+    <meta name="description" content={page.seoDescription} />
     <link rel="icon" href="/favicon.svg" />
-    <title>About Screen Pro | Family-Owned on Kauaʻi Since 1998</title>
+    <title>{page.seoTitle}</title>
     <ClientRouter />
   </head>
   <body>
@@ -26,24 +28,23 @@ const yearsInBusiness = new Date().getFullYear() - siteSettings.foundingYear;
     <main>
       <section class="hero">
         <div class="container hero__content">
-          <p class="eyebrow">Our story</p>
-          <h1>A legacy of quality<br /><em>on the Garden Isle.</em></h1>
-          <p>Family-owned, locally experienced, and committed to helping Kauaʻi homes welcome the breeze without compromising comfort.</p>
+          <p class="eyebrow">{page.hero.eyebrow}</p>
+          <h1>{page.hero.title}<br /><em>{page.hero.accent}</em></h1>
+          <p>{page.hero.description}</p>
         </div>
       </section>
 
       <section class="legacy section">
         <div class="container legacy__grid">
           <div class="legacy__image">
-            <img src="/images/screen-installation-1.avif" alt="Custom screen installation at a Kauaʻi home" />
-            <span><strong>{yearsInBusiness}+</strong> years serving Kauaʻi</span>
+            <img src={page.legacy.image} alt={page.legacy.imageAlt} />
+            <span><strong>{yearsInBusiness}+</strong> {page.legacy.badgeSuffix}</span>
           </div>
           <div class="legacy__content">
-            <p class="eyebrow eyebrow--dark">Family owned since {siteSettings.foundingYear}</p>
-            <h2>More than a business.<br /><em>We’re family.</em></h2>
-            <p class="lead">For more than {yearsInBusiness - 1} years, Screen Pro has helped our neighbors experience the beauty of island living more comfortably.</p>
-            <p>Living and working on Kauaʻi gives us a practical understanding of how salt air, humidity, tropical sun, trade winds, and everyday use affect a home. That experience shapes every recommendation we make.</p>
-            <p>We aren’t simply selling screens. We create custom solutions that invite in fresh air, preserve the view, and protect the spaces where island life happens.</p>
+            <p class="eyebrow eyebrow--dark">{page.legacy.eyebrowPrefix} {siteSettings.foundingYear}</p>
+            <h2>{page.legacy.title}<br /><em>{page.legacy.accent}</em></h2>
+            <p class="lead">{page.legacy.leadPrefix} {yearsInBusiness - 1} {page.legacy.leadSuffix}</p>
+            {page.legacy.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </div>
       </section>
@@ -51,13 +52,14 @@ const yearsInBusiness = new Date().getFullYear() - siteSettings.foundingYear;
       <section class="principles section">
         <div class="container">
           <div class="principles__head">
-            <div><p class="eyebrow eyebrow--dark">What guides us</p><h2>Local knowledge.<br /><em>Lasting standards.</em></h2></div>
-            <p>Our reputation has been built one home, one opening, and one relationship at a time.</p>
+            <div><p class="eyebrow eyebrow--dark">{page.principles.eyebrow}</p><h2>{page.principles.title}<br /><em>{page.principles.accent}</em></h2></div>
+            <p>{page.principles.description}</p>
           </div>
           <div class="principles__grid">
-            <article><Waves aria-hidden="true" /><h3>Island experience</h3><p>Solutions selected for Kauaʻi’s coastal climate, architecture, and indoor-outdoor way of life.</p></article>
-            <article><ShieldCheck aria-hidden="true" /><h3>Dependable quality</h3><p>Careful specifications, precise measurements, professional installation, and products designed to be serviced.</p></article>
-            <article><HeartHandshake aria-hidden="true" /><h3>Personal care</h3><p>Clear communication, honest guidance, and the same attention we would want for our own home.</p></article>
+            {page.principles.items.map((item) => {
+              const Icon = principleIcons[item.icon as keyof typeof principleIcons];
+              return <article><Icon aria-hidden="true" /><h3>{item.title}</h3><p>{item.copy}</p></article>;
+            })}
           </div>
         </div>
       </section>
@@ -65,29 +67,25 @@ const yearsInBusiness = new Date().getFullYear() - siteSettings.foundingYear;
       <section class="expertise section">
         <div class="container expertise__grid">
           <div>
-            <p class="eyebrow">The exclusive local experts</p>
-            <h2>Industry-leading systems,<br /><em>supported here at home.</em></h2>
-            <p>Our commitment to integrity and customer care is reflected in the partners we choose. As Kauaʻi’s exclusive OEM dealer for ClearView, Rainier, and Wizard, we bring proven retractable doors, motorized shades, and large-format screen systems directly to the island.</p>
-            <p>We only recommend products that meet our standards for durability, appearance, smooth operation, and long-term serviceability.</p>
-            <a href="/partners/">Meet our partners <ArrowUpRight aria-hidden="true" /></a>
+            <p class="eyebrow">{page.expertise.eyebrow}</p>
+            <h2>{page.expertise.title}<br /><em>{page.expertise.accent}</em></h2>
+            {page.expertise.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <a href={page.expertise.linkUrl}>{page.expertise.linkLabel} <ArrowUpRight aria-hidden="true" /></a>
           </div>
           <div class="expertise__points">
-            <div><BadgeCheck aria-hidden="true" /><span><strong>Authorized products</strong>Genuine systems backed by established manufacturers.</span></div>
-            <div><BadgeCheck aria-hidden="true" /><span><strong>Current technology</strong>Modern manual, motorized, and smart-control options.</span></div>
-            <div><BadgeCheck aria-hidden="true" /><span><strong>Local support</strong>Professional installation, service, and warranty guidance on Kauaʻi.</span></div>
+            {page.expertise.points.map((point) => <div><BadgeCheck aria-hidden="true" /><span><strong>{point.title}</strong>{point.copy}</span></div>)}
           </div>
         </div>
       </section>
 
       <section class="ohana section">
         <div class="container ohana__grid">
-          <div class="ohana__image"><img src="/images/custom-screen-installation-kauai.jpg" alt="Custom screen installation at a Kauaʻi home" loading="lazy" /></div>
+          <div class="ohana__image"><img src={page.ohana.image} alt={page.ohana.imageAlt} loading="lazy" /></div>
           <div>
-            <p class="eyebrow eyebrow--dark">Part of our ʻohana</p>
-            <h2>Your home deserves<br /><em>personal attention.</em></h2>
-            <p>When you choose Screen Pro, you’re not just another customer. You become a valued member of our ʻohana. From the complimentary site visit through the final walkthrough, we treat every project as if it were for our own home.</p>
-            <p>We stand behind our word, our workmanship, and our warranties. Our goal is a warm, straightforward experience and a finished space where you can enjoy the best of Kauaʻi living.</p>
-            <a class="button" href="/contact/">Start a conversation <ArrowUpRight aria-hidden="true" /></a>
+            <p class="eyebrow eyebrow--dark">{page.ohana.eyebrow}</p>
+            <h2>{page.ohana.title}<br /><em>{page.ohana.accent}</em></h2>
+            {page.ohana.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <a class="button" href={page.ohana.linkUrl}>{page.ohana.linkLabel} <ArrowUpRight aria-hidden="true" /></a>
           </div>
         </div>
       </section>

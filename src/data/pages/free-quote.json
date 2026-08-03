@@ -1,0 +1,40 @@
+{
+  "seoTitle": "Request a Free Screen Quote | Screen Pro Kauaʻi",
+  "seoDescription": "Request a free quote for custom screen installation or repair across Kauaʻi’s North Shore, East Side, South Shore, and West Side.",
+  "content": {
+    "eyebrow": "Start your project",
+    "title": "Request a free quote for",
+    "accent": "your screen project.",
+    "description": "Tell us what you’re working on. We’ll explore design options, discuss product features, and prepare a detailed quote for the right solution.",
+    "phoneLabel": "Call us directly",
+    "promiseTitle": "Fast, helpful communication",
+    "promiseCopy": "We typically respond within one business day.",
+    "formTitle": "Request a free quote",
+    "formSubtitle": "No pressure. Just helpful advice.",
+    "nameLabel": "Full name *",
+    "namePlaceholder": "Your name",
+    "phoneLabelField": "Phone number *",
+    "phonePlaceholder": "(808) 123-4567",
+    "emailLabel": "Email address *",
+    "emailPlaceholder": "you@email.com",
+    "addressLabel": "Project address",
+    "addressPlaceholder": "Town or address",
+    "serviceLabel": "What can we help with? *",
+    "servicePlaceholder": "Select a service",
+    "serviceOptions": [
+      "Retractable screen doors",
+      "Motorized screens",
+      "Window screens",
+      "Sliding screen doors",
+      "Hurricane screens",
+      "Screen repair",
+      "Not sure yet"
+    ],
+    "descriptionLabel": "Tell us about your project *",
+    "descriptionPlaceholder": "What opening or screen needs attention?",
+    "measurementsLabel": "Opening size (optional)",
+    "measurementsPlaceholder": "Approx. width × height",
+    "submitLabel": "Send quote request",
+    "consent": "By submitting, you agree that we may contact you about your project."
+  }
+}

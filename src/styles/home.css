@@ -884,6 +884,13 @@ h2 em {
 .area__label--south::before {
   right: calc(100% + 0.5rem);
 }
+.area__label--west {
+  bottom: 24%;
+  left: 8%;
+}
+.area__label--west::before {
+  left: calc(100% + 0.5rem);
+}
 .area__content > p {
   margin: 2rem 0;
   color: #63737a;

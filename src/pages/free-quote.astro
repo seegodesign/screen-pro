@@ -3,6 +3,7 @@ import { ClientRouter, fade } from "astro:transitions";
 import QuoteSection from "../components/QuoteSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import page from "../data/pages/free-quote.json";
 import "../styles/variables.css";
 ---
 
@@ -11,9 +12,9 @@ import "../styles/variables.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Request a free quote for custom screen installation or repair on Kauaʻi’s North Shore, East Side, or South Shore." />
+    <meta name="description" content={page.seoDescription} />
     <link rel="icon" href="/favicon.svg" />
-    <title>Request a Free Screen Quote | Screen Pro Kauaʻi</title>
+    <title>{page.seoTitle}</title>
     <ClientRouter />
   </head>
   <body class="quote-page">

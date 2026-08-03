@@ -4,4 +4,6 @@ export const siteSettings = {
   ...settings.identity,
   ...settings.contact,
   ...settings.business,
+  nav: settings.navigation,
+  footer: settings.footer,
 };

@@ -1,0 +1,52 @@
+{
+  "seoTitle": "Screen Services on Kauaʻi | Screen Pro",
+  "seoDescription": "Explore custom retractable doors, power screens, window screens, sliding doors, hurricane protection, and screen repair across North, East, South, and West Kauaʻi.",
+  "hero": {
+    "eyebrow": "Our services",
+    "title": "Custom screen solutions",
+    "accent": "for island living.",
+    "description": "From a single repair to a fully motorized lanai, every system is measured, specified, and installed for your opening and the way you use your space."
+  },
+  "intro": {
+    "eyebrow": "What we do",
+    "title": "Doors, windows, lanais",
+    "accent": "and everything between.",
+    "description": "Explore our complete range of custom installation and repair services across Kauaʻi’s North Shore, East Side, South Shore, and West Side."
+  },
+  "cta": {
+    "eyebrow": "Not sure what you need?",
+    "title": "Start with a complimentary",
+    "accent": "on-site consultation.",
+    "label": "Discuss your project",
+    "url": "/contact/"
+  },
+  "detail": {
+    "heroEyebrow": "Screen Pro Kauaʻi",
+    "quoteLabel": "Get a free quote",
+    "callLabel": "Call",
+    "overviewEyebrow": "What’s included",
+    "overviewSuffix": "on Kauaʻi,",
+    "overviewAccent": "done right.",
+    "estimateLabel": "Call for a free estimate",
+    "benefitsEyebrow": "Why it matters",
+    "processEyebrow": "How it works",
+    "processTitle": "Our process,",
+    "processAccent": "from quote to completion.",
+    "seriesEyebrow": "Power screen sizing",
+    "seriesTitle": "Which series fits",
+    "seriesAccent": "your opening?",
+    "seriesDescription": "Rainier power screen series are sized for different spans and drops. We measure the opening and confirm the right housing, fabric, and mounting configuration.",
+    "seriesNameSuffix": "Power Screen",
+    "dimensionPrefix": "Up to",
+    "widthLabel": "wide",
+    "heightLabel": "high",
+    "seriesNote": "Maximum dimensions vary by fabric, mounting method, and site conditions. Final sizing is confirmed during consultation.",
+    "faqEyebrow": "FAQ",
+    "faqTitle": "Common",
+    "faqAccent": "questions.",
+    "relatedEyebrow": "More services",
+    "relatedTitle": "Explore other",
+    "relatedAccent": "screen solutions.",
+    "relatedLinkLabel": "Learn more"
+  }
+}

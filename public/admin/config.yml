@@ -39,3 +39,627 @@ singletons:
           - { label: Header tagline, name: tagline, widget: string }
           - { label: Service area label, name: serviceAreaLabel, widget: string }
           - { label: Founding year, name: foundingYear, widget: number, value_type: int, min: 1900, max: 2100 }
+      - label: Navigation
+        name: navigation
+        widget: object
+        fields:
+          - { label: Home, name: home, widget: string }
+          - { label: Services, name: services, widget: string }
+          - { label: All services, name: allServices, widget: string }
+          - { label: About, name: about, widget: string }
+          - { label: Partners, name: partners, widget: string }
+          - { label: Gallery, name: gallery, widget: string }
+          - { label: Reviews, name: reviews, widget: string }
+          - { label: Service areas, name: serviceAreas, widget: string }
+          - { label: Free quote, name: freeQuote, widget: string }
+          - { label: Open-menu accessibility label, name: openMenu, widget: string }
+          - { label: Close-menu accessibility label, name: closeMenu, widget: string }
+          - { label: Learn-more link, name: learnMore, widget: string }
+          - { label: Primary navigation accessibility label, name: primaryLabel, widget: string }
+          - { label: Mobile navigation accessibility label, name: mobileLabel, widget: string }
+          - { label: Breadcrumb accessibility label, name: breadcrumbLabel, widget: string }
+      - label: Footer
+        name: footer
+        widget: object
+        fields:
+          - { label: Explore heading, name: exploreHeading, widget: string }
+          - { label: Services heading, name: servicesHeading, widget: string }
+          - { label: Service areas heading, name: serviceAreasHeading, widget: string }
+          - { label: Contact heading, name: contactHeading, widget: string }
+          - { label: Family-owned prefix, name: familyOwnedPrefix, widget: string }
+          - { label: Site credit label, name: siteByLabel, widget: string }
+          - { label: Site credit name, name: siteByName, widget: string }
+          - { label: Site credit URL, name: siteByUrl, widget: string }
+  - name: service_areas
+    label: Service Areas
+    icon: map
+    file: src/data/service-areas.json
+    format: json
+    fields:
+      - { label: All towns served, name: towns, widget: list, field: { label: Town, name: town, widget: string } }
+      - label: Regions
+        name: regions
+        widget: object
+        fields:
+          - label: North Shore Kauaʻi
+            name: north-shore-kauai
+            widget: object
+            fields: &region_fields
+              - { label: Name, name: name, widget: string }
+              - { label: Short name, name: shortName, widget: string }
+              - { label: Towns, name: towns, widget: list, field: { label: Town, name: town, widget: string } }
+              - { label: Page heading, name: title, widget: string }
+              - { label: Hero image, name: heroImage, widget: image }
+              - { label: Description, name: description, widget: text }
+              - { label: Expertise heading, name: expertiseHeading, widget: string }
+              - { label: Expertise accent, name: expertiseAccent, widget: string }
+              - { label: Introduction, name: intro, widget: text }
+              - { label: Local conditions, name: conditions, widget: text }
+              - { label: Town descriptions, name: townCopy, widget: keyvalue }
+          - { label: East Side Kauaʻi, name: east-side-kauai, widget: object, fields: *region_fields }
+          - { label: South Shore Kauaʻi, name: south-shore-kauai, widget: object, fields: *region_fields }
+          - { label: West Side Kauaʻi, name: west-side-kauai, widget: object, fields: *region_fields }
+
+collections:
+  - name: pages
+    label: Pages
+    label_singular: Page
+    icon: article
+    files:
+      - name: home
+        label: Home
+        file: src/data/pages/home.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Hero video, name: video, widget: file }
+              - { label: Video poster, name: poster, widget: image }
+              - { label: Quote button, name: quoteLabel, widget: string }
+              - { label: Quote URL, name: quoteUrl, widget: string }
+              - { label: Phone label, name: phoneLabel, widget: string }
+              - label: Trust statistics
+                name: trust
+                widget: list
+                fields:
+                  - { label: Value, name: value, widget: string }
+                  - { label: Label, name: label, widget: string }
+              - { label: Region labels, name: regions, widget: list, field: { label: Region, name: region, widget: string } }
+          - label: Introduction
+            name: intro
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Lead, name: lead, widget: text }
+              - { label: Description, name: description, widget: text }
+              - label: Details
+                name: details
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: copy, widget: string }
+              - { label: Link label, name: linkLabel, widget: string }
+              - { label: Link URL, name: linkUrl, widget: string }
+          - label: Services section
+            name: servicesSection
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+          - label: Why Screen Pro
+            name: why
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+              - label: Reasons
+                name: reasons
+                widget: list
+                fields: &value_card_fields
+                  - { label: Icon, name: icon, widget: select, options: [badge, handshake, ruler, shield, heart, factory] }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: copy, widget: text }
+                  - { label: Image, name: image, widget: image }
+              - { label: Values, name: values, widget: list, fields: *value_card_fields }
+          - label: Installation feature
+            name: feature
+            widget: object
+            fields:
+              - { label: Image, name: image, widget: image }
+              - { label: Image description, name: imageAlt, widget: string }
+              - { label: Badge title, name: badgeTitle, widget: string }
+              - { label: Badge description, name: badgeCopy, widget: string }
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Lead, name: lead, widget: text }
+              - { label: Description, name: description, widget: text }
+              - label: Points
+                name: points
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: copy, widget: string }
+              - { label: Link label, name: linkLabel, widget: string }
+              - { label: Link URL, name: linkUrl, widget: string }
+          - label: Partner section
+            name: brandsSection
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: External link label, name: linkLabel, widget: string }
+          - label: Gallery section
+            name: gallerySection
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Gallery link label, name: linkLabel, widget: string }
+              - { label: Gallery link URL, name: linkUrl, widget: string }
+              - { label: Item link label, name: itemLinkLabel, widget: string }
+              - { label: Item link URL, name: itemLinkUrl, widget: string }
+          - label: Reviews section
+            name: reviewsSection
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Rating, name: rating, widget: string }
+              - { label: Rating label, name: ratingLabel, widget: string }
+              - { label: Reviews link label, name: linkLabel, widget: string }
+              - { label: Reviews link URL, name: linkUrl, widget: string }
+          - label: Service area section
+            name: area
+            widget: object
+            fields:
+              - { label: Map, name: map, widget: image }
+              - { label: Map description, name: mapAlt, widget: string }
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+              - label: Regions
+                name: regions
+                widget: list
+                fields:
+                  - { label: Name, name: name, widget: string }
+                  - { label: Towns, name: towns, widget: string }
+                  - { label: URL, name: url, widget: string }
+      - name: about
+        label: About
+        file: src/data/pages/about.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - label: Hero
+            name: hero
+            widget: object
+            fields: &hero_fields
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+          - label: Legacy
+            name: legacy
+            widget: object
+            fields:
+              - { label: Image, name: image, widget: image }
+              - { label: Image description, name: imageAlt, widget: string }
+              - { label: Years badge suffix, name: badgeSuffix, widget: string }
+              - { label: Eyebrow prefix, name: eyebrowPrefix, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Lead prefix, name: leadPrefix, widget: string }
+              - { label: Lead suffix, name: leadSuffix, widget: string }
+              - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+          - label: Principles
+            name: principles
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+              - label: Items
+                name: items
+                widget: list
+                fields:
+                  - { label: Icon, name: icon, widget: select, options: [waves, shield, heart] }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: copy, widget: text }
+          - label: Expertise
+            name: expertise
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+              - { label: Link label, name: linkLabel, widget: string }
+              - { label: Link URL, name: linkUrl, widget: string }
+              - label: Points
+                name: points
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: copy, widget: text }
+          - label: Closing section
+            name: ohana
+            widget: object
+            fields:
+              - { label: Image, name: image, widget: image }
+              - { label: Image description, name: imageAlt, widget: string }
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+              - { label: Link label, name: linkLabel, widget: string }
+              - { label: Link URL, name: linkUrl, widget: string }
+      - name: services
+        label: Services
+        file: src/data/pages/services.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - label: Hero
+            name: hero
+            widget: object
+            fields: *hero_fields
+          - label: Introduction
+            name: intro
+            widget: object
+            fields: *hero_fields
+          - label: Call to action
+            name: cta
+            widget: object
+            fields: &cta_fields
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Button label, name: label, widget: string }
+              - { label: Button URL, name: url, widget: string }
+          - label: Service detail layout copy
+            name: detail
+            widget: object
+            fields:
+              - { label: Hero eyebrow, name: heroEyebrow, widget: string }
+              - { label: Quote button, name: quoteLabel, widget: string }
+              - { label: Call button prefix, name: callLabel, widget: string }
+              - { label: Overview eyebrow, name: overviewEyebrow, widget: string }
+              - { label: Overview heading suffix, name: overviewSuffix, widget: string }
+              - { label: Overview accent, name: overviewAccent, widget: string }
+              - { label: Estimate button, name: estimateLabel, widget: string }
+              - { label: Benefits eyebrow, name: benefitsEyebrow, widget: string }
+              - { label: Process eyebrow, name: processEyebrow, widget: string }
+              - { label: Process heading, name: processTitle, widget: string }
+              - { label: Process accent, name: processAccent, widget: string }
+              - { label: Series eyebrow, name: seriesEyebrow, widget: string }
+              - { label: Series heading, name: seriesTitle, widget: string }
+              - { label: Series accent, name: seriesAccent, widget: string }
+              - { label: Series description, name: seriesDescription, widget: text }
+              - { label: Series name suffix, name: seriesNameSuffix, widget: string }
+              - { label: Dimension prefix, name: dimensionPrefix, widget: string }
+              - { label: Width label, name: widthLabel, widget: string }
+              - { label: Height label, name: heightLabel, widget: string }
+              - { label: Series note, name: seriesNote, widget: text }
+              - { label: FAQ eyebrow, name: faqEyebrow, widget: string }
+              - { label: FAQ heading, name: faqTitle, widget: string }
+              - { label: FAQ accent, name: faqAccent, widget: string }
+              - { label: Related eyebrow, name: relatedEyebrow, widget: string }
+              - { label: Related heading, name: relatedTitle, widget: string }
+              - { label: Related accent, name: relatedAccent, widget: string }
+              - { label: Related link, name: relatedLinkLabel, widget: string }
+      - name: partners
+        label: Partners
+        file: src/data/pages/partners.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - { label: Hero, name: hero, widget: object, fields: *hero_fields }
+          - { label: Introduction, name: intro, widget: object, fields: *hero_fields }
+          - { label: Partner badge, name: partnerBadge, widget: string }
+          - { label: Manufacturer link label, name: manufacturerLinkLabel, widget: string }
+          - { label: Call to action, name: cta, widget: object, fields: *cta_fields }
+      - name: service_area_template
+        label: Service Area Pages
+        file: src/data/pages/service-areas.json
+        format: json
+        fields:
+          - { label: Browser title suffix, name: titleSuffix, widget: string }
+          - label: Breadcrumb labels
+            name: breadcrumbs
+            widget: object
+            fields:
+              - { label: Home, name: home, widget: string }
+              - { label: Service areas, name: areas, widget: string }
+          - { label: Hero eyebrow, name: heroEyebrow, widget: string }
+          - { label: Hero button label, name: heroCtaLabel, widget: string }
+          - { label: Hero button URL, name: heroCtaUrl, widget: string }
+          - { label: Expertise eyebrow, name: expertiseEyebrow, widget: string }
+          - label: Communities section
+            name: communities
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Request link prefix, name: requestPrefix, widget: string }
+          - label: Services section
+            name: services
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Link label, name: linkLabel, widget: string }
+          - label: Other areas section
+            name: otherAreas
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+      - name: gallery
+        label: Gallery
+        file: src/data/pages/gallery.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - { label: Hero, name: hero, widget: object, fields: *hero_fields }
+          - { label: Gallery accessibility label, name: galleryLabel, widget: string }
+          - { label: Call to action, name: cta, widget: object, fields: *cta_fields }
+      - name: reviews
+        label: Reviews
+        file: src/data/pages/reviews.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Rating, name: rating, widget: string }
+              - { label: Rating label, name: ratingLabel, widget: string }
+          - { label: Introduction, name: intro, widget: object, fields: *hero_fields }
+          - label: Values heading
+            name: valuesSection
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+          - label: Values
+            name: values
+            widget: list
+            fields:
+              - { label: Icon, name: icon, widget: select, options: [messages, badge, heart] }
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: copy, widget: text }
+          - { label: Call to action, name: cta, widget: object, fields: *cta_fields }
+      - name: contact
+        label: Contact
+        file: src/data/pages/contact.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - { label: Hero, name: hero, widget: object, fields: *hero_fields }
+          - { label: Introduction, name: intro, widget: object, fields: *hero_fields }
+          - label: Contact labels
+            name: contactLabels
+            widget: object
+            fields:
+              - { label: Phone label, name: phone, widget: string }
+              - { label: Email label, name: email, widget: string }
+              - { label: Response label, name: response, widget: string }
+              - { label: Response value, name: responseValue, widget: string }
+          - label: Form
+            name: form
+            widget: object
+            fields:
+              - { label: Name label, name: nameLabel, widget: string }
+              - { label: Phone label, name: phoneLabel, widget: string }
+              - { label: Email label, name: emailLabel, widget: string }
+              - { label: Town label, name: townLabel, widget: string }
+              - { label: Service label, name: serviceLabel, widget: string }
+              - { label: Service placeholder, name: servicePlaceholder, widget: string }
+              - { label: Service choices, name: serviceOptions, widget: list, field: { label: Choice, name: choice, widget: string } }
+              - { label: Message label, name: messageLabel, widget: string }
+              - { label: Submit button, name: submitLabel, widget: string }
+              - { label: Form note, name: note, widget: text }
+      - name: free_quote
+        label: Free Quote
+        file: src/data/pages/free-quote.json
+        format: json
+        fields:
+          - { label: SEO title, name: seoTitle, widget: string }
+          - { label: SEO description, name: seoDescription, widget: text }
+          - label: Page and form content
+            name: content
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - { label: Accent heading, name: accent, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Phone label, name: phoneLabel, widget: string }
+              - { label: Promise title, name: promiseTitle, widget: string }
+              - { label: Promise description, name: promiseCopy, widget: string }
+              - { label: Form title, name: formTitle, widget: string }
+              - { label: Form subtitle, name: formSubtitle, widget: string }
+              - { label: Name label, name: nameLabel, widget: string }
+              - { label: Name placeholder, name: namePlaceholder, widget: string }
+              - { label: Phone label, name: phoneLabelField, widget: string }
+              - { label: Phone placeholder, name: phonePlaceholder, widget: string }
+              - { label: Email label, name: emailLabel, widget: string }
+              - { label: Email placeholder, name: emailPlaceholder, widget: string }
+              - { label: Address label, name: addressLabel, widget: string }
+              - { label: Address placeholder, name: addressPlaceholder, widget: string }
+              - { label: Service label, name: serviceLabel, widget: string }
+              - { label: Service placeholder, name: servicePlaceholder, widget: string }
+              - { label: Service choices, name: serviceOptions, widget: list, field: { label: Choice, name: choice, widget: string } }
+              - { label: Project description label, name: descriptionLabel, widget: string }
+              - { label: Project description placeholder, name: descriptionPlaceholder, widget: string }
+              - { label: Measurements label, name: measurementsLabel, widget: string }
+              - { label: Measurements placeholder, name: measurementsPlaceholder, widget: string }
+              - { label: Submit button, name: submitLabel, widget: string }
+              - { label: Consent note, name: consent, widget: text }
+  - name: partners
+    label: Partners
+    label_singular: Partner
+    icon: handshake
+    folder: src/data/cms/partners
+    media_folder: /public/images/brand-logos
+    public_folder: /images/brand-logos
+    format: json
+    create: true
+    fields:
+      - { label: Full name, name: name, widget: string }
+      - { label: Short name, name: shortName, widget: string }
+      - { label: Logo, name: logo, widget: image }
+      - { label: Website, name: url, widget: string }
+      - { label: Product label, name: label, widget: string }
+      - { label: Homepage description, name: homepageCopy, widget: text }
+      - { label: Partner page description, name: intro, widget: text }
+      - label: Product highlights
+        name: points
+        widget: list
+        field: { label: Highlight, name: highlight, widget: string }
+      - { label: Monochrome logo treatment, name: monochrome, widget: boolean, default: true }
+      - { label: Display order, name: order, widget: number, value_type: int, min: 1 }
+  - name: reviews
+    label: Reviews
+    label_singular: Review
+    icon: reviews
+    folder: src/data/cms/reviews
+    format: json
+    create: true
+    fields:
+      - { label: Customer name, name: name, widget: string }
+      - { label: Quote, name: quote, widget: text }
+      - { label: Location, name: place, widget: string }
+      - { label: Service, name: service, widget: string }
+      - { label: Feature on homepage, name: featured, widget: boolean, default: false }
+      - { label: Display order, name: order, widget: number, value_type: int, min: 1 }
+  - name: gallery
+    label: Gallery
+    label_singular: Gallery image
+    icon: photo_library
+    folder: src/data/cms/gallery
+    format: json
+    create: true
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Image, name: src, widget: image }
+      - { label: Image description, name: alt, widget: string, hint: "Describe the image for visitors using screen readers." }
+      - { label: Location, name: location, widget: string }
+      - { label: Feature on homepage, name: featured, widget: boolean, default: false }
+      - { label: Display order, name: order, widget: number, value_type: int, min: 1 }
+  - name: service_content
+    label: Services
+    label_singular: Service content
+    icon: home_repair_service
+    files:
+      - name: service_cards
+        label: Service Cards
+        file: src/data/service-cards.json
+        format: json
+        fields:
+          - label: Services
+            name: services
+            widget: list
+            fields:
+              - { label: Number, name: num, widget: string }
+              - { label: Route slug, name: slug, widget: hidden }
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: copy, widget: text }
+              - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+              - { label: Image, name: image, widget: image }
+      - name: service_metadata
+        label: Service Headings and Summaries
+        file: src/data/service-meta.json
+        format: json
+        fields:
+          - label: Services
+            name: services
+            widget: list
+            fields:
+              - { label: Route slug, name: slug, widget: hidden }
+              - { label: Navigation title, name: title, widget: string }
+              - { label: Page heading, name: heroKeyword, widget: string }
+              - { label: Summary, name: description, widget: text }
+              - { label: Highlights, name: bullets, widget: list, field: { label: Highlight, name: highlight, widget: string } }
+      - name: service_details
+        label: Service Detail Pages
+        file: src/data/service-content.json
+        format: json
+        fields:
+          - label: Screen Doors
+            name: screen-doors
+            widget: object
+            fields: &service_detail_fields
+              - { label: Hero image, name: heroImage, widget: image }
+              - { label: Introduction, name: intro, widget: text }
+              - label: Benefits
+                name: benefits
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: body, widget: text }
+              - label: Process
+                name: process
+                widget: list
+                fields:
+                  - { label: Step number, name: step, widget: string }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Description, name: body, widget: text }
+              - label: Power screen series
+                name: series
+                widget: list
+                required: false
+                fields:
+                  - { label: Name, name: name, widget: string }
+                  - { label: Ideal for, name: idealFor, widget: text }
+                  - { label: Maximum width, name: maxWidth, widget: string }
+                  - { label: Maximum drop, name: maxDrop, widget: string }
+                  - { label: Summary, name: summary, widget: text }
+              - label: FAQs
+                name: faqs
+                widget: list
+                fields:
+                  - { label: Question, name: q, widget: string }
+                  - { label: Answer, name: a, widget: text }
+              - { label: Related service slugs, name: relatedSlugs, widget: list, field: { label: Slug, name: slug, widget: string } }
+          - { label: Motorized Screens, name: motorized-screens, widget: object, fields: *service_detail_fields }
+          - { label: Window Screens, name: window-screens, widget: object, fields: *service_detail_fields }
+          - { label: Sliding Screen Doors, name: sliding-screen-doors, widget: object, fields: *service_detail_fields }
+          - { label: Hurricane Screens, name: hurricane-screens, widget: object, fields: *service_detail_fields }
+          - { label: Screen Repair, name: screen-repair, widget: object, fields: *service_detail_fields }

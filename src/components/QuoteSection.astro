@@ -1,38 +1,40 @@
 ---
 import { ArrowUpRight } from "@lucide/astro";
 import { siteSettings } from "../data/site-settings";
+import page from "../data/pages/free-quote.json";
+
+const content = page.content;
 ---
 
 <section class="quote" id="quote-form">
   <div class="quote__container">
     <div class="quote__content">
-      <p class="quote__eyebrow">Start your project</p>
-      <h1>Request a free quote for<br /><em>your screen project.</em></h1>
-      <p>Tell us what you’re working on. We’ll explore design options, discuss product features, and prepare a detailed quote for the right solution.</p>
-      <a class="quote__phone" href={`tel:${siteSettings.phoneNumber}`}><span>Call us directly</span><strong>{siteSettings.phoneDisplay}</strong></a>
+      <p class="quote__eyebrow">{content.eyebrow}</p>
+      <h1>{content.title}<br /><em>{content.accent}</em></h1>
+      <p>{content.description}</p>
+      <a class="quote__phone" href={`tel:${siteSettings.phoneNumber}`}><span>{content.phoneLabel}</span><strong>{siteSettings.phoneDisplay}</strong></a>
       <a class="quote__email" href={`mailto:${siteSettings.email}`}>{siteSettings.email}</a>
-      <div class="quote__promise"><span>✓</span><p><b>Fast, helpful communication</b>We typically respond within one business day.</p></div>
+      <div class="quote__promise"><span>✓</span><p><b>{content.promiseTitle}</b>{content.promiseCopy}</p></div>
     </div>
 
     <form action={`mailto:${siteSettings.email}`} method="post" enctype="text/plain">
-      <div class="form__heading"><strong>Request a free quote</strong><span>No pressure. Just helpful advice.</span></div>
+      <div class="form__heading"><strong>{content.formTitle}</strong><span>{content.formSubtitle}</span></div>
       <div class="form__grid">
-        <label><span>Full name *</span><input type="text" name="name" placeholder="Your name" autocomplete="name" required /></label>
-        <label><span>Phone number *</span><input type="tel" name="phone" placeholder="(808) 123-4567" autocomplete="tel" required /></label>
-        <label><span>Email address *</span><input type="email" name="email" placeholder="you@email.com" autocomplete="email" required /></label>
-        <label><span>Project address</span><input type="text" name="address" placeholder="Town or address" autocomplete="street-address" /></label>
-        <label class="full"><span>What can we help with? *</span>
+        <label><span>{content.nameLabel}</span><input type="text" name="name" placeholder={content.namePlaceholder} autocomplete="name" required /></label>
+        <label><span>{content.phoneLabelField}</span><input type="tel" name="phone" placeholder={content.phonePlaceholder} autocomplete="tel" required /></label>
+        <label><span>{content.emailLabel}</span><input type="email" name="email" placeholder={content.emailPlaceholder} autocomplete="email" required /></label>
+        <label><span>{content.addressLabel}</span><input type="text" name="address" placeholder={content.addressPlaceholder} autocomplete="street-address" /></label>
+        <label class="full"><span>{content.serviceLabel}</span>
           <select name="service" required>
-            <option value="">Select a service</option>
-            <option>Retractable screen doors</option><option>Motorized screens</option><option>Window screens</option>
-            <option>Sliding screen doors</option><option>Hurricane screens</option><option>Screen repair</option><option>Not sure yet</option>
+            <option value="">{content.servicePlaceholder}</option>
+            {content.serviceOptions.map((option) => <option>{option}</option>)}
           </select>
         </label>
-        <label class="full"><span>Tell us about your project *</span><textarea name="description" placeholder="What opening or screen needs attention?" required></textarea></label>
-        <label><span>Opening size (optional)</span><input type="text" name="measurements" placeholder="Approx. width × height" /></label>
+        <label class="full"><span>{content.descriptionLabel}</span><textarea name="description" placeholder={content.descriptionPlaceholder} required></textarea></label>
+        <label><span>{content.measurementsLabel}</span><input type="text" name="measurements" placeholder={content.measurementsPlaceholder} /></label>
       </div>
-      <button type="submit">Send quote request <ArrowUpRight aria-hidden="true" /></button>
-      <small>By submitting, you agree that we may contact you about your project.</small>
+      <button type="submit">{content.submitLabel} <ArrowUpRight aria-hidden="true" /></button>
+      <small>{content.consent}</small>
     </form>
   </div>
 </section>

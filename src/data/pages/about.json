@@ -1,0 +1,85 @@
+{
+  "seoTitle": "About Screen Pro | Family-Owned on Kauaʻi Since 1998",
+  "seoDescription": "Family-owned since 1998, Screen Pro provides custom retractable and power screen solutions backed by more than 25 years of experience on Kauaʻi.",
+  "hero": {
+    "eyebrow": "Our story",
+    "title": "A legacy of quality",
+    "accent": "on the Garden Isle.",
+    "description": "Family-owned, locally experienced, and committed to helping Kauaʻi homes welcome the breeze without compromising comfort."
+  },
+  "legacy": {
+    "image": "/images/screen-installation-1.avif",
+    "imageAlt": "Custom screen installation at a Kauaʻi home",
+    "badgeSuffix": "years serving Kauaʻi",
+    "eyebrowPrefix": "Family owned since",
+    "title": "More than a business.",
+    "accent": "We’re family.",
+    "leadPrefix": "For more than",
+    "leadSuffix": "years, Screen Pro has helped our neighbors experience the beauty of island living more comfortably.",
+    "paragraphs": [
+      "Living and working on Kauaʻi gives us a practical understanding of how salt air, humidity, tropical sun, trade winds, and everyday use affect a home. That experience shapes every recommendation we make.",
+      "We aren’t simply selling screens. We create custom solutions that invite in fresh air, preserve the view, and protect the spaces where island life happens."
+    ]
+  },
+  "principles": {
+    "eyebrow": "What guides us",
+    "title": "Local knowledge.",
+    "accent": "Lasting standards.",
+    "description": "Our reputation has been built one home, one opening, and one relationship at a time.",
+    "items": [
+      {
+        "icon": "waves",
+        "title": "Island experience",
+        "copy": "Solutions selected for Kauaʻi’s coastal climate, architecture, and indoor-outdoor way of life."
+      },
+      {
+        "icon": "shield",
+        "title": "Dependable quality",
+        "copy": "Careful specifications, precise measurements, professional installation, and products designed to be serviced."
+      },
+      {
+        "icon": "heart",
+        "title": "Personal care",
+        "copy": "Clear communication, honest guidance, and the same attention we would want for our own home."
+      }
+    ]
+  },
+  "expertise": {
+    "eyebrow": "The exclusive local experts",
+    "title": "Industry-leading systems,",
+    "accent": "supported here at home.",
+    "paragraphs": [
+      "Our commitment to integrity and customer care is reflected in the partners we choose. As Kauaʻi’s exclusive OEM dealer for ClearView, Rainier, Wizard, and Centor, we bring proven retractable doors, motorized shades, and large-format screen systems directly to the island.",
+      "We only recommend products that meet our standards for durability, appearance, smooth operation, and long-term serviceability."
+    ],
+    "linkLabel": "Meet our partners",
+    "linkUrl": "/partners/",
+    "points": [
+      {
+        "title": "Authorized products",
+        "copy": "Genuine systems backed by established manufacturers."
+      },
+      {
+        "title": "Current technology",
+        "copy": "Modern manual, motorized, and smart-control options."
+      },
+      {
+        "title": "Local support",
+        "copy": "Professional installation, service, and warranty guidance on Kauaʻi."
+      }
+    ]
+  },
+  "ohana": {
+    "image": "/images/custom-screen-installation-kauai.jpg",
+    "imageAlt": "Custom screen installation at a Kauaʻi home",
+    "eyebrow": "Part of our ʻohana",
+    "title": "Your home deserves",
+    "accent": "personal attention.",
+    "paragraphs": [
+      "When you choose Screen Pro, you’re not just another customer. You become a valued member of our ʻohana. From the complimentary site visit through the final walkthrough, we treat every project as if it were for our own home.",
+      "We stand behind our word, our workmanship, and our warranties. Our goal is a warm, straightforward experience and a finished space where you can enjoy the best of Kauaʻi living."
+    ],
+    "linkLabel": "Start a conversation",
+    "linkUrl": "/contact/"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "seoTitle": "Contact Screen Pro | Screen Services on Kauaʻi",
+  "seoDescription": "Contact Screen Pro for custom screen installation and repair across Kauaʻi’s North Shore, East Side, South Shore, and West Side.",
+  "hero": {
+    "eyebrow": "Start a conversation",
+    "title": "Let’s talk about",
+    "accent": "your screen project.",
+    "description": "Tell us what you need and where you’re located. We’ll follow up with helpful advice and the right next step for your Kauaʻi home or business."
+  },
+  "intro": {
+    "eyebrow": "Contact Screen Pro",
+    "title": "Local help,",
+    "accent": "without the hard sell.",
+    "description": "Questions are welcome. Reach out directly or send a few project details through the form."
+  },
+  "contactLabels": {
+    "phone": "Call us",
+    "email": "Email us",
+    "response": "Response time",
+    "responseValue": "Usually within one business day"
+  },
+  "form": {
+    "nameLabel": "Name *",
+    "phoneLabel": "Phone *",
+    "emailLabel": "Email *",
+    "townLabel": "Town",
+    "serviceLabel": "What can we help with?",
+    "servicePlaceholder": "Select a service",
+    "serviceOptions": [
+      "Retractable screen doors",
+      "Motorized screens",
+      "Window screens",
+      "Sliding screen doors",
+      "Hurricane screens",
+      "Screen repair",
+      "Not sure yet"
+    ],
+    "messageLabel": "Project details *",
+    "submitLabel": "Send message",
+    "note": "Submitting opens your email app with these details ready to send."
+  }
+}

@@ -3,35 +3,12 @@ import { ClientRouter, fade } from "astro:transitions";
 import { ArrowRight, BadgeCheck, HeartHandshake, MessagesSquare } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import page from "../data/pages/reviews.json";
+import { reviews } from "../data/cms";
 import "../styles/variables.css";
 import "../styles/reviews.css";
 
-const reviews = [
-  {
-    quote: "Screen Pro made the entire process easy. The communication was excellent, the installation was clean, and the retractable screens feel like they were always part of the house.",
-    name: "Malia R.",
-    place: "Princeville",
-    service: "Retractable screens",
-  },
-  {
-    quote: "We had a very wide lanai opening and wanted something that would disappear when not in use. The finished motorized screen is beautiful and works flawlessly.",
-    name: "David K.",
-    place: "Poʻipū",
-    service: "Power screens",
-  },
-  {
-    quote: "They repaired two old sliders other companies wanted to replace. Honest advice, quality parts, and both doors glide better than they have in years.",
-    name: "Anne P.",
-    place: "Kapaʻa",
-    service: "Screen repair",
-  },
-];
-
-const values = [
-  { icon: MessagesSquare, title: "Clear communication", copy: "Helpful guidance, straightforward recommendations, and updates throughout the project." },
-  { icon: BadgeCheck, title: "Careful workmanship", copy: "Accurate measurements, clean installation, and systems adjusted to operate properly." },
-  { icon: HeartHandshake, title: "Local support", copy: "A Kauaʻi-based team available for service, repairs, and long-term product support." },
-];
+const icons = { messages: MessagesSquare, badge: BadgeCheck, heart: HeartHandshake };
 ---
 
 <!doctype html>
@@ -39,9 +16,9 @@ const values = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Read reviews from Kauaʻi homeowners who chose Screen Pro for retractable screens, power screens, sliding screen doors, and screen repair." />
+    <meta name="description" content={page.seoDescription} />
     <link rel="icon" href="/favicon.svg" />
-    <title>Customer Reviews | Screen Pro Kauaʻi</title>
+    <title>{page.seoTitle}</title>
     <ClientRouter />
   </head>
   <body>
@@ -51,12 +28,12 @@ const values = [
       <section class="reviews-hero">
         <div class="container reviews-hero__grid">
           <div>
-            <p class="eyebrow">Homeowner reviews</p>
-            <h1>Trusted in homes<br /><em>across Kauaʻi.</em></h1>
+            <p class="eyebrow">{page.hero.eyebrow}</p>
+            <h1>{page.hero.title}<br /><em>{page.hero.accent}</em></h1>
           </div>
           <div class="reviews-rating">
-            <strong>5.0</strong>
-            <span><b aria-label="5 out of 5 stars">★★★★★</b><small>Local customer reviews</small></span>
+            <strong>{page.hero.rating}</strong>
+            <span><b aria-label="5 out of 5 stars">★★★★★</b><small>{page.hero.ratingLabel}</small></span>
           </div>
         </div>
       </section>
@@ -64,8 +41,8 @@ const values = [
       <section class="reviews-page section">
         <div class="container">
           <div class="reviews-page__intro">
-            <div><p class="eyebrow eyebrow--dark">In their words</p><h2>Thoughtful service.<br /><em>Results that last.</em></h2></div>
-            <p>Every project starts with listening. These homeowners trusted us to recommend, install, or repair the right screen solution for their space.</p>
+            <div><p class="eyebrow eyebrow--dark">{page.intro.eyebrow}</p><h2>{page.intro.title}<br /><em>{page.intro.accent}</em></h2></div>
+            <p>{page.intro.description}</p>
           </div>
           <div class="reviews-page__grid">
             {reviews.map((review) => (
@@ -84,19 +61,20 @@ const values = [
 
       <section class="review-values section">
         <div class="container">
-          <div class="review-values__head"><p class="eyebrow eyebrow--dark">What clients value</p><h2>Professional from the first conversation<br /><em>through the final walkthrough.</em></h2></div>
+          <div class="review-values__head"><p class="eyebrow eyebrow--dark">{page.valuesSection.eyebrow}</p><h2>{page.valuesSection.title}<br /><em>{page.valuesSection.accent}</em></h2></div>
           <div class="review-values__grid">
-            {values.map(({ icon: Icon, title, copy }) => (
-              <article><Icon aria-hidden="true" /><h3>{title}</h3><p>{copy}</p></article>
-            ))}
+            {page.values.map(({ icon, title, copy }) => {
+              const Icon = icons[icon as keyof typeof icons];
+              return <article><Icon aria-hidden="true" /><h3>{title}</h3><p>{copy}</p></article>;
+            })}
           </div>
         </div>
       </section>
 
       <section class="reviews-cta">
         <div class="container reviews-cta__inner">
-          <div><p class="eyebrow">Ready to get started?</p><h2>Let’s make your home<br /><em>more comfortable.</em></h2></div>
-          <a href="/free-quote/">Get a free quote <ArrowRight aria-hidden="true" /></a>
+          <div><p class="eyebrow">{page.cta.eyebrow}</p><h2>{page.cta.title}<br /><em>{page.cta.accent}</em></h2></div>
+          <a href={page.cta.url}>{page.cta.label} <ArrowRight aria-hidden="true" /></a>
         </div>
       </section>
     </main>

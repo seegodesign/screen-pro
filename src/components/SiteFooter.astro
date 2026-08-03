@@ -1,34 +1,31 @@
 ---
 import { siteSettings } from "../data/site-settings";
+import { serviceMeta } from "../data/service-meta";
+import { serviceAreaRegions } from "../data/service-areas";
 ---
 
 <footer class="site-footer">
   <div class="site-footer__container">
     <div class="site-footer__middle">
       <div>
-        <span>Explore</span>
-        <a href="/services/">Services</a>
-        <a href="/partners/">Partners</a>
-        <a href="/about/">About</a>
-        <a href="/gallery/">Gallery</a>
-        <a href="/reviews/">Reviews</a>
-        <a href="/contact/">Contact</a>
+        <span>{siteSettings.footer.exploreHeading}</span>
+        <a href="/services/">{siteSettings.nav.services}</a>
+        <a href="/partners/">{siteSettings.nav.partners}</a>
+        <a href="/about/">{siteSettings.nav.about}</a>
+        <a href="/gallery/">{siteSettings.nav.gallery}</a>
+        <a href="/reviews/">{siteSettings.nav.reviews}</a>
+        <a href="/contact/">{siteSettings.footer.contactHeading}</a>
       </div>
       <div>
-        <span>Services</span>
-        <a href="/services/screen-doors/">Retractable screens</a>
-        <a href="/services/motorized-screens/">Motorized screens</a>
-        <a href="/services/screen-repair/">Screen repair</a>
-        <a href="/services/hurricane-screens/">Hurricane screens</a>
+        <span>{siteSettings.footer.servicesHeading}</span>
+        {Object.entries(serviceMeta).slice(0, 4).map(([slug, service]) => <a href={`/services/${slug}/`}>{service.title}</a>)}
       </div>
       <div>
-        <span>Service areas</span>
-        <a href="/service-areas/north-shore-kauai/">North Shore Kauaʻi</a>
-        <a href="/service-areas/east-side-kauai/">East Side Kauaʻi</a>
-        <a href="/service-areas/south-shore-kauai/">South Shore Kauaʻi</a>
+        <span>{siteSettings.footer.serviceAreasHeading}</span>
+        {Object.entries(serviceAreaRegions).map(([slug, area]) => <a href={`/service-areas/${slug}/`}>{area.name}</a>)}
       </div>
       <div>
-        <span>Contact</span>
+        <span>{siteSettings.footer.contactHeading}</span>
         <a href={`tel:${siteSettings.phoneNumber}`}>{siteSettings.phoneDisplay}</a>
       </div>
       <a class="site-footer__logo" href="/" aria-label={`${siteSettings.businessName} home`}>
@@ -43,11 +40,11 @@ import { siteSettings } from "../data/site-settings";
 
     <div class="site-footer__bottom">
       <span>© {new Date().getFullYear()} {siteSettings.businessName}</span>
-      <span>Family owned · Serving Kauaʻi since {siteSettings.foundingYear}</span>
+      <span>{siteSettings.footer.familyOwnedPrefix} {siteSettings.foundingYear}</span>
       <a
-        href="https://seegodesign.com"
+        href={siteSettings.footer.siteByUrl}
         target="_blank"
-        rel="noopener noreferrer">Site by Seego Design</a
+        rel="noopener noreferrer">{siteSettings.footer.siteByLabel} {siteSettings.footer.siteByName}</a
       >
     </div>
   </div>
