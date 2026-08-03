@@ -3,11 +3,8 @@ import { ClientRouter, fade } from "astro:transitions";
 import { Clock3, Mail, Phone } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import { siteSettings } from "../data/site-settings";
 import "../styles/variables.css";
-
-const phone = "(808) 651-8664";
-const tel = "+18086518664";
-const email = "info@kauairetractablescreens.com";
 ---
 
 <!doctype html>
@@ -39,13 +36,13 @@ const email = "info@kauairetractablescreens.com";
             <h2>Local help,<br /><em>without the hard sell.</em></h2>
             <p>Questions are welcome. Reach out directly or send a few project details through the form.</p>
             <div class="contact-methods">
-              <a href={`tel:${tel}`}><Phone aria-hidden="true" /><span><small>Call us</small><strong>{phone}</strong></span></a>
-              <a href={`mailto:${email}`}><Mail aria-hidden="true" /><span><small>Email us</small><strong>{email}</strong></span></a>
+              <a href={`tel:${siteSettings.phoneNumber}`}><Phone aria-hidden="true" /><span><small>Call us</small><strong>{siteSettings.phoneDisplay}</strong></span></a>
+              <a href={`mailto:${siteSettings.email}`}><Mail aria-hidden="true" /><span><small>Email us</small><strong>{siteSettings.email}</strong></span></a>
               <div><Clock3 aria-hidden="true" /><span><small>Response time</small><strong>Usually within one business day</strong></span></div>
             </div>
           </aside>
 
-          <form action={`mailto:${email}`} method="post" enctype="text/plain">
+          <form action={`mailto:${siteSettings.email}`} method="post" enctype="text/plain">
             <div class="form-grid">
               <label>Name *<input name="name" autocomplete="name" required /></label>
               <label>Phone *<input name="phone" type="tel" autocomplete="tel" required /></label>

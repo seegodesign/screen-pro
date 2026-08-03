@@ -1,8 +1,19 @@
-# Astro Starter Kit: Minimal
+# Screen Pro
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Astro website for Screen Pro Retractable Doors.
+
+## Content management
+
+Sveltia CMS is available at `/admin/`. It uses the GitHub backend for the
+`seegodesign/screen-pro` repository and currently allows personal access token
+authentication.
+
+The **Site Settings** screen edits `src/data/site-settings.json`. Saving in the
+CMS commits the change to GitHub; the hosting provider must deploy repository
+commits for changes to appear on the live site.
+
+For local editing, start Astro with `npm run astro -- dev --background`, visit
+`http://localhost:4321/admin/`, and choose the local repository workflow.
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 

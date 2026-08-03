@@ -1,9 +1,6 @@
 ---
 import { ArrowUpRight } from "@lucide/astro";
-
-const phone = "(808) 651-8664";
-const tel = "+18086518664";
-const email = "info@kauairetractablescreens.com";
+import { siteSettings } from "../data/site-settings";
 ---
 
 <section class="quote" id="quote-form">
@@ -12,12 +9,12 @@ const email = "info@kauairetractablescreens.com";
       <p class="quote__eyebrow">Start your project</p>
       <h1>Request a free quote for<br /><em>your screen project.</em></h1>
       <p>Tell us what you’re working on. We’ll explore design options, discuss product features, and prepare a detailed quote for the right solution.</p>
-      <a class="quote__phone" href={`tel:${tel}`}><span>Call us directly</span><strong>{phone}</strong></a>
-      <a class="quote__email" href={`mailto:${email}`}>{email}</a>
+      <a class="quote__phone" href={`tel:${siteSettings.phoneNumber}`}><span>Call us directly</span><strong>{siteSettings.phoneDisplay}</strong></a>
+      <a class="quote__email" href={`mailto:${siteSettings.email}`}>{siteSettings.email}</a>
       <div class="quote__promise"><span>✓</span><p><b>Fast, helpful communication</b>We typically respond within one business day.</p></div>
     </div>
 
-    <form action={`mailto:${email}`} method="post" enctype="text/plain">
+    <form action={`mailto:${siteSettings.email}`} method="post" enctype="text/plain">
       <div class="form__heading"><strong>Request a free quote</strong><span>No pressure. Just helpful advice.</span></div>
       <div class="form__grid">
         <label><span>Full name *</span><input type="text" name="name" placeholder="Your name" autocomplete="name" required /></label>

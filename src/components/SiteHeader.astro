@@ -2,6 +2,7 @@
 import { MessageSquareText } from "@lucide/astro";
 import { serviceMeta } from "../data/service-meta";
 import { serviceAreaRegions } from "../data/service-areas";
+import { siteSettings } from "../data/site-settings";
 
 interface Props {
   currentService?: string;
@@ -10,15 +11,14 @@ interface Props {
 }
 
 const { currentService, currentArea, quoteHref = "/free-quote/" } = Astro.props;
-const phone = "(808) 651-8664";
 ---
 
 <div class="site-topbar">
   <div class="site-header__container site-topbar__inner">
-    <p>Custom-fit screen solutions, built for island living.</p>
+    <p>{siteSettings.tagline}</p>
     <div>
-      <span>Serving North, East & South Kauaʻi</span><a href="tel:+18086518664"
-        >{phone}</a>
+      <span>{siteSettings.serviceAreaLabel}</span><a href={`tel:${siteSettings.phoneNumber}`}
+        >{siteSettings.phoneDisplay}</a>
     </div>
   </div>
 </div>
@@ -28,13 +28,13 @@ const phone = "(808) 651-8664";
     <a
       class="site-header__logo"
       href="/"
-      aria-label="Screen Pro Retractable Doors home"
+      aria-label={`${siteSettings.businessName} home`}
     >
       <img
         src="/images/logo.webp"
         width="400"
         height="154"
-        alt="Screen Pro Retractable Doors"
+        alt={siteSettings.businessName}
       />
     </a>
     <nav class="site-header__nav" aria-label="Primary navigation">

@@ -1,6 +1,5 @@
 ---
-const phone = "(808) 651-8664";
-const tel = "+18086518664";
+import { siteSettings } from "../data/site-settings";
 ---
 
 <footer class="site-footer">
@@ -30,21 +29,21 @@ const tel = "+18086518664";
       </div>
       <div>
         <span>Contact</span>
-        <a href={`tel:${tel}`}>{phone}</a>
+        <a href={`tel:${siteSettings.phoneNumber}`}>{siteSettings.phoneDisplay}</a>
       </div>
-      <a class="site-footer__logo" href="/" aria-label="Screen Pro home">
+      <a class="site-footer__logo" href="/" aria-label={`${siteSettings.businessName} home`}>
         <img
           src="/images/logo-light.webp"
           width="1723"
           height="522"
-          alt="Screen Pro Retractable Doors"
+          alt={siteSettings.businessName}
         />
       </a>
     </div>
 
     <div class="site-footer__bottom">
-      <span>© {new Date().getFullYear()} Screen Pro Retractable Doors</span>
-      <span>Family owned · Serving Kauaʻi since 1998</span>
+      <span>© {new Date().getFullYear()} {siteSettings.businessName}</span>
+      <span>Family owned · Serving Kauaʻi since {siteSettings.foundingYear}</span>
       <a
         href="https://seegodesign.com"
         target="_blank"

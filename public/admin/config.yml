@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: seegodesign/screen-pro
+  auth_methods: [token]
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+singletons:
+  - name: settings
+    label: Site Settings
+    icon: settings
+    file: src/data/site-settings.json
+    format: json
+    fields:
+      - label: Site identity
+        name: identity
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Business name, name: businessName, widget: string }
+          - { label: Website URL, name: siteUrl, widget: string, hint: "Include https:// and do not include a trailing slash." }
+          - { label: Default meta description, name: defaultMetaDescription, widget: text }
+      - label: Contact details
+        name: contact
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Display phone number, name: phoneDisplay, widget: string, hint: "The formatted number shown to visitors." }
+          - { label: Click-to-call number, name: phoneNumber, widget: string, hint: "Use international format, for example +18086518664." }
+          - { label: Email address, name: email, widget: string }
+      - label: Business details
+        name: business
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Header tagline, name: tagline, widget: string }
+          - { label: Service area label, name: serviceAreaLabel, widget: string }
+          - { label: Founding year, name: foundingYear, widget: number, value_type: int, min: 1900, max: 2100 }

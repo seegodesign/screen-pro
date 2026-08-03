@@ -7,6 +7,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
 import serviceContent from "../../data/service-content.json";
 import { serviceAreas } from "../../data/service-areas";
+import { siteSettings } from "../../data/site-settings";
 import "../../styles/variables.css";
 import "../../styles/service-detail.css";
 
@@ -39,10 +40,7 @@ const faqs = content.faqs as Faq[];
 const relatedSlugs = content.relatedSlugs as ServiceSlug[];
 const related = relatedSlugs.map((relatedSlug) => ({ slug: relatedSlug, ...serviceMeta[relatedSlug] }));
 
-const phone = "(808) 651-8664";
-const tel = "+18086518664";
-const email = "info@kauairetractablescreens.com";
-const siteUrl = "https://kauairetractablescreens.com";
+const siteUrl = siteSettings.siteUrl;
 const pageUrl = `${siteUrl}/services/${slug}/`;
 const seoDescription = `${intro} Professional service and installation across Kauaʻi’s North, East, and South sides.`;
 const jsonLd = {
@@ -85,7 +83,7 @@ const jsonLd = {
     <link rel="canonical" href={pageUrl} />
     <link rel="icon" href="/favicon.svg" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <title>{meta.heroKeyword} | Screen Pro Retractable Doors</title>
+    <title>{meta.heroKeyword} | {siteSettings.businessName}</title>
     <ClientRouter />
   </head>
   <body>
@@ -100,7 +98,7 @@ const jsonLd = {
           <p class="hero__lede">{intro}</p>
           <div class="hero__actions">
             <a class="button button--bronze" href="/free-quote/">Get a free quote <span class="button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 12 12 4M6 4h6v6"/></svg></span></a>
-            <a class="button button--glass" href={`tel:${tel}`}>Call {phone} <Phone aria-hidden="true" /></a>
+            <a class="button button--glass" href={`tel:${siteSettings.phoneNumber}`}>Call {siteSettings.phoneDisplay} <Phone aria-hidden="true" /></a>
           </div>
         </div>
       </section>
@@ -112,7 +110,7 @@ const jsonLd = {
             <h2>{meta.title} on Kauaʻi,<br /><em>done right.</em></h2>
             <p class="lead">{meta.description}</p>
             <ul class="check-list">{meta.bullets.map((bullet) => <li><span>✓</span>{bullet}</li>)}</ul>
-            <a class="button button--dark" href={`tel:${tel}`}>Call for a free estimate <Phone aria-hidden="true" /></a>
+            <a class="button button--dark" href={`tel:${siteSettings.phoneNumber}`}>Call for a free estimate <Phone aria-hidden="true" /></a>
           </div>
           <div>
             <p class="eyebrow eyebrow--dark">Why it matters</p>

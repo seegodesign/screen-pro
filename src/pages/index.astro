@@ -17,6 +17,7 @@ import ServiceCard from "../components/ServiceCard.astro";
 import ValueCard from "../components/ValueCard.astro";
 import { serviceAreas } from "../data/service-areas";
 import { services } from "../data/services";
+import { siteSettings } from "../data/site-settings";
 import "../styles/variables.css";
 import "../styles/home.css";
 
@@ -121,9 +122,7 @@ const reviews = [
   },
 ];
 
-const phone = "(808) 651-8664";
-const tel = "+18086518664";
-const siteUrl = "https://kauairetractablescreens.com";
+const siteUrl = siteSettings.siteUrl;
 const businessId = `${siteUrl}/#business`;
 
 const jsonLd = {
@@ -133,22 +132,21 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: `${siteUrl}/`,
-      name: "Screen Pro Retractable Doors",
+      name: siteSettings.businessName,
       publisher: { "@id": businessId },
       inLanguage: "en-US",
     },
     {
       "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
       "@id": businessId,
-      name: "Screen Pro Retractable Doors",
+      name: siteSettings.businessName,
       url: `${siteUrl}/`,
       logo: `${siteUrl}/images/logo.webp`,
       image: `${siteUrl}/images/kauai-luxury-motorized-screen.jpg`,
-      description:
-        "Custom retractable screen doors, motorized power screens, window screens, sliding screen doors, hurricane screens, and screen repair for homes on North, East, and South Kauaʻi.",
-      telephone: tel,
-      email: "info@kauairetractablescreens.com",
-      foundingDate: "1998",
+      description: siteSettings.defaultMetaDescription,
+      telephone: siteSettings.phoneNumber,
+      email: siteSettings.email,
+      foundingDate: String(siteSettings.foundingYear),
       areaServed: [
         { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
         ...serviceAreas.map((town) => ({
@@ -188,7 +186,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Premium custom screen doors, window screens, power screens, hurricane screens, and screen repair for homes on Kauaʻi’s North Shore, East Side, and South Shore."
+      content={siteSettings.defaultMetaDescription}
     />
     <meta name="theme-color" content="#12324a" />
     <link rel="icon" href="/favicon.svg" />
@@ -235,8 +233,8 @@ const jsonLd = {
                 ></span
               ></a
             >
-            <a class="button button--glass" href={`tel:${tel}`}>
-              <span><small>Call us today</small>{phone}</span>
+            <a class="button button--glass" href={`tel:${siteSettings.phoneNumber}`}>
+              <span><small>Call us today</small>{siteSettings.phoneDisplay}</span>
               <Phone class="button__icon" aria-hidden="true" />
             </a>
           </div>

@@ -3,8 +3,11 @@ import { ClientRouter, fade } from "astro:transitions";
 import { ArrowUpRight, BadgeCheck, HeartHandshake, ShieldCheck, Waves } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import { siteSettings } from "../data/site-settings";
 import "../styles/variables.css";
 import "../styles/about.css";
+
+const yearsInBusiness = new Date().getFullYear() - siteSettings.foundingYear;
 ---
 
 <!doctype html>
@@ -12,7 +15,7 @@ import "../styles/about.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Family-owned since 1998, Screen Pro provides custom retractable and power screen solutions backed by more than 25 years of experience on Kauaʻi." />
+    <meta name="description" content={`Family-owned since ${siteSettings.foundingYear}, Screen Pro provides custom retractable and power screen solutions backed by more than ${yearsInBusiness - 1} years of experience on Kauaʻi.`} />
     <link rel="icon" href="/favicon.svg" />
     <title>About Screen Pro | Family-Owned on Kauaʻi Since 1998</title>
     <ClientRouter />
@@ -33,12 +36,12 @@ import "../styles/about.css";
         <div class="container legacy__grid">
           <div class="legacy__image">
             <img src="/images/screen-installation-1.avif" alt="Custom screen installation at a Kauaʻi home" />
-            <span><strong>25+</strong> years serving Kauaʻi</span>
+            <span><strong>{yearsInBusiness}+</strong> years serving Kauaʻi</span>
           </div>
           <div class="legacy__content">
-            <p class="eyebrow eyebrow--dark">Family owned since 1998</p>
+            <p class="eyebrow eyebrow--dark">Family owned since {siteSettings.foundingYear}</p>
             <h2>More than a business.<br /><em>We’re family.</em></h2>
-            <p class="lead">For more than 25 years, Screen Pro has helped our neighbors experience the beauty of island living more comfortably.</p>
+            <p class="lead">For more than {yearsInBusiness - 1} years, Screen Pro has helped our neighbors experience the beauty of island living more comfortably.</p>
             <p>Living and working on Kauaʻi gives us a practical understanding of how salt air, humidity, tropical sun, trade winds, and everyday use affect a home. That experience shapes every recommendation we make.</p>
             <p>We aren’t simply selling screens. We create custom solutions that invite in fresh air, preserve the view, and protect the spaces where island life happens.</p>
           </div>
