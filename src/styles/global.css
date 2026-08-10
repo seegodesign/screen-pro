@@ -248,6 +248,16 @@ em {
   color: var(--muted);
 }
 
+.form-status {
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.form-status[data-state="error"] {
+  color: #a24a39;
+}
+
 @media (max-width: 760px) {
   .container {
     width: min(calc(100% - 32px), 1180px);

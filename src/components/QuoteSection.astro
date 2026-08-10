@@ -25,11 +25,7 @@ const content = page.content;
       </div>
     </div>
 
-    <form
-      action="https://submit-form.com/YZDxl4NqJ"
-      method="post"
-      enctype="text/plain"
-    >
+    <form action="https://submit-form.com/YZDxl4NqJ" method="post">
       <div class="form__heading">
         <strong>{content.formTitle}</strong><span>{content.formSubtitle}</span>
       </div>
@@ -93,10 +89,58 @@ const content = page.content;
       <button type="submit"
         >{content.submitLabel} <ArrowUpRight aria-hidden="true" /></button
       >
+      <p class="form__status" data-form-status hidden aria-live="polite"></p>
       <small>{content.consent}</small>
     </form>
   </div>
 </section>
+
+<script>
+  const form = document.querySelector("#quote-form form");
+
+  if (form instanceof HTMLFormElement) {
+    const status = form.querySelector("[data-form-status]");
+    const button = form.querySelector("button");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!(status instanceof HTMLElement) || !(button instanceof HTMLButtonElement)) {
+        return;
+      }
+
+      status.hidden = true;
+      button.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        form.reset();
+        delete status.dataset.state;
+        status.textContent =
+          "Thanks. We received your request and will follow up soon.";
+        status.hidden = false;
+      } catch {
+        status.dataset.state = "error";
+        status.textContent = "Something went wrong. Please try again.";
+        status.hidden = false;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>
 
 <style>
   .quote {
@@ -293,6 +337,16 @@ const content = page.content;
     color: #7a878d;
     text-align: center;
     font-size: 0.62rem;
+  }
+  .form__status {
+    margin: 0.8rem 0 0;
+    color: #4b5d65;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .form__status[data-state="error"] {
+    color: #a24a39;
   }
   @media (max-width: 760px) {
     .quote {

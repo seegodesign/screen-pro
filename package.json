@@ -12,8 +12,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.10",
     "@lucide/astro": "^1.27.0",
     "astro": "^7.2.0",
+    "typescript": "^6.0.3",
     "wrangler": "^4.120.1"
   }
 }
