@@ -1,5 +1,5 @@
 ---
-import { ArrowUpRight } from "@lucide/astro";
+import { ArrowUpRight, CheckCircle2 } from "@lucide/astro";
 import { siteSettings } from "../data/site-settings";
 import page from "../data/pages/free-quote.json";
 
@@ -26,10 +26,11 @@ const content = page.content;
     </div>
 
     <form action="https://submit-form.com/YZDxl4NqJ" method="post">
-      <div class="form__heading">
-        <strong>{content.formTitle}</strong><span>{content.formSubtitle}</span>
-      </div>
-      <div class="form__grid">
+      <div data-form-content>
+        <div class="form__heading">
+          <strong>{content.formTitle}</strong><span>{content.formSubtitle}</span>
+        </div>
+        <div class="form__grid">
         <label
           ><span>{content.nameLabel}</span><input
             type="text"
@@ -85,12 +86,18 @@ const content = page.content;
             placeholder={content.measurementsPlaceholder}
           /></label
         >
+        </div>
+        <button type="submit"
+          >{content.submitLabel} <ArrowUpRight aria-hidden="true" /></button
+        >
+        <p class="form__status" data-form-status hidden aria-live="polite"></p>
+        <small>{content.consent}</small>
       </div>
-      <button type="submit"
-        >{content.submitLabel} <ArrowUpRight aria-hidden="true" /></button
-      >
-      <p class="form__status" data-form-status hidden aria-live="polite"></p>
-      <small>{content.consent}</small>
+      <div class="form__success" data-form-success hidden tabindex="-1">
+        <CheckCircle2 aria-hidden="true" />
+        <strong>Thank you!</strong>
+        <p>We received your quote request and will follow up soon.</p>
+      </div>
     </form>
   </div>
 </section>
@@ -101,11 +108,18 @@ const content = page.content;
   if (form instanceof HTMLFormElement) {
     const status = form.querySelector("[data-form-status]");
     const button = form.querySelector("button");
+    const content = form.querySelector("[data-form-content]");
+    const success = form.querySelector("[data-form-success]");
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      if (!(status instanceof HTMLElement) || !(button instanceof HTMLButtonElement)) {
+      if (
+        !(status instanceof HTMLElement) ||
+        !(button instanceof HTMLButtonElement) ||
+        !(content instanceof HTMLElement) ||
+        !(success instanceof HTMLElement)
+      ) {
         return;
       }
 
@@ -127,10 +141,9 @@ const content = page.content;
         }
 
         form.reset();
-        delete status.dataset.state;
-        status.textContent =
-          "Thanks. We received your request and will follow up soon.";
-        status.hidden = false;
+        content.hidden = true;
+        success.hidden = false;
+        success.focus();
       } catch {
         status.dataset.state = "error";
         status.textContent = "Something went wrong. Please try again.";
@@ -331,7 +344,7 @@ const content = page.content;
     width: 1rem;
     height: 1rem;
   }
-  form > small {
+  [data-form-content] > small {
     margin-top: 0.8rem;
     display: block;
     color: #7a878d;
@@ -347,6 +360,32 @@ const content = page.content;
   }
   .form__status[data-state="error"] {
     color: #a24a39;
+  }
+  .form__success {
+    min-height: 420px;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    text-align: center;
+  }
+  .form__success[hidden] {
+    display: none;
+  }
+  .form__success svg {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-bronze);
+  }
+  .form__success strong {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  .form__success p {
+    max-width: 330px;
+    margin: 0.5rem 0 0;
+    color: #6b7a81;
   }
   @media (max-width: 760px) {
     .quote {

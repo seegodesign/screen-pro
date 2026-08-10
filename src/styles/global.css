@@ -258,6 +258,37 @@ em {
   color: #a24a39;
 }
 
+.form-success {
+  min-height: 430px;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.form-success[hidden] {
+  display: none;
+}
+
+.form-success svg {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.25rem;
+  color: var(--bronze);
+}
+
+.form-success strong {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.form-success p {
+  max-width: 330px;
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
 @media (max-width: 760px) {
   .container {
     width: min(calc(100% - 32px), 1180px);

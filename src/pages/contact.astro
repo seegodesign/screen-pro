@@ -1,6 +1,6 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
-import { Clock3, Mail, Phone } from "@lucide/astro";
+import { CheckCircle2, Clock3, Mail, Phone } from "@lucide/astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { siteSettings } from "../data/site-settings";
@@ -61,7 +61,8 @@ import "../styles/variables.css";
           </aside>
 
           <form action="https://submit-form.com/eBLNnJMRD" method="post">
-            <div class="form-grid">
+            <div data-form-content>
+              <div class="form-grid">
               <label
                 >{page.form.nameLabel}<input
                   name="name"
@@ -108,10 +109,16 @@ import "../styles/variables.css";
                   rows="5"
                   required></textarea></label
               >
+              </div>
+              <button type="submit">{page.form.submitLabel}</button>
+              <p class="form-status" data-form-status hidden aria-live="polite"></p>
+              <small class="form-note">{page.form.note}</small>
             </div>
-            <button type="submit">{page.form.submitLabel}</button>
-            <p class="form-status" data-form-status hidden aria-live="polite"></p>
-            <small class="form-note">{page.form.note}</small>
+            <div class="form-success" data-form-success hidden tabindex="-1">
+              <CheckCircle2 aria-hidden="true" />
+              <strong>Thank you!</strong>
+              <p>We received your message and will respond soon.</p>
+            </div>
           </form>
         </div>
       </section>
@@ -127,11 +134,18 @@ import "../styles/variables.css";
   if (form instanceof HTMLFormElement) {
     const status = form.querySelector("[data-form-status]");
     const button = form.querySelector("button");
+    const content = form.querySelector("[data-form-content]");
+    const success = form.querySelector("[data-form-success]");
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      if (!(status instanceof HTMLElement) || !(button instanceof HTMLButtonElement)) {
+      if (
+        !(status instanceof HTMLElement) ||
+        !(button instanceof HTMLButtonElement) ||
+        !(content instanceof HTMLElement) ||
+        !(success instanceof HTMLElement)
+      ) {
         return;
       }
 
@@ -153,9 +167,9 @@ import "../styles/variables.css";
         }
 
         form.reset();
-        delete status.dataset.state;
-        status.textContent = "Thanks. We received your message and will respond soon.";
-        status.hidden = false;
+        content.hidden = true;
+        success.hidden = false;
+        success.focus();
       } catch {
         status.dataset.state = "error";
         status.textContent = "Something went wrong. Please try again.";
