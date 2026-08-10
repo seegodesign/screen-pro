@@ -37,25 +37,81 @@ import "../styles/variables.css";
             <h2>{page.intro.title}<br /><em>{page.intro.accent}</em></h2>
             <p>{page.intro.description}</p>
             <div class="contact-methods">
-              <a href={`tel:${siteSettings.phoneNumber}`}><Phone aria-hidden="true" /><span><small>{page.contactLabels.phone}</small><strong>{siteSettings.phoneDisplay}</strong></span></a>
-              <a href={`mailto:${siteSettings.email}`}><Mail aria-hidden="true" /><span><small>{page.contactLabels.email}</small><strong>{siteSettings.email}</strong></span></a>
-              <div><Clock3 aria-hidden="true" /><span><small>{page.contactLabels.response}</small><strong>{page.contactLabels.responseValue}</strong></span></div>
+              <a href={`tel:${siteSettings.phoneNumber}`}
+                ><Phone aria-hidden="true" /><span
+                  ><small>{page.contactLabels.phone}</small><strong
+                    >{siteSettings.phoneDisplay}</strong
+                  ></span
+                ></a
+              >
+              <a href={`mailto:${siteSettings.email}`}
+                ><Mail aria-hidden="true" /><span
+                  ><small>{page.contactLabels.email}</small><strong
+                    >{siteSettings.email}</strong
+                  ></span
+                ></a
+              >
+              <div>
+                <Clock3 aria-hidden="true" /><span
+                  ><small>{page.contactLabels.response}</small><strong
+                    >{page.contactLabels.responseValue}</strong
+                  ></span>
+              </div>
             </div>
           </aside>
 
-          <form action={`mailto:${siteSettings.email}`} method="post" enctype="text/plain">
+          <form
+            action="https://submit-form.com/eBLNnJMRD"
+            method="post"
+            enctype="text/plain"
+          >
             <div class="form-grid">
-              <label>{page.form.nameLabel}<input name="name" autocomplete="name" required /></label>
-              <label>{page.form.phoneLabel}<input name="phone" type="tel" autocomplete="tel" required /></label>
-              <label>{page.form.emailLabel}<input name="email" type="email" autocomplete="email" required /></label>
-              <label>{page.form.townLabel}<input name="town" autocomplete="address-level2" /></label>
-              <label class="full">{page.form.serviceLabel}
+              <label
+                >{page.form.nameLabel}<input
+                  name="name"
+                  autocomplete="name"
+                  required
+                /></label
+              >
+              <label
+                >{page.form.phoneLabel}<input
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  required
+                /></label
+              >
+              <label
+                >{page.form.emailLabel}<input
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                /></label
+              >
+              <label
+                >{page.form.townLabel}<input
+                  name="town"
+                  autocomplete="address-level2"
+                /></label
+              >
+              <label class="full"
+                >{page.form.serviceLabel}
                 <select name="service">
                   <option value="">{page.form.servicePlaceholder}</option>
-                  {page.form.serviceOptions.map((option) => <option>{option}</option>)}
+                  {
+                    page.form.serviceOptions.map((option) => (
+                      <option>{option}</option>
+                    ))
+                  }
                 </select>
               </label>
-              <label class="full">{page.form.messageLabel}<textarea name="message" rows="5" required></textarea></label>
+              <label class="full"
+                >{page.form.messageLabel}<textarea
+                  name="message"
+                  rows="5"
+                  required></textarea></label
+              >
             </div>
             <button type="submit">{page.form.submitLabel}</button>
             <small class="form-note">{page.form.note}</small>
