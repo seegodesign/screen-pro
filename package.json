@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@lucide/astro": "^1.27.0",
-    "astro": "^7.1.4"
+    "astro": "^7.2.0",
+    "wrangler": "^4.120.1"
   }
 }
