@@ -2,6 +2,7 @@
 import { ClientRouter, fade } from "astro:transitions";
 import { ArrowUpRight, Phone } from "@lucide/astro";
 import FaqAccordion from "../../components/FaqAccordion.astro";
+import SeoHead from "../../components/SeoHead.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { serviceMeta, type ServiceSlug } from "../../data/service-meta";
@@ -22,6 +23,15 @@ type PowerScreenSeries = {
   maxDrop: string;
   summary: string;
 };
+type ServiceContent = {
+  heroImage: string;
+  intro: string;
+  benefits: Benefit[];
+  process: ProcessStep[];
+  series?: PowerScreenSeries[];
+  faqs: Faq[];
+  relatedSlugs: ServiceSlug[];
+};
 
 export function getStaticPaths() {
   return Object.keys(serviceMeta).map((slug) => ({ params: { slug } }));
@@ -31,19 +41,20 @@ const slug = Astro.params.slug as ServiceSlug;
 const meta = serviceMeta[slug];
 if (!meta) return Astro.redirect("/#services");
 
-const content = serviceContent[slug];
+const content = (serviceContent as Record<string, ServiceContent>)[slug];
 const heroImage = content.heroImage;
 const intro = content.intro;
-const benefits = content.benefits as Benefit[];
-const process = content.process as ProcessStep[];
-const series = ("series" in content ? content.series : []) as PowerScreenSeries[];
-const faqs = content.faqs as Faq[];
-const relatedSlugs = content.relatedSlugs as ServiceSlug[];
+const benefits = content.benefits;
+const process = content.process;
+const series = content.series ?? [];
+const faqs = content.faqs;
+const relatedSlugs = content.relatedSlugs;
 const related = relatedSlugs.map((relatedSlug) => ({ slug: relatedSlug, ...serviceMeta[relatedSlug] }));
 
 const siteUrl = siteSettings.siteUrl;
 const pageUrl = `${siteUrl}/services/${slug}/`;
-const seoDescription = `${intro} Professional service and installation across Kauaʻi’s North, East, South, and West sides.`;
+const seoTitle = `${meta.heroKeyword} | ${siteSettings.businessName}`;
+const seoDescription = meta.description;
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -54,7 +65,7 @@ const jsonLd = {
       serviceType: meta.title,
       description: intro,
       url: pageUrl,
-      image: heroImage,
+      image: new URL(heroImage, `${siteUrl}/`).toString(),
       areaServed: [
         { "@type": "AdministrativeArea", name: "Kauaʻi, Hawaii" },
         ...serviceAreas.map((town) => ({ "@type": "City", name: `${town}, Hawaii` })),
@@ -77,14 +88,8 @@ const jsonLd = {
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={seoDescription} />
-    <meta name="theme-color" content="#12324a" />
-    <link rel="canonical" href={pageUrl} />
-    <link rel="icon" type="image/png" href="/images/logomark.png" />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <title>{meta.heroKeyword} | {siteSettings.businessName}</title>
+    <SeoHead title={seoTitle} description={seoDescription} path={`/services/${slug}/`} image={heroImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <ClientRouter />
   </head>
   <body>

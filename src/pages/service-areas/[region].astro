@@ -1,6 +1,7 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import { ArrowRight, ArrowUpRight } from "@lucide/astro";
+import SeoHead from "../../components/SeoHead.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import "../../styles/variables.css";
@@ -23,6 +24,8 @@ const siteUrl = siteSettings.siteUrl;
 const pageUrl = `${siteUrl}/service-areas/${region}/`;
 const services = Object.entries(serviceMeta);
 const otherRegions = Object.entries(serviceAreaRegions).filter(([slug]) => slug !== region);
+const townCopy = area.townCopy as Record<string, string>;
+const seoTitle = `${area.title}${page.titleSuffix}`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -68,14 +71,8 @@ const jsonLd = {
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={area.description} />
-    <meta name="theme-color" content="#12324a" />
-    <link rel="canonical" href={pageUrl} />
-    <link rel="icon" type="image/png" href="/images/logomark.png" />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <title>{area.title}{page.titleSuffix}</title>
+    <SeoHead title={seoTitle} description={area.description} path={`/service-areas/${region}/`} image={area.heroImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <ClientRouter />
   </head>
   <body>
@@ -103,7 +100,7 @@ const jsonLd = {
         <div class="container">
           <div class="section-head"><div><p class="eyebrow eyebrow--dark">{page.communities.eyebrow}</p><h2>{page.communities.title}<br /><em>{area.shortName}.</em></h2></div><p>{page.communities.description}</p></div>
           <div class="town-grid">
-            {area.towns.map((town, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{town}</h3><p>{area.townCopy[town]}</p><a href="/free-quote/">{page.communities.requestPrefix} {town} <b><ArrowRight aria-hidden="true" /></b></a></article>)}
+            {area.towns.map((town, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{town}</h3><p>{townCopy[town]}</p><a href="/free-quote/">{page.communities.requestPrefix} {town} <b><ArrowRight aria-hidden="true" /></b></a></article>)}
           </div>
         </div>
       </section>

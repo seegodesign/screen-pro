@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const orderedEntry = {
   order: z.number().int().positive(),
@@ -11,7 +12,7 @@ const partners = defineCollection({
     name: z.string(),
     shortName: z.string(),
     logo: z.string(),
-    url: z.string().url(),
+    url: z.url(),
     label: z.string(),
     homepageCopy: z.string(),
     intro: z.string(),

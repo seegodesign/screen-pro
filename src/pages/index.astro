@@ -13,6 +13,7 @@ import {
 } from "@lucide/astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import SeoHead from "../components/SeoHead.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import ValueCard from "../components/ValueCard.astro";
 import { serviceAreas } from "../data/service-areas";
@@ -87,17 +88,8 @@ const jsonLd = {
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content={page.seoDescription}
-    />
-    <meta name="theme-color" content="#12324a" />
-    <link rel="icon" type="image/png" href="/images/logomark.png" />
-    <link rel="preconnect" href="https://images.unsplash.com" />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    <title>{page.seoTitle}</title>
+    <SeoHead title={page.seoTitle} description={page.seoDescription} path="/" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <ClientRouter />
   </head>
   <body>

@@ -1,5 +1,6 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
+import SeoHead from "../components/SeoHead.astro";
 import QuoteSection from "../components/QuoteSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
@@ -10,11 +11,7 @@ import "../styles/variables.css";
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={page.seoDescription} />
-    <link rel="icon" type="image/png" href="/images/logomark.png" />
-    <title>{page.seoTitle}</title>
+    <SeoHead title={page.seoTitle} description={page.seoDescription} path="/free-quote/" />
     <ClientRouter />
   </head>
   <body class="quote-page">

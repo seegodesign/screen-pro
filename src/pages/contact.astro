@@ -1,6 +1,7 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
-import { CheckCircle2, Clock3, Mail, Phone } from "@lucide/astro";
+import { CircleCheck, Clock3, Mail, Phone } from "@lucide/astro";
+import SeoHead from "../components/SeoHead.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { siteSettings } from "../data/site-settings";
@@ -11,11 +12,7 @@ import "../styles/variables.css";
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={page.seoDescription} />
-    <link rel="icon" type="image/png" href="/images/logomark.png" />
-    <title>{page.seoTitle}</title>
+    <SeoHead title={page.seoTitle} description={page.seoDescription} path="/contact/" />
     <ClientRouter />
   </head>
   <body>
@@ -115,7 +112,7 @@ import "../styles/variables.css";
               <small class="form-note">{page.form.note}</small>
             </div>
             <div class="form-success" data-form-success hidden tabindex="-1">
-              <CheckCircle2 aria-hidden="true" />
+              <CircleCheck aria-hidden="true" />
               <strong>Thank you!</strong>
               <p>We received your message and will respond soon.</p>
             </div>

@@ -1,5 +1,5 @@
 ---
-import { ArrowUpRight, CheckCircle2 } from "@lucide/astro";
+import { ArrowUpRight, CircleCheck } from "@lucide/astro";
 import { siteSettings } from "../data/site-settings";
 import page from "../data/pages/free-quote.json";
 
@@ -94,7 +94,7 @@ const content = page.content;
         <small>{content.consent}</small>
       </div>
       <div class="form__success" data-form-success hidden tabindex="-1">
-        <CheckCircle2 aria-hidden="true" />
+        <CircleCheck aria-hidden="true" />
         <strong>Thank you!</strong>
         <p>We received your quote request and will follow up soon.</p>
       </div>

@@ -1,6 +1,7 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import { ArrowRight } from "@lucide/astro";
+import SeoHead from "../components/SeoHead.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import page from "../data/pages/gallery.json";
@@ -13,11 +14,7 @@ import "../styles/gallery.css";
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={page.seoDescription} />
-    <link rel="icon" type="image/png" href="/images/logomark.png" />
-    <title>{page.seoTitle}</title>
+    <SeoHead title={page.seoTitle} description={page.seoDescription} path="/gallery/" />
     <ClientRouter />
   </head>
   <body>

@@ -1,6 +1,7 @@
 ---
 import { ClientRouter, fade } from "astro:transitions";
 import { ArrowRight, BadgeCheck, HeartHandshake, MessagesSquare } from "@lucide/astro";
+import SeoHead from "../components/SeoHead.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import page from "../data/pages/reviews.json";
@@ -14,11 +15,7 @@ const icons = { messages: MessagesSquare, badge: BadgeCheck, heart: HeartHandsha
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={page.seoDescription} />
-    <link rel="icon" type="image/png" href="/images/logomark.png" />
-    <title>{page.seoTitle}</title>
+    <SeoHead title={page.seoTitle} description={page.seoDescription} path="/reviews/" />
     <ClientRouter />
   </head>
   <body>
