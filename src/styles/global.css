@@ -225,6 +225,10 @@ em {
   outline: 2px solid rgba(185, 133, 82, 0.35);
 }
 
+.cf-turnstile {
+  margin-top: 1.25rem;
+}
+
 .contact-grid button {
   min-height: 52px;
   margin-top: 1.25rem;
