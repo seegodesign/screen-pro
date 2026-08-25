@@ -12,7 +12,11 @@ import "../styles/variables.css";
 <!doctype html>
 <html lang="en" transition:animate={fade({ duration: 300 })}>
   <head>
-    <SeoHead title={page.seoTitle} description={page.seoDescription} path="/contact/" />
+    <SeoHead
+      title={page.seoTitle}
+      description={page.seoDescription}
+      path="/contact/"
+    />
     <ClientRouter />
   </head>
   <body>
@@ -52,63 +56,68 @@ import "../styles/variables.css";
                 <Clock3 aria-hidden="true" /><span
                   ><small>{page.contactLabels.response}</small><strong
                     >{page.contactLabels.responseValue}</strong
-                  ></span>
+                  ></span
+                >
               </div>
             </div>
           </aside>
 
-          <form action="https://submit-form.com/eBLNnJMRD" method="post">
+          <form
+            action="https://forms.seegodesign.com/f/fm_ytpnsLborBrq3DoA"
+            method="post"
+          >
             <div data-form-content>
               <div class="form-grid">
-              <label
-                >{page.form.nameLabel}<input
-                  name="name"
-                  autocomplete="name"
-                  required
-                /></label
-              >
-              <label
-                >{page.form.phoneLabel}<input
-                  name="phone"
-                  type="tel"
-                  autocomplete="tel"
-                  required
-                /></label
-              >
-              <label
-                >{page.form.emailLabel}<input
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required
-                /></label
-              >
-              <label
-                >{page.form.townLabel}<input
-                  name="town"
-                  autocomplete="address-level2"
-                /></label
-              >
-              <label class="full"
-                >{page.form.serviceLabel}
-                <select name="service">
-                  <option value="">{page.form.servicePlaceholder}</option>
-                  {
-                    page.form.serviceOptions.map((option) => (
-                      <option>{option}</option>
-                    ))
-                  }
-                </select>
-              </label>
-              <label class="full"
-                >{page.form.messageLabel}<textarea
-                  name="message"
-                  rows="5"
-                  required></textarea></label
-              >
+                <label
+                  >{page.form.nameLabel}<input
+                    name="name"
+                    autocomplete="name"
+                    required
+                  /></label
+                >
+                <label
+                  >{page.form.phoneLabel}<input
+                    name="phone"
+                    type="tel"
+                    autocomplete="tel"
+                    required
+                  /></label
+                >
+                <label
+                  >{page.form.emailLabel}<input
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                  /></label
+                >
+                <label
+                  >{page.form.townLabel}<input
+                    name="town"
+                    autocomplete="address-level2"
+                  /></label
+                >
+                <label class="full"
+                  >{page.form.serviceLabel}
+                  <select name="service">
+                    <option value="">{page.form.servicePlaceholder}</option>
+                    {
+                      page.form.serviceOptions.map((option) => (
+                        <option>{option}</option>
+                      ))
+                    }
+                  </select>
+                </label>
+                <label class="full"
+                  >{page.form.messageLabel}<textarea
+                    name="message"
+                    rows="5"
+                    required></textarea></label
+                >
               </div>
               <button type="submit">{page.form.submitLabel}</button>
-              <p class="form-status" data-form-status hidden aria-live="polite"></p>
+              <p class="form-status" data-form-status hidden aria-live="polite">
+              </p>
               <small class="form-note">{page.form.note}</small>
             </div>
             <div class="form-success" data-form-success hidden tabindex="-1">
