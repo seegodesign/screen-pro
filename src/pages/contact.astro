@@ -23,7 +23,7 @@ const FORM_ID = "fm_ytpnsLborBrq3DoA";
     <ClientRouter />
     <script
       is:inline
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
       async
       defer></script>
   </head>
@@ -159,7 +159,15 @@ const FORM_ID = "fm_ytpnsLborBrq3DoA";
 
 <script>
   type TurnstileApi = {
-    render: (container: HTMLElement) => string;
+    render: (
+      container: HTMLElement,
+      options: {
+        sitekey: string;
+        action?: string;
+        cData?: string;
+        "response-field-name"?: string;
+      },
+    ) => string;
     reset: (widgetId?: string) => void;
   };
 
@@ -182,15 +190,25 @@ const FORM_ID = "fm_ytpnsLborBrq3DoA";
     let widgetId: string | undefined;
 
     const renderWidget = () => {
-      if (!(widget instanceof HTMLElement) || !turnstileWindow.turnstile) {
+      if (
+        widgetId !== undefined ||
+        !(widget instanceof HTMLElement) ||
+        !turnstileWindow.turnstile
+      ) {
         return;
       }
 
-      if (widget.querySelector("iframe")) {
+      const sitekey = widget.dataset.sitekey;
+      if (!sitekey) {
         return;
       }
 
-      widgetId = turnstileWindow.turnstile.render(widget);
+      widgetId = turnstileWindow.turnstile.render(widget, {
+        sitekey,
+        action: widget.dataset.action,
+        cData: widget.dataset.cdata,
+        "response-field-name": widget.dataset.responseFieldName,
+      });
     };
 
     renderWidget();
