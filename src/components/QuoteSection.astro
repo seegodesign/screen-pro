@@ -4,6 +4,8 @@ import { siteSettings } from "../data/site-settings";
 import page from "../data/pages/free-quote.json";
 
 const content = page.content;
+const TURNSTILE_SITE_KEY = "0x4AAAAAAEa7xLP7yb_HFek7";
+const FORM_ID = "fm_ytpnsLborBrq3DoA";
 ---
 
 <section class="quote" id="quote-form">
@@ -25,7 +27,10 @@ const content = page.content;
       </div>
     </div>
 
-    <form action="https://submit-form.com/YZDxl4NqJ" method="post">
+    <form
+      action="https://forms.seegodesign.com/f/fm_ytpnsLborBrq3DoA"
+      method="post"
+    >
       <div data-form-content>
         <div class="form__heading">
           <strong>{content.formTitle}</strong><span>{content.formSubtitle}</span>
@@ -87,6 +92,21 @@ const content = page.content;
           /></label
         >
         </div>
+        <input
+          name="_cf_honeypot"
+          tabindex={-1}
+          autocomplete="off"
+          aria-hidden="true"
+          style="position:absolute;left:-9999px"
+        />
+        <div
+          class="cf-turnstile"
+          data-sitekey={TURNSTILE_SITE_KEY}
+          data-action="form_submit"
+          data-cdata={FORM_ID}
+          data-response-field-name="_cf_turnstile"
+        >
+        </div>
         <button type="submit"
           >{content.submitLabel} <ArrowUpRight aria-hidden="true" /></button
         >
@@ -103,13 +123,65 @@ const content = page.content;
 </section>
 
 <script>
-  const form = document.querySelector("#quote-form form");
+  type TurnstileApi = {
+    render: (
+      container: HTMLElement,
+      options: {
+        sitekey: string;
+        action?: string;
+        cData?: string;
+        "response-field-name"?: string;
+      },
+    ) => string;
+    reset: (widgetId?: string) => void;
+  };
 
-  if (form instanceof HTMLFormElement) {
+  const turnstileWindow = window as Window & { turnstile?: TurnstileApi };
+
+  const setupQuoteForm = () => {
+    const form = document.querySelector("#quote-form form");
+
+    if (!(form instanceof HTMLFormElement) || form.dataset.bound === "true") {
+      return;
+    }
+
+    form.dataset.bound = "true";
+
     const status = form.querySelector("[data-form-status]");
     const button = form.querySelector("button");
     const content = form.querySelector("[data-form-content]");
     const success = form.querySelector("[data-form-success]");
+    const widget = form.querySelector(".cf-turnstile");
+    let widgetId: string | undefined;
+
+    const renderWidget = () => {
+      if (
+        widgetId !== undefined ||
+        !(widget instanceof HTMLElement) ||
+        !turnstileWindow.turnstile
+      ) {
+        return;
+      }
+
+      const sitekey = widget.dataset.sitekey;
+      if (!sitekey) {
+        return;
+      }
+
+      widgetId = turnstileWindow.turnstile.render(widget, {
+        sitekey,
+        action: widget.dataset.action,
+        cData: widget.dataset.cdata,
+        "response-field-name": widget.dataset.responseFieldName,
+      });
+    };
+
+    renderWidget();
+    document
+      .querySelectorAll('script[src*="challenges.cloudflare.com/turnstile"]')
+      .forEach((script) => {
+        script.addEventListener("load", renderWidget, { once: true });
+      });
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -126,6 +198,17 @@ const content = page.content;
       status.hidden = true;
       button.disabled = true;
 
+      const payload = Object.fromEntries(new FormData(form));
+      const token = payload._cf_turnstile;
+
+      if (typeof token !== "string" || token.length === 0) {
+        status.dataset.state = "error";
+        status.textContent = "Please complete the verification challenge.";
+        status.hidden = false;
+        button.disabled = false;
+        return;
+      }
+
       try {
         const response = await fetch(form.action, {
           method: "POST",
@@ -133,7 +216,7 @@ const content = page.content;
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
@@ -150,9 +233,17 @@ const content = page.content;
         status.hidden = false;
       } finally {
         button.disabled = false;
+        if (widgetId !== undefined) {
+          turnstileWindow.turnstile?.reset(widgetId);
+        } else {
+          turnstileWindow.turnstile?.reset();
+        }
       }
     });
-  }
+  };
+
+  setupQuoteForm();
+  document.addEventListener("astro:page-load", setupQuoteForm);
 </script>
 
 <style>
@@ -343,6 +434,9 @@ const content = page.content;
   button svg {
     width: 1rem;
     height: 1rem;
+  }
+  .cf-turnstile {
+    margin-top: 1.8rem;
   }
   [data-form-content] > small {
     margin-top: 0.8rem;
